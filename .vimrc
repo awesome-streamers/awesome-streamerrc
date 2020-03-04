@@ -33,6 +33,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " Set of basic vim options
+set t_Co=256
 set termguicolors
 colorscheme horizon
 set noerrorbells
