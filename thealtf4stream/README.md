@@ -4,7 +4,7 @@
 
 ## Setup
 
-> NOTE: A more throuought guide will eventually be written on how to set all of this up.
+> NOTE: A more thorough guide will eventually be written on how to set all of this up.
 
 I am currently using `neovim` and `plug` for my setup. To get started, make sure you have `neovim` installed and the configuration file in the `~/.config/nvim/init.vim` location.
 
