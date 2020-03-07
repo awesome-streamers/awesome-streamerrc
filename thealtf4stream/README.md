@@ -4,9 +4,9 @@
 
 ## Setup
 
-To properly setup this `.vimrc` configuration you will need to download and setup `Vundle`, copy the `.vimrc` file from here, and then run `:PluginInstall` when inside `vim` program. See the link below for setting up Vundle.
+> NOTE: A more throuought guide will eventually be written on how to set all of this up.
 
-Vundle Quick Start: https://github.com/VundleVim/Vundle.vim#quick-start
+I am currently using `neovim` and `plug` for my setup. To get started, make sure you have `neovim` installed and the configuration file in the `~/.config/nvim/init.vim` location.
 
 Feel free to make any changes/suggestions via a `merge request`.
 
