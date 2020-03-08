@@ -7,9 +7,17 @@ Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'prettier/vim-prettier'
 Plug 'mbbill/undotree'
+Plug 'jparise/vim-graphql'
+Plug 'mxw/vim-jsx'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
+colorscheme horizon
+highlight Pmenu ctermbg=111217 guibg=#111217
 set hidden
 set nobackup
 set nowritebackup
@@ -24,13 +32,13 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set nowrap
-colorscheme horizon
 
 " horizon
 let g:lightline = {'colorscheme' : 'horizon'}
 
 " nerdtree
 let NERDTreeMinimalUI = 1
+au VimEnter *  NERDTree
 
 " Let definitions
 let mapleader = " "
@@ -40,6 +48,12 @@ let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#jsx_bracket_same_line = 'false'
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" graphql
+au BufNewFile,BufRead *.prisma setfiletype graphql
+
+" vim-jsx
+autocmd BufRead,BufNewFile *.tsx setlocal syntax=javascript.jsx
 
 " Basic remaps.  This is where the magic of vim happens
 nmap <leader>h :wincmd h<CR>
@@ -51,7 +65,6 @@ nnoremap <Leader>pt :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
 nmap <C-p> :GFiles<CR>
 nmap <s-p> :Rg<CR>
-
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
