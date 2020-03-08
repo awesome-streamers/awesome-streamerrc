@@ -1,8 +1,8 @@
 # awesome-streamerrc/thealtf4stream
 
-![preview]
-
 Tune in live at [The Alt-F4 Stream](https://www.twitch.tv/thealtf4stream) on Twitch.
+
+![The Alt-F4 Stream][preview]
 
 ## Setup
 
