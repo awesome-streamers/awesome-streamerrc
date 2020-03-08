@@ -1,6 +1,8 @@
 # awesome-streamerrc/thealtf4stream
 
-[The Alt-F4 Stream](https://www.twitch.tv/thealtf4stream)
+![preview]
+
+Tune in live at [The Alt-F4 Stream](https://www.twitch.tv/thealtf4stream) on Twitch.
 
 ## Setup
 
@@ -13,3 +15,5 @@ Feel free to make any changes/suggestions via a `merge request`.
 Thank you! <3
 
 blackglasses
+
+[preview]: https://github.com/erkrnt/awesome-streamerrc/blob/master/TheAltF4Stream/TheAltF4Stream.png "The Alt-F4 Stream"
