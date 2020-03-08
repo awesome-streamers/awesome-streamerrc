@@ -1,6 +1,6 @@
 # awesome-streamerrc/ThePrimeagen
 
-This is my vimrc.  Please feel free to reach out and ask any questions.  Best place to reach me is [Discord](https://discord.gg/3ujcVMe).
+Please feel free to reach out and ask any questions.  Best place to reach me is [Discord](https://discord.gg/3ujcVMe).
 
 ![preview]
 
