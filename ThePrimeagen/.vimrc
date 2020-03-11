@@ -16,11 +16,10 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'jremmen/vim-ripgrep'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'jremmen/vim-ripgrep'
 Plugin 'scrooloose/nerdtree'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
-Plugin 'git@github.com:rking/ag.vim.git'
 Plugin 'git@github.com:moll/vim-node.git'
 Plugin 'morhetz/gruvbox'
 Plugin 'rust-lang/rust.vim'
@@ -83,16 +82,8 @@ let g:ycm_error_symbol = '..'
 let g:ycm_server_use_vim_stdout = 1
 " DEBUG STUFFS
 
-" ag items.  I need the silent ag.
-if executable('ag')
-  " Use ag over grep "
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore "
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache "
-  let g:ctrlp_use_caching = 0
+if executable('rg')
+    let g:rg_derive_root='true'
 endif
 
 " Let definitions
@@ -131,9 +122,9 @@ nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 " RG
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
-nnoremap <Leader>ps :Ag<SPACE>
+" command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Rg<SPACE>
+nnoremap <Leader>ps :Rg<SPACE>
 
 " Autocompletion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
