@@ -9,20 +9,20 @@ Plug 'prettier/vim-prettier'
 Plug 'mbbill/undotree'
 Plug 'jparise/vim-graphql'
 Plug 'mxw/vim-jsx'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mhinz/vim-signify'
 
 call plug#end()
 
 colorscheme horizon
 highlight Pmenu ctermbg=111217 guibg=#111217
+set updatetime=100
 set hidden
 set nobackup
 set nowritebackup
 set termguicolors
-set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 set encoding=utf-8
@@ -178,8 +178,8 @@ nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
