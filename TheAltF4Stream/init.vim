@@ -1,3 +1,5 @@
+filetype plugin on
+
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ntk148v/vim-horizon'
@@ -13,6 +15,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mhinz/vim-signify'
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
@@ -32,12 +35,19 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set nowrap
+set number
 
 " horizon
 let g:lightline = {'colorscheme' : 'horizon'}
 
+" nerdcommenter
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDTrimTrailingWhitespace = 1
+
 " nerdtree
 let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
 au VimEnter *  NERDTree
 
 " Let definitions
