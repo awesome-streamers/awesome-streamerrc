@@ -12,31 +12,24 @@ set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
-set incsearch 
+set incsearch
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-" THE VUNDLE CODEZZZZZ
-filetype off                  " required
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'morhetz/gruvbox'
+Plug 'jremmen/vim-ripgrep'
+Plug 'tpope/vim-fugitive'
+Plug 'leafgarland/typescript-vim'
+Plug 'vim-utils/vim-man'
+Plug 'lyuts/vim-rtags'
+Plug 'git@github.com:kien/ctrlp.vim.git'
+Plug 'git@github.com:Valloric/YouCompleteMe.git'
+Plug 'mbbill/undotree'
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'jremmen/vim-ripgrep'
-Plugin 'tpope/vim-fugitive'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'vim-utils/vim-man'
-Plugin 'lyuts/vim-rtags'
-Plugin 'git@github.com:kien/ctrlp.vim.git'
-Plugin 'git@github.com:Valloric/YouCompleteMe.git'
-Plugin 'mbbill/undotree'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 colorscheme gruvbox
 set background=dark
@@ -49,10 +42,9 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let mapleader = " "
 let g:netrw_browse_split=2
 let g:netrw_banner = 0
-
-" ag is fast enough that CtrlP doesn't need to cache "
-let g:ctrlp_use_caching = 0
 let g:netrw_winsize = 25
+
+let g:ctrlp_use_caching = 0
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -70,4 +62,11 @@ nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
 autocmd BufEnter *.tsx set filetype=typescript
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+autocmd BufWritePre * :call TrimWhitespace()
 
