@@ -79,6 +79,7 @@ inoremap <silent><expr> <TAB>
 			\ coc#refresh()
 
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " GoTo code navigation.
 nmap <silent> <leader>gd <Plug>(coc-definition)
