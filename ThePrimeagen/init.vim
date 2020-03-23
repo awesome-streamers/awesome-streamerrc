@@ -1,6 +1,5 @@
 syntax on
 
-set hidden
 set noerrorbells
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -14,23 +13,13 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
-"
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
-" Plug 'ycm-core/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
@@ -38,7 +27,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
 Plug 'git@github.com:kien/ctrlp.vim.git'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree'
 
 call plug#end()
@@ -71,14 +59,11 @@ nnoremap <silent> <Leader>- :vertical resize -5<CR>
 " YCM
 " The best part.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-" nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+" nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
-inoremap <silent><expr> <TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
-
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> <leader>[g <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> <leader>gd <Plug>(coc-definition)
@@ -86,10 +71,14 @@ nmap <silent> <leader>gy <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
 
+autocmd BufEnter *.tsx set filetype=typescript
+
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
 autocmd BufWritePre * :call TrimWhitespace()
+
+
 
