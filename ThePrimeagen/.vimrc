@@ -20,7 +20,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=50
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -52,9 +52,11 @@ endif
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let mapleader = " "
-let g:netrw_browse_split=2
+
+let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+let g:netrw_liststyle = 3
 
 let g:ctrlp_use_caching = 0
 
@@ -79,13 +81,14 @@ inoremap <silent><expr> <TAB>
 			\ coc#refresh()
 
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <C-space> coc#refresh()
 
 " GoTo code navigation.
 nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gy <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>cr :CocRestart
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
