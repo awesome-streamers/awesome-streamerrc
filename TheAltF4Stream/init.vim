@@ -16,11 +16,19 @@ Plug 'tpope/vim-commentary'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdcommenter'
+Plug 'chun-yang/auto-pairs'
+Plug 'b4b4r07/vim-hcl'
+Plug 'fatih/vim-hclfmt'
+Plug 'ekalinin/dockerfile.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
 colorscheme horizon
 highlight Pmenu ctermbg=111217 guibg=#111217
+set splitright
 set updatetime=100
 set hidden
 set nobackup
@@ -36,6 +44,32 @@ set shiftwidth=2
 set expandtab
 set nowrap
 set number
+
+" airline
+let g:airline_theme = "base16_spacemacs"
+
+" hclfmt
+let g:hcl_fmt_autosave = 1
+let g:tf_fmt_autosave = 1
+let g:nomad_fmt_autosave = 1
+
+" go
+let g:go_fmt_command = "goimports"
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_chan_whitespace_error = 0
+let g:go_highlight_extra_types = 0
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
 
 " horizon
 let g:lightline = {'colorscheme' : 'horizon'}
@@ -75,6 +109,9 @@ nnoremap <Leader>pt :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
 nmap <C-p> :GFiles<CR>
 nmap <s-p> :Rg<CR>
+
+" go
+au FileType go nmap <leader>rv <Plug>(go-run-vertical)
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
