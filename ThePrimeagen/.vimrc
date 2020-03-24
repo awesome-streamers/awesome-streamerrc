@@ -89,8 +89,8 @@ nnoremap <silent> <Leader>- :vertical resize -5<CR>
 "nmap <silent> <leader>gr <Plug>(coc-references)
 "nmap <silent> <leader>cr :CocRestart
 
-nmap <silent> <leader>gd :YcmCompleter GoTo
-nmap <silent> <leader>gr :YcmCompleter GoToReferences
+nmap <silent> <leader>gd :YcmCompleter GoTo<CR>
+nmap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
