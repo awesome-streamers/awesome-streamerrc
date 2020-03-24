@@ -30,7 +30,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
-" Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
@@ -38,7 +38,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
 Plug 'git@github.com:kien/ctrlp.vim.git'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree'
 
 call plug#end()
@@ -74,20 +74,23 @@ nnoremap <silent> <Leader>- :vertical resize -5<CR>
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 " nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
 
-inoremap <silent><expr> <TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
+"inoremap <silent><expr> <TAB>
+"			\ pumvisible() ? "\<C-n>" :
+"			\ <SID>check_back_space() ? "\<TAB>" :
+"			\ coc#refresh()
+"
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <silent><expr> <C-space> coc#refresh()
+"
+"" GoTo code navigation.
+"nmap <silent> <leader>gd <Plug>(coc-definition)
+"nmap <silent> <leader>gy <Plug>(coc-type-definition)
+"nmap <silent> <leader>gi <Plug>(coc-implementation)
+"nmap <silent> <leader>gr <Plug>(coc-references)
+"nmap <silent> <leader>cr :CocRestart
 
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <C-space> coc#refresh()
-
-" GoTo code navigation.
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
-nmap <silent> <leader>cr :CocRestart
+nmap <silent> <leader>gd :YcmCompleter GoTo
+nmap <silent> <leader>gr :YcmCompleter GoToReferences
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
