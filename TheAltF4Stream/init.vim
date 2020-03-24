@@ -20,6 +20,9 @@ Plug 'chun-yang/auto-pairs'
 Plug 'b4b4r07/vim-hcl'
 Plug 'fatih/vim-hclfmt'
 Plug 'ekalinin/dockerfile.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -41,6 +44,9 @@ set shiftwidth=2
 set expandtab
 set nowrap
 set number
+
+" airline
+let g:airline_theme = "base16_spacemacs"
 
 " hclfmt
 let g:hcl_fmt_autosave = 1
