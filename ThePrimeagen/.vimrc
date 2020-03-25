@@ -38,7 +38,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
 Plug 'git@github.com:kien/ctrlp.vim.git'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree'
 
 call plug#end()
@@ -69,33 +69,39 @@ nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
+fun! GoYCM()
+    nmap <silent> <leader>gd :YcmCompleter GoTo<CR>
+    nmap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
+endfun
+
+fun! GoCoc()
+    inoremap <silent><expr> <TAB>
+                \ pumvisible() ? "\<C-n>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
+
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    inoremap <silent><expr> <C-space> coc#refresh()
+
+    " GoTo code navigation.
+    nmap <silent> <leader>gd <Plug>(coc-definition)
+    nmap <silent> <leader>gy <Plug>(coc-type-definition)
+    nmap <silent> <leader>gi <Plug>(coc-implementation)
+    nmap <silent> <leader>gr <Plug>(coc-references)
+    nmap <silent> <leader>cr :CocRestart
+endfun
+
 " YCM
 " The best part.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 " nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
-
-"inoremap <silent><expr> <TAB>
-"			\ pumvisible() ? "\<C-n>" :
-"			\ <SID>check_back_space() ? "\<TAB>" :
-"			\ coc#refresh()
-"
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"inoremap <silent><expr> <C-space> coc#refresh()
-"
-"" GoTo code navigation.
-"nmap <silent> <leader>gd <Plug>(coc-definition)
-"nmap <silent> <leader>gy <Plug>(coc-type-definition)
-"nmap <silent> <leader>gi <Plug>(coc-implementation)
-"nmap <silent> <leader>gr <Plug>(coc-references)
-"nmap <silent> <leader>cr :CocRestart
-
-nmap <silent> <leader>gd :YcmCompleter GoTo<CR>
-nmap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
-autocmd BufWritePre * :call TrimWhitespace()
 
+autocmd BufWritePre * :call TrimWhitespace()
+autocmd FileType ts call GoYCM()
+autocmd FileType cxx,cpp,c,h,hpp call GoCoc()
