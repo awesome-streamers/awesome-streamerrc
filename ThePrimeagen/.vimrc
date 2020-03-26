@@ -103,5 +103,5 @@ fun! TrimWhitespace()
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
-autocmd FileType ts call GoYCM()
-autocmd FileType cxx,cpp,c,h,hpp call GoCoc()
+autocmd FileType ts :call GoYCM()
+autocmd FileType cxx,cpp,c,h,hpp :call GoCoc()
