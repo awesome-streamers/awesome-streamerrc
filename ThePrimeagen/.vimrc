@@ -72,7 +72,7 @@ nnoremap <silent> <Leader>- :vertical resize -5<CR>
 fun! GoYCM()
     nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
     nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-    nnoremap <buffer> <silent> <leader>rr :YcmCompleter RefactorRename
+    nnoremap <buffer> <silent> <leader>rr :YcmCompleter RefactorRename<space>
 endfun
 
 function! s:check_back_space() abort
