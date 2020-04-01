@@ -70,31 +70,31 @@ nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
 fun! GoYCM()
-    nmap <silent> <leader>gd :YcmCompleter GoTo<CR>
-    nmap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
+    nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
+    nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
 endfun
 
 fun! GoCoc()
-    inoremap <silent><expr> <TAB>
+    inoremap <buffer> <silent><expr> <TAB>
                 \ pumvisible() ? "\<C-n>" :
                 \ <SID>check_back_space() ? "\<TAB>" :
                 \ coc#refresh()
 
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-    inoremap <silent><expr> <C-space> coc#refresh()
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    inoremap <buffer> <silent><expr> <C-space> coc#refresh()
 
     " GoTo code navigation.
-    nmap <silent> <leader>gd <Plug>(coc-definition)
-    nmap <silent> <leader>gy <Plug>(coc-type-definition)
-    nmap <silent> <leader>gi <Plug>(coc-implementation)
-    nmap <silent> <leader>gr <Plug>(coc-references)
-    nmap <silent> <leader>cr :CocRestart
+    nmap <buffer> <leader>gd <Plug>(coc-definition)
+    nmap <buffer> <leader>gy <Plug>(coc-type-definition)
+    nmap <buffer> <leader>gi <Plug>(coc-implementation)
+    nmap <buffer> <leader>gr <Plug>(coc-references)
+    nnoremap <buffer> <leader>cr :CocRestart
 endfun
-
-" YCM
-" The best part.
-" nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-" nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
@@ -103,5 +103,6 @@ fun! TrimWhitespace()
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
-autocmd FileType ts :call GoYCM()
-autocmd FileType cxx,cpp,c,h,hpp :call GoCoc()
+autocmd FileType typescript :call GoYCM()
+autocmd FileType cpp,cxx,h,hpp,c :call GoCoc()
+
