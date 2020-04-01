@@ -72,18 +72,19 @@ nnoremap <silent> <Leader>- :vertical resize -5<CR>
 fun! GoYCM()
     nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
     nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
+    nnoremap <buffer> <silent> <leader>rr :YcmCompleter RefactorRename
 endfun
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 fun! GoCoc()
     inoremap <buffer> <silent><expr> <TAB>
                 \ pumvisible() ? "\<C-n>" :
                 \ <SID>check_back_space() ? "\<TAB>" :
                 \ coc#refresh()
-
-    function! s:check_back_space() abort
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
 
     inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
     inoremap <buffer> <silent><expr> <C-space> coc#refresh()
