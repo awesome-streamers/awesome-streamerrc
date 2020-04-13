@@ -38,7 +38,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
 Plug 'git@github.com:kien/ctrlp.vim.git'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree'
 
 call plug#end()
@@ -68,6 +67,8 @@ nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 fun! GoYCM()
     nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
