@@ -3,7 +3,6 @@ filetype plugin on
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ntk148v/vim-horizon'
-Plug 'scrooloose/nerdtree'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -11,16 +10,14 @@ Plug 'prettier/vim-prettier'
 Plug 'mbbill/undotree'
 Plug 'jparise/vim-graphql'
 Plug 'mxw/vim-jsx'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
-Plug 'chun-yang/auto-pairs'
 Plug 'b4b4r07/vim-hcl'
 Plug 'fatih/vim-hclfmt'
 Plug 'ekalinin/dockerfile.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -47,6 +44,9 @@ set number
 
 " airline
 let g:airline_theme = "base16_spacemacs"
+
+" fzf.vim
+let g:fzf_preview_window = ''
 
 " hclfmt
 let g:hcl_fmt_autosave = 1
@@ -79,11 +79,6 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" nerdtree
-let NERDTreeMinimalUI = 1
-let NERDTreeShowHidden = 1
-au VimEnter *  NERDTree
-
 " Let definitions
 let mapleader = " "
 
@@ -107,7 +102,7 @@ nmap <leader>l :wincmd l<CR>
 nmap <leader>u :UndotreeShow<CR>
 nnoremap <Leader>pt :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
-nmap <C-p> :GFiles<CR>
+nmap <C-p> :Files<CR>
 nmap <s-p> :Rg<CR>
 
 " go
