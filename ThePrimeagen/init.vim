@@ -1,6 +1,7 @@
 syntax on
 
 set guicursor=
+set nohlsearch
 set hidden
 set noerrorbells
 set tabstop=4 softtabstop=4
@@ -69,10 +70,10 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
-nnoremap <Leader>ns :noh<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
-nnoremap <silent> <Leader>ee oif (err != nil) {<CR>panic err<CR>}<CR><esc>kkI<esc>
+nnoremap <silent> <Leader>ee oif (err != nil) {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
