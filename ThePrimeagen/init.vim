@@ -34,16 +34,22 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ycm-core/YouCompleteMe'
-Plug 'phanviet/vim-monokai-pro'
-Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
-Plug 'git@github.com:kien/ctrlp.vim.git'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+"  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
+"  TOOOOOOOOOOOOO
+Plug 'morhetz/gruvbox'
+Plug 'phanviet/vim-monokai-pro'
+Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
@@ -70,16 +76,42 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
+nnoremap <Leader>pf :GFiles<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 nnoremap <silent> <Leader>ee oif (err != nil) {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+nnoremap <silent> <leader>vwm :colorscheme gruvbox<CR>
 
-nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-nnoremap <silent> <leader>rr :YcmCompleter RefactorRename<space>
+fun! GoYCM()
+    nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
+    nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
+    nnoremap <buffer> <silent> <leader>rr :YcmCompleter RefactorRename<space>
+endfun
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+fun! GoCoc()
+    inoremap <buffer> <silent><expr> <TAB>
+                \ pumvisible() ? "\<C-n>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
+
+    inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    inoremap <buffer> <silent><expr> <C-space> coc#refresh()
+
+    " GoTo code navigation.
+    nmap <buffer> <leader>gd <Plug>(coc-definition)
+    nmap <buffer> <leader>gy <Plug>(coc-type-definition)
+    nmap <buffer> <leader>gi <Plug>(coc-implementation)
+    nmap <buffer> <leader>gr <Plug>(coc-references)
+    nnoremap <buffer> <leader>cr :CocRestart
+endfun
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
@@ -88,6 +120,5 @@ fun! TrimWhitespace()
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
-
-
-
+autocmd FileType typescript :call GoYCM()
+autocmd FileType cpp,cxx,h,hpp,c :call GoCoc()
