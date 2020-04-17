@@ -73,6 +73,7 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
+nnoremap <Leader><C-p> :GFiles<CR>
 nnoremap <Leader>pf :GFiles<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
