@@ -100,8 +100,6 @@ nmap <leader>j :wincmd j<CR>
 nmap <leader>k :wincmd k<CR>
 nmap <leader>l :wincmd l<CR>
 nmap <leader>u :UndotreeShow<CR>
-nnoremap <Leader>pt :NERDTreeToggle<Enter>
-nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
 nmap <C-p> :Files<CR>
 nmap <s-p> :Rg<CR>
 
