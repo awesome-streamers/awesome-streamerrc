@@ -2,7 +2,9 @@ filetype plugin on
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'ayu-theme/ayu-vim'
 Plug 'ntk148v/vim-horizon'
+Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -23,6 +25,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
+syntax on
 colorscheme horizon
 highlight Pmenu ctermbg=111217 guibg=#111217
 set splitright
@@ -44,6 +47,9 @@ set number
 
 " airline
 let g:airline_theme = "base16_spacemacs"
+
+" ayu
+let ayucolor="dark"
 
 " fzf.vim
 let g:fzf_preview_window = ''
@@ -100,8 +106,6 @@ nmap <leader>j :wincmd j<CR>
 nmap <leader>k :wincmd k<CR>
 nmap <leader>l :wincmd l<CR>
 nmap <leader>u :UndotreeShow<CR>
-nnoremap <Leader>pt :NERDTreeToggle<Enter>
-nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
 nmap <C-p> :Files<CR>
 nmap <s-p> :Rg<CR>
 
