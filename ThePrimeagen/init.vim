@@ -47,7 +47,7 @@ Plug 'junegunn/fzf.vim'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
@@ -101,7 +101,11 @@ nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Vim with me
 nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
+nmap <leader>vtm :highlight Pmenu ctermbg=gray guibg=gray
+
 vnoremap X "_d
 inoremap <C-c> <esc>
 
