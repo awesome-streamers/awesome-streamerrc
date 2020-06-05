@@ -56,6 +56,11 @@ Plug '/home/mpaulson/personal/vim-be-good'
 
 call plug#end()
 
+let g:gruvbox_contrast_dark = 'hard'
+
+" --- The Greatest plugin of all time.  I am not bias
+let g:vim_be_good_floating = 1
+
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
