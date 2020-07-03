@@ -44,6 +44,7 @@ Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'vuciv/vim-bujo'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
@@ -93,10 +94,10 @@ let loaded_matchparen = 1
 let mapleader = " "
 
 let g:netrw_browse_split = 2
-let g:vrfr_rg = 'true'
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
+nnoremap <leader>prr :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>h :wincmd h<CR>
@@ -115,6 +116,11 @@ nnoremap <Leader>rp :resize 100<CR>
 nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" vim TODO
+nmap <Leader>tu <Plug>BujoChecknormal
+nmap <Leader>th <Plug>BujoAddnormal
+let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
 " Vim with me
 nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
@@ -143,6 +149,7 @@ nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>rr <Plug>(coc-rename)
+nmap <leader>rpr :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>g[ <Plug>(coc-diagnostic-prev)
 nmap <leader>g] <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
