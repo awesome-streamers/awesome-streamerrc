@@ -44,6 +44,7 @@ set shiftwidth=2
 set expandtab
 set nowrap
 set number
+set noshowmode
 
 " airline
 let g:airline_theme = "base16_spacemacs"
