@@ -1,6 +1,5 @@
 syntax on
 
-set kscb
 set guicursor=
 set relativenumber
 set nohlsearch
@@ -47,7 +46,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
-Plug 'theprimeagen/vim-apm'
+Plug '/home/mpaulson/personal/vim-apm'
 Plug 'theprimeagen/vim-be-good', {'do': './install.sh'}
 Plug 'gruvbox-community/gruvbox'
 
@@ -59,6 +58,7 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -121,6 +121,7 @@ nnoremap <Leader>rp :resize 100<CR>
 nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+vnoremap X "_d
 
 " vim TODO
 nmap <Leader>tu <Plug>BujoChecknormal
@@ -131,7 +132,6 @@ let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
 nmap <leader>vtm :highlight Pmenu ctermbg=gray guibg=gray
 
-vnoremap X "_d
 inoremap <C-c> <esc>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
@@ -160,10 +160,17 @@ fun! TrimWhitespace()
     call winrestview(l:save)
 endfun
 
+" YES
+com! W w
+
 augroup highlight_yank
     autocmd!
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
 
-autocmd BufWritePre * :call TrimWhitespace()
+augroup THE_PRIMEAGEN
+    autocmd!
+    autocmd BufWritePre * :call TrimWhitespace()
+    autocmd VimEnter * :VimApm
+augroup END
 
