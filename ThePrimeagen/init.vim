@@ -20,6 +20,7 @@ set incsearch
 set termguicolors
 set scrolloff=8
 set noshowmode
+set completeopt=menuone,noinsert,noselect
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -36,7 +37,8 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
@@ -62,6 +64,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 
 call plug#end()
+
 
 let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
@@ -159,22 +162,9 @@ nmap <leader>vtm :highlight Pmenu ctermbg=gray guibg=gray
 
 inoremap <C-c> <esc>
 
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-inoremap <silent><expr> <C-space> coc#refresh()
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
 
-" GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>rr <Plug>(coc-rename)
-nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-nmap <leader>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <leader>cr :CocRestart
-
-" Sweet Sweet FuGITive
 nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
@@ -188,6 +178,13 @@ endfun
 " YES
 com! W w
 
+fun! ThePrimeagen_LspHighlighter()
+    lua package.loaded["my_lspconfig"] = nil
+    lua require("my_lspconfig")
+endfun
+
+com! SetLspVirtualText call ThePrimeagen_LspHighlighter()
+
 augroup highlight_yank
     autocmd!
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank(timeuout = 200)
@@ -196,6 +193,7 @@ augroup END
 augroup THE_PRIMEAGEN
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
+    " autocmd BufEnter * lua require'completion'.on_attach()
     autocmd VimEnter * :VimApm
 augroup END
 
