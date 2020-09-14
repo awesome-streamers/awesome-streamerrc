@@ -5,3 +5,5 @@
 " 5. ...
 " 6. profit
 
+" lua require'nvim_lsp'.tsserver.setup{ }
+" echo "TESTING"
