@@ -41,6 +41,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
+Plug 'tjdevries/lsp_extensions.nvim'
 
 Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
@@ -80,6 +81,10 @@ if exists('+termguicolors')
 endif
 let g:gruvbox_invert_selection='0'
 
+" telescope
+let g:telescope_cache_results = 1
+let g:telescope_prime_fuzzy_find  = 1
+
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -111,6 +116,7 @@ let mapleader = " "
 let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+let g:netrw_localrmdir='rm -r'
 
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
@@ -132,6 +138,7 @@ let g:fzf_branch_actions = {
       \   'confirm': v:false,
       \ },
       \}
+" lua require('telescope').setup({defaults = {file_matching_strategy = "prime" }})
 
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
@@ -155,7 +162,7 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>ps :lua require('telescope.builtin').grep_string()<CR>
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For >")})<CR>
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <Leader>pf :Files<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
@@ -185,6 +192,7 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
 lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
 lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
+lua require'nvim_lsp'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
 " lua require'nvim_lsp'.sumneko_lua.setup{ on_attach=require'completion'.on_attach }
 
 nmap <leader>gh :diffget //3<CR>
@@ -217,5 +225,6 @@ augroup THE_PRIMEAGEN
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
     autocmd VimEnter * :VimApm
+    autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
 
