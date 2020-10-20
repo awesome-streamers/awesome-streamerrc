@@ -1,4 +1,5 @@
 syntax on
+filetype plugin indent on
 
 set guicursor=
 set relativenumber
@@ -21,6 +22,7 @@ set termguicolors
 set scrolloff=8
 set noshowmode
 set completeopt=menuone,noinsert,noselect
+set signcolumn=yes
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -43,6 +45,7 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 
+Plug 'rust-lang/rust.vim'
 Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
@@ -102,6 +105,7 @@ let g:go_highlight_variable_declarations = 1
 let g:go_auto_sameids = 1
 
 let g:vim_be_good_log_file = 1
+let g:vim_apm_log = 1
 
 colorscheme gruvbox
 set background=dark
@@ -147,6 +151,7 @@ nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
 nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
 nnoremap <leader>gc :GBranches<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
@@ -155,6 +160,7 @@ nnoremap <leader>grom :Git rebase origin/master<CR>
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -172,7 +178,6 @@ nnoremap <Leader>rp :resize 100<CR>
 nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-vnoremap X "_d
 
 " greatest remap ever
 vnoremap <leader>p "_dP
@@ -181,6 +186,8 @@ vnoremap <leader>p "_dP
 nmap <Leader>tu <Plug>BujoChecknormal
 nmap <Leader>th <Plug>BujoAddnormal
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
+
+nnoremap <Leader>ww ofunction wait(ms: number): Promise<void> {<CR>return new Promise(res => setTimeout(res, ms));<CR>}<esc>k=i{<CR>
 
 " Vim with me
 nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
@@ -199,19 +206,85 @@ nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
+" Terminal commands
+" ueoa is first through fourth finger left hand home row.
+" This just means I can crush, with opposite hand, the 4 terminal positions
+nmap <leader>tu :call GotoBuffer(0)<CR>
+nmap <leader>te :call GotoBuffer(1)<CR>
+nmap <leader>to :call GotoBuffer(2)<CR>
+nmap <leader>ta :call GotoBuffer(3)<CR>
+
+nmap <leader>tsu :call SetBuffer(0)<CR>
+nmap <leader>tse :call SetBuffer(1)<CR>
+nmap <leader>tso :call SetBuffer(2)<CR>
+nmap <leader>tsa :call SetBuffer(3)<CR>
+
+fun! EmptyRegisters()
+    let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
+    for r in regs
+        call setreg(r, [])
+    endfor
+endfun
+
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
 
-" YES
+" ES
 com! W w
 
 fun! ThePrimeagen_LspHighlighter()
     lua print("Testing")
     lua package.loaded["my_lspconfig"] = nil
     lua require("my_lspconfig")
+endfun
+
+fun! GotoBuffer(ctrlId)
+    if (a:ctrlId > 9) || (a:ctrlId < 0)
+        echo "CtrlID must be between 0 - 9"
+        return
+    end
+
+    let contents = g:win_ctrl_buf_list[a:ctrlId]
+    if type(l:contents) != v:t_list
+        echo "Nothing There"
+        return
+    end
+
+    let bufh = l:contents[1]
+    call nvim_win_set_buf(0, l:bufh)
+endfun
+
+" How to do this but much better?
+let g:win_ctrl_buf_list = [0, 0, 0, 0]
+fun! SetBuffer(ctrlId)
+    if has_key(b:, "terminal_job_id") == 0
+        echo "You must be in a terminal to execute this command"
+        return
+    end
+    if (a:ctrlId > 9) || (a:ctrlId < 0)
+        echo "CtrlID must be between 0 - 9"
+        return
+    end
+
+    let g:win_ctrl_buf_list[a:ctrlId] = [b:terminal_job_id, nvim_win_get_buf(0)]
+endfun
+
+fun! SendTerminalCommand(ctrlId, command)
+    if (a:ctrlId > 9) || (a:ctrlId < 0)
+        echo "CtrlID must be between 0 - 9"
+        return
+    end
+    let contents = g:win_ctrl_buf_list[a:ctrlId]
+    if type(l:contents) != v:t_list
+        echo "Nothing There"
+        return
+    end
+
+    let job_id = l:contents[0]
+    call chansend(job_id, command)
 endfun
 
 com! SetLspVirtualText call ThePrimeagen_LspHighlighter()
