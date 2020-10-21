@@ -284,7 +284,7 @@ fun! SendTerminalCommand(ctrlId, command)
     end
 
     let job_id = l:contents[0]
-    call chansend(job_id, command)
+    call chansend(l:job_id, a:command)
 endfun
 
 com! SetLspVirtualText call ThePrimeagen_LspHighlighter()
