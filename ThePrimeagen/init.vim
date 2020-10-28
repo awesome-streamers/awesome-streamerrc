@@ -50,7 +50,6 @@ Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
-Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
@@ -63,7 +62,7 @@ Plug 'gruvbox-community/gruvbox'
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug '/home/mpaulson/personal/telescope.nvim'
+Plug 'nvim-lua/telescope.nvim'
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
@@ -73,6 +72,7 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
+" Plug '/home/mpaulson/personal/VimDeathmatch/client'
 
 call plug#end()
 
@@ -170,7 +170,7 @@ nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For >")})<CR>
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
-nnoremap <Leader>pf :Files<CR>
+nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
