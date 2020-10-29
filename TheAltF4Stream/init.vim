@@ -46,6 +46,8 @@ call plug#end()
 
 "'' VIM POST-PLUG ''"
 colorscheme horizon
+highlight Normal cterm=NONE gui=NONE ctermbg=233 ctermfg=252 guibg=NONE guifg=NONE
+highlight Pmenu cterm=NONE gui=NONE ctermbg=233 ctermfg=252 guifg=#ffffff guibg=#4f4f4f
 set splitright
 set encoding=utf-8
 set noerrorbells
