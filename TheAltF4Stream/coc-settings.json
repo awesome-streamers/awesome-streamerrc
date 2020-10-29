@@ -1,26 +1,15 @@
 {
   "languageserver": {
     "dockerfile": {
+      "args": ["--stdio"],
       "command": "docker-langserver",
-      "filetypes": ["dockerfile"],
-      "args": ["--stdio"]
+      "filetypes": ["dockerfile"]
     },
     "golang": {
       "command": "gopls",
-      "rootPatterns": ["go.mod"],
       "disableWorkspaceFolders": true,
-      "filetypes": ["go"]
-    },
-    "haskell": {
-      "command": "hie-wrapper",
-      "args": ["--lsp"],
-      "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
-      "filetypes": ["hs", "lhs", "haskell"],
-      "initializationOptions": {
-        "languageServerHaskell": {
-          "hlintOn": true
-        }
-      }
+      "filetypes": ["go"],
+      "rootPatterns": ["go.mod"]
     },
     "terraform": {
       "command": "terraform-lsp",
