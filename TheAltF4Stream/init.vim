@@ -19,6 +19,7 @@ Plug 'ntk148v/vim-horizon'
 
 """ Utilities
 Plug 'preservim/nerdcommenter'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -81,6 +82,10 @@ lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
 lua require'nvim_lsp'.vuels.setup{ on_attach=require'completion'.on_attach }
 set completeopt=menuone,noinsert,noselect
 autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
+
+
+"'' Neovim Treesitter ''"
+lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
 
 
 "'' Lightline ''"

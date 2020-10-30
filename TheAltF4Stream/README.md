@@ -16,4 +16,4 @@ Thank you! <3
 
 blackglasses
 
-[preview]: https://github.com/erkrnt/awesome-streamerrc/blob/master/TheAltF4Stream/TheAltF4Stream.jpg "The Alt-F4 Stream"
+[preview]: https://github.com/erkrnt/awesome-streamerrc/blob/master/TheAltF4Stream/TheAltF4Stream.png "The Alt-F4 Stream"
