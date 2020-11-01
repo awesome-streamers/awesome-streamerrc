@@ -55,11 +55,14 @@ set noshowmode
 let mapleader = " "
 
 
-"'' Keymaps ''"
+"'' VIM Keymaps ''"
 nmap <leader>h :wincmd h<CR>
 nmap <leader>j :wincmd j<CR>
 nmap <leader>k :wincmd k<CR>
 nmap <leader>l :wincmd l<CR>
+
+
+"'' Neovim LSP Keymaps ''"
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
