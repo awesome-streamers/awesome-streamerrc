@@ -16,11 +16,9 @@ RUN git clone --branch "nightly" --progress "https://github.com/neovim/neovim.gi
 RUN curl -fLo "${HOME}/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
   "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
-# TODO : clone all plugins repos
-# RUN nvim --headless +PlugInstall +qall
-
-# RUN mkdir -p /root/.config/nvim
-# COPY init.vim /root/.config/nvim/init.vim
+RUN mkdir -p /root/.config/nvim
+COPY init.vim /root/.config/nvim/init.vim
+RUN nvim --headless +PlugInstall +qall
 
 WORKDIR /workspace
 ENTRYPOINT [ "nvim" ]

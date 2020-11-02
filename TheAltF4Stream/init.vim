@@ -1,7 +1,8 @@
 "'' VIM PRE-PLUG ''"
 filetype plugin indent on
 set nocompatible
-set termguicolors
+"I had to comment this out because my terminal is weird
+"set termguicolors
 syntax enable
 
 
@@ -37,7 +38,8 @@ call plug#end()
 
 
 "'' VIM POST-PLUG ''"
-colorscheme horizon
+"This executes the command silently and ignores errors
+silent! colorscheme horizon
 highlight Normal cterm=NONE gui=NONE ctermbg=233 ctermfg=252 guibg=NONE guifg=NONE
 highlight Pmenu cterm=NONE gui=NONE ctermbg=233 ctermfg=252 guifg=#ffffff guibg=#4f4f4f
 set splitright
@@ -63,46 +65,54 @@ nmap <leader>l :wincmd l<CR>
 
 
 "'' Neovim LSP Keymaps ''"
-nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-
+if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vim"))
+  nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
+  nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
+  nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
+  nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
+  nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
+  nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+  nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
 "'' Neovim LSP ''"
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua require'nvim_lsp'.bashls.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.dockerls.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.html.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.jsonls.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.vuels.setup{ on_attach=require'completion'.on_attach }
-set completeopt=menuone,noinsert,noselect
-autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
-
+  let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+  lua require'nvim_lsp'.bashls.setup{ on_attach=require'completion'.on_attach }
+  lua require'nvim_lsp'.dockerls.setup{ on_attach=require'completion'.on_attach }
+  lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
+  lua require'nvim_lsp'.html.setup{ on_attach=require'completion'.on_attach }
+  lua require'nvim_lsp'.jsonls.setup{ on_attach=require'completion'.on_attach }
+  lua require'nvim_lsp'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
+  lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
+  lua require'nvim_lsp'.vuels.setup{ on_attach=require'completion'.on_attach }
+  set completeopt=menuone,noinsert,noselect
+  autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
+endif
 
 "'' Neovim Treesitter ''"
-lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
+  lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+endif
 
 
 "'' Lightline ''"
-let g:lightline = {'colorscheme' : 'horizon'}
+if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
+  let g:lightline = {'colorscheme' : 'horizon'}
+endif
 
 
 "'' Prettier ''"
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#jsx_bracket_same_line = 'false'
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+if filereadable(expand("~/.config/nvim/plugged/vim-prettier/plugin/prettier.vim"))
+  let g:prettier#config#bracket_spacing = 'true'
+  let g:prettier#config#jsx_bracket_same_line = 'false'
+  let g:prettier#autoformat = 0
+  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+endif
 
 
 "'' Telescope ''"
-nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
-nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
-nnoremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
+if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
+  nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
+  nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
+  nnoremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
+endif
