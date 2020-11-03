@@ -85,6 +85,35 @@ erkrnt/nvim:latest [<filename> | <folder>]
 
 ### Auto-loading Environment (experimental)
 
-To be documented.
+> WARNING: WORKING IN PROGRESS - EXPERIMENTAL USE ONLY.
+
+To use as an auto-loading Neovim environment and mount ANY `init.vim` configuration for portability. This method has two requirements:
+
+- The target "init.vim" has NO ERRORS on load due to plugins missing, etc `(see init.vim for examples)`
+- The target "init.vim" is in a folder `(ie. myNeovimEnv/init.vim)` to mount with Docker bind volume
+
+When this image starts ":PlugInstall" is ran headlessly `(see scripts/autoload_entrypoint.sh)` to install plugins then Neovim is executed with the passed parameters from Docker CLI. A "plugged" folder will appear inside the mounted configuration path if this worked properly.
+
+1. (optional) If you would like to use a custom tag rather than download the latest `erkrnt/nvim-autoload:latest` tag:
+
+```
+docker image build --file autoload.Dockerfile --tag <tag-name> .
+```
+
+2. Run the following in your working directory and replace `<config-dir-path>` with the location of the folder containing your `init.vim` file:
+
+> NOTE: If you built a custom tag (step 1) replace `erkrnt/nvim-autoload:latest` when using the command below.
+
+```
+docker container run \
+--env "GID=$GID" \
+--env "UID=$UID" \
+--interactive \
+--rm \
+--tty \
+--volume "<config-dir-path>:/home/neovim/.config/nvim" \
+--volume "$PWD:/workspace" \
+erkrnt/nvim-autoload:latest [<filename> | <folder>]
+```
 
 [preview]: https://github.com/erkrnt/awesome-streamerrc/blob/master/TheAltF4Stream/TheAltF4Stream.png "The Alt-F4 Stream"

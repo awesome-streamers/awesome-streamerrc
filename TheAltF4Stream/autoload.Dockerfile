@@ -32,7 +32,9 @@ RUN addgroup "neovim" \
   && adduser -D -G "neovim" -g "" -s "/bin/bash" "neovim" \
   && su-exec neovim:neovim \
   curl -fLo "/home/neovim/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-  "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
+  && su-exec neovim:neovim \
+  mkdir -p /home/neovim/.config/nvim/plugged
 
 COPY ./scripts/autoload_entrypoint.sh /docker_entrypoint.sh
 
