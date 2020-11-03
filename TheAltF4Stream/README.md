@@ -37,7 +37,7 @@ cp init.vim ~/.config/nvim/init.vim
 nvim --headless +PlugInstall +qa
 ```
 
-This last step can also be achieved using `:PlugInstall` after opening Neovim - however it will require a restarting for them to properly load.
+This last step can also be achieved using `:PlugInstall` after opening Neovim - however it will require a restart for them to properly load.
 
 ### Pre-built Environment
 
