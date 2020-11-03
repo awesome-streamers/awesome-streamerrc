@@ -4,7 +4,7 @@ Neovim configuration and optional "Neovim-in-Docker" environment for `blackglass
 
 ![The Alt-F4 Stream][preview]
 
-## Use Cases
+## Project Goals
 
 There are three main goals for this repository:
 
