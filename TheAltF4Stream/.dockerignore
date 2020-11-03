@@ -1,0 +1,4 @@
+plugged
+*.md
+*.png
+.nvimlog

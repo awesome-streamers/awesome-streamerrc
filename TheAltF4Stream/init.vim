@@ -1,8 +1,7 @@
 "'' VIM PRE-PLUG ''"
 filetype plugin indent on
 set nocompatible
-"I had to comment this out because my terminal is weird
-"set termguicolors
+set termguicolors
 syntax enable
 
 
