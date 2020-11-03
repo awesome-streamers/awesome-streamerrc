@@ -14,7 +14,7 @@ There are three main goals for this repository:
 
 The first two should work out of the box - the `auto-loading` Docker image is still HIGHLY experimental and NOT recommended for actual development use.
 
-### Drag-and-drop
+### Drag-and-drop Configuration
 
 To use this configuration for your own personal use (recommended):
 
@@ -39,7 +39,7 @@ nvim --headless +PlugInstall +qa
 
 This last step can also be achieved using `:PlugInstall` after opening Neovim - however it will require a restarting for them to properly load.
 
-### Pre-built
+### Pre-built Environment
 
 To use this configuration as a portable pre-built Neovim-in-Docker environment:
 
@@ -68,7 +68,7 @@ erkrnt/nvim:latest [<filename> | <folder>]
 
 > NOTE: If you built a custom tag (step 2) replace `erkrnt/nvim:latest` when using the command above.
 
-### Auto-loading (experimental)
+### Auto-loading Environment (experimental)
 
 To be documented.
 
