@@ -80,9 +80,7 @@ erkrnt/nvim:latest [<filename> | <folder>]
 > NOTE: If you didn't create a named Docker volume (step 3) remove the following line
 
 ```
-...
 --volume "neovim_data:/home/neovim/.config" \
-...
 ```
 
 ### Auto-loading Environment (experimental)
