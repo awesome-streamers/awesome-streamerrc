@@ -53,7 +53,17 @@ To use this configuration as a portable pre-built Neovim-in-Docker environment:
 docker image build --tag <tag-name> .
 ```
 
+3. (suggested) If you would like to cache compiled or downloaded plugins - create a named Docker volume:
+
+> NOTE: This avoids things like `nvim-treesitter` needing to compile on every load.
+
+```
+docker volume create neovim_data
+```
+
 3. Run the following in your working directory:
+
+> NOTE: If you built a custom tag (step 2) replace `erkrnt/nvim:latest` when using the command below.
 
 ```
 docker container run \
@@ -62,11 +72,18 @@ docker container run \
 --interactive \
 --rm \
 --tty \
+--volume "neovim_data:/home/neovim/.config" \
 --volume "$PWD:/workspace" \
 erkrnt/nvim:latest [<filename> | <folder>]
 ```
 
-> NOTE: If you built a custom tag (step 2) replace `erkrnt/nvim:latest` when using the command above.
+> NOTE: If you didn't create a named Docker volume (step 3) remove the following line
+
+```
+...
+--volume "neovim_data:/home/neovim/.config" \
+...
+```
 
 ### Auto-loading Environment (experimental)
 
