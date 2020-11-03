@@ -61,7 +61,7 @@ docker image build --tag <tag-name> .
 docker volume create neovim_data
 ```
 
-3. Run the following in your working directory:
+4. Run the following in your working directory:
 
 > NOTE: If you built a custom tag (step 2) replace `erkrnt/nvim:latest` when using the command below.
 
