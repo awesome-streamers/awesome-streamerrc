@@ -16,7 +16,7 @@ The first two should work out of the box - the `auto-loading` Docker image is st
 
 ### I. Drag-and-drop
 
-To use this configuration for your own personal use:
+To use this configuration for your own personal use (recommended):
 
 1. Install `neovim` nightly (required for LSP support) using the instructions at https://github.com/neovim/neovim
 
@@ -47,13 +47,13 @@ To use this configuration as a portable pre-built Neovim-in-Docker environment:
 
 1. Install Docker for your operating system at https://docs.docker.com/get-docker/
 
-2. (optional) If you would like to build the image locally with a custom tag:
+2. (optional) If you would like to use a custom tag rather than download the latest `erkrnt/nvim:latest` tag:
 
 ```
 docker image build --tag <tag-name> .
 ```
 
-3. Run the command following in your working directory:
+3. Run the following in your working directory:
 
 ```
 docker container run \
