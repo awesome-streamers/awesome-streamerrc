@@ -111,7 +111,8 @@ endif
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
-  nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
-  nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
+  nnoremap <Leader>pp :lua require'telescope.builtin'.find_files{}<CR>
+  nnoremap <Leader>pg :lua require'telescope.builtin'.live_grep{}<CR>
   nnoremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
+  nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
 endif
