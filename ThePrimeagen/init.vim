@@ -45,6 +45,10 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 
+" Debugger Plugins
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
+
 Plug 'rust-lang/rust.vim'
 Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
@@ -55,7 +59,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
-Plug '/home/mpaulson/personal/vim-apm'
 Plug 'theprimeagen/vim-be-good'
 Plug 'gruvbox-community/gruvbox'
 
@@ -76,6 +79,7 @@ Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
+" let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
 let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
@@ -83,10 +87,6 @@ if exists('+termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 let g:gruvbox_invert_selection='0'
-
-" telescope
-let g:telescope_cache_results = 1
-let g:telescope_prime_fuzzy_find  = 1
 
 " --- vim go (polyglot) settings.
 let g:go_highlight_build_constraints = 1
@@ -142,7 +142,8 @@ let g:fzf_branch_actions = {
       \   'confirm': v:false,
       \ },
       \}
-" lua require('telescope').setup({defaults = {file_matching_strategy = "prime" }})
+
+lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
 
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
@@ -152,6 +153,38 @@ nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+
+fun GotoWindow(id)
+    call win_gotoid(a:id)
+    MaximizerToggle
+endfun
+
+" Debugger remaps
+nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>de :call vimspector#Reset()<CR>
+
+nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
+" <Plug>VimspectorStop
+" <Plug>VimspectorPause
+" <Plug>VimspectorAddFunctionBreakpoint
 
 nnoremap <leader>gc :GBranches<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
@@ -168,7 +201,7 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For >")})<CR>
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
@@ -205,20 +238,6 @@ lua require'nvim_lsp'.rust_analyzer.setup{ on_attach=require'completion'.on_atta
 nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
-
-" Terminal commands
-" ueoa is first through fourth finger left hand home row.
-" This just means I can crush, with opposite hand, the 4 terminal positions
-nmap <leader>tu :call GotoBuffer(0)<CR>
-nmap <leader>te :call GotoBuffer(1)<CR>
-nmap <leader>to :call GotoBuffer(2)<CR>
-nmap <leader>ta :call GotoBuffer(3)<CR>
-
-nmap <leader>tsu :call SetBuffer(0)<CR>
-nmap <leader>tse :call SetBuffer(1)<CR>
-nmap <leader>tso :call SetBuffer(2)<CR>
-nmap <leader>tsa :call SetBuffer(3)<CR>
-
 fun! EmptyRegisters()
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
     for r in regs
@@ -241,6 +260,22 @@ fun! ThePrimeagen_LspHighlighter()
     lua require("my_lspconfig")
 endfun
 
+" Terminal commands
+" ueoa is first through fourth finger left hand home row.
+" This just means I can crush, with opposite hand, the 4 terminal positions
+nmap <leader>tu :call GotoBuffer(0)<CR>
+nmap <leader>te :call GotoBuffer(1)<CR>
+nmap <leader>to :call GotoBuffer(2)<CR>
+nmap <leader>ta :call GotoBuffer(3)<CR>
+
+nmap <leader>tsu :call SetBuffer(0)<CR>
+nmap <leader>tse :call SetBuffer(1)<CR>
+nmap <leader>tso :call SetBuffer(2)<CR>
+nmap <leader>tsa :call SetBuffer(3)<CR>
+
+" How to do this but much better?
+let g:win_ctrl_buf_list = [0, 0, 0, 0]
+
 fun! GotoBuffer(ctrlId)
     if (a:ctrlId > 9) || (a:ctrlId < 0)
         echo "CtrlID must be between 0 - 9"
@@ -256,9 +291,6 @@ fun! GotoBuffer(ctrlId)
     let bufh = l:contents[1]
     call nvim_win_set_buf(0, l:bufh)
 endfun
-
-" How to do this but much better?
-let g:win_ctrl_buf_list = [0, 0, 0, 0]
 fun! SetBuffer(ctrlId)
     if has_key(b:, "terminal_job_id") == 0
         echo "You must be in a terminal to execute this command"
@@ -297,7 +329,7 @@ augroup END
 augroup THE_PRIMEAGEN
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
-    autocmd VimEnter * :VimApm
+    " autocmd VimEnter * :VimApm
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
 
