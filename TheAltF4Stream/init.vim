@@ -50,6 +50,7 @@ set expandtab
 set nowrap
 set number
 set noshowmode
+set relativenumber "" PogChamp
 
 
 "'' Definitions ''"
