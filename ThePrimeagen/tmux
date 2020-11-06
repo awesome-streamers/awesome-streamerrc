@@ -78,6 +78,7 @@ while [ "$#" -gt 0 ]; do
     "--deathmatch")
         createSession $PERSONAL_SESSION primary -c $DEATHMATCH
         createWindow $PERSONAL_SESSION server -c $DEATHMATCH/server "docker-compose up --build"
+        tmux next-window -t $PERSONAL_SESSION:primary
         ;;
 
     "--dm-logging")
