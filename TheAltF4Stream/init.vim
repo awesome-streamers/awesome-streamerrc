@@ -87,6 +87,7 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vi
   lua require'nvim_lsp'.vuels.setup{ on_attach=require'completion'.on_attach }
   set completeopt=menuone,noinsert,noselect
   autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
+  nnoremap <Leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
 endif
 
 "'' Neovim Treesitter ''"
