@@ -50,6 +50,7 @@ set expandtab
 set nowrap
 set number
 set noshowmode
+set relativenumber "" PogChamp
 
 
 "'' Definitions ''"
@@ -86,6 +87,7 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vi
   lua require'nvim_lsp'.vuels.setup{ on_attach=require'completion'.on_attach }
   set completeopt=menuone,noinsert,noselect
   autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
+  nnoremap <Leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
 endif
 
 "'' Neovim Treesitter ''"
@@ -111,7 +113,8 @@ endif
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
-  nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
-  nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
+  nnoremap <Leader>pp :lua require'telescope.builtin'.find_files{}<CR>
+  nnoremap <Leader>pg :lua require'telescope.builtin'.live_grep{}<CR>
   nnoremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
+  nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
 endif
