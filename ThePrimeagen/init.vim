@@ -167,7 +167,7 @@ nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
-fun GotoWindow(id)
+fun! GotoWindow(id)
     call win_gotoid(a:id)
     MaximizerToggle
 endfun
@@ -228,6 +228,11 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " greatest remap ever
 vnoremap <leader>p "_dP
+
+" next greatest remap ever : asbjornHaland
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y gg"+yG
 
 " vim TODO
 nmap <Leader>tu <Plug>BujoChecknormal

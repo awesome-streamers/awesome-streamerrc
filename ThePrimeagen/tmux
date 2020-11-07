@@ -44,6 +44,7 @@ while [ "$#" -gt 0 ]; do
     "-m")
         createSession tvui primary
         createWindow tvui milo_dta -c $MILO/dist "dtalocal"
+        createWindow tvui milo -c $MILO
         ;;
     "-n")
         createSession tvui primary
