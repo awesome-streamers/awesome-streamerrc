@@ -18,6 +18,7 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'ntk148v/vim-horizon'
 
 """ Utilities
+Plug 'lambdalisue/fern.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'nvim-treesitter/nvim-treesitter'
 
@@ -75,7 +76,7 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vi
   nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
   nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
-"'' Neovim LSP ''"
+  "'' Neovim LSP ''"
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
   lua require'nvim_lsp'.bashls.setup{ on_attach=require'completion'.on_attach }
   lua require'nvim_lsp'.dockerls.setup{ on_attach=require'completion'.on_attach }
@@ -90,9 +91,26 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vi
   nnoremap <Leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
 endif
 
+
 "'' Neovim Treesitter ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
   lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+endif
+
+
+"'' Fern ''"
+if filereadable(expand("~/.config/nvim/plugged/fern.vim/plugin/fern.vim"))
+  function! s:init_fern() abort
+    nmap <buffer><expr>
+      \ <Plug>(fern-my-expand-or-collapse)
+      \ fern#smart#leaf(
+      \   "\<Plug>(fern-action-collapse)",
+      \   "\<Plug>(fern-action-expand)",
+      \   "\<Plug>(fern-action-collapse)",
+      \ )
+    nmap <buffer><nowait> l <Plug>(fern-my-expand-or-collapse)
+  endfunction
+  nnoremap <Leader>tv :Fern . -drawer -reveal=% -toggle<CR>
 endif
 
 
@@ -113,8 +131,8 @@ endif
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
-  nnoremap <Leader>pp :lua require'telescope.builtin'.find_files{}<CR>
-  nnoremap <Leader>pg :lua require'telescope.builtin'.live_grep{}<CR>
+  nnoremap <Leader>ff :lua require'telescope.builtin'.find_files{}<CR>
+  nnoremap <Leader>lg :lua require'telescope.builtin'.live_grep{}<CR>
   nnoremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
   nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
 endif
