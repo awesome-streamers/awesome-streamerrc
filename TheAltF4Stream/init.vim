@@ -1,6 +1,8 @@
 "'' VIM PRE-PLUG ''"
 filetype plugin indent on
+set exrc
 set nocompatible
+set secure
 set termguicolors
 syntax enable
 
@@ -18,9 +20,9 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'ntk148v/vim-horizon'
 
 """ Utilities
-Plug 'lambdalisue/fern.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'ThePrimeagen/harpoon'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -98,19 +100,9 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-trees
 endif
 
 
-"'' Fern ''"
-if filereadable(expand("~/.config/nvim/plugged/fern.vim/plugin/fern.vim"))
-  function! s:init_fern() abort
-    nmap <buffer><expr>
-      \ <Plug>(fern-my-expand-or-collapse)
-      \ fern#smart#leaf(
-      \   "\<Plug>(fern-action-collapse)",
-      \   "\<Plug>(fern-action-expand)",
-      \   "\<Plug>(fern-action-collapse)",
-      \ )
-    nmap <buffer><nowait> l <Plug>(fern-my-expand-or-collapse)
-  endfunction
-  nnoremap <Leader>tv :Fern . -drawer -reveal=% -toggle<CR>
+"'' Harpoon ''"
+if filereadable(expand("~/.config/nvim/plugged/harpoon/plugin/harpoon.vim"))
+  nmap <Leader>bf :call GotoBuffer(0)<CR>
 endif
 
 
