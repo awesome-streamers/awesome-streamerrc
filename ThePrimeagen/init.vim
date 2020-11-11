@@ -39,6 +39,24 @@ set colorcolumn=80
 
 call plug#begin('~/.vim/plugged')
 
+let g:firenvim_config = {
+    \ 'globalSettings': {
+        \ 'alt': 'all',
+    \  },
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'cmdline': 'neovim',
+            \ 'priority': 0,
+            \ 'selector': 'textarea',
+            \ 'takeover': 'always',
+        \ },
+    \ }
+\ }
+let fc = g:firenvim_config['localSettings']
+let fc['https?://twitter.com'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https://.*gmail.com.*'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://.*twitch.tv.*'] = { 'takeover': 'never', 'priority': 1 }
+
 " Neovim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
@@ -80,6 +98,9 @@ Plug 'chriskempson/base16-vim'
 " HARPOON!!
 Plug '/home/mpaulson/personal/harpoon'
 
+" Fire Nvim
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(69) } }
+
 call plug#end()
 
 " let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
@@ -101,6 +122,7 @@ fun! ColorMyPencils()
     " highlight LineNr guifg=#ff8659
     " highlight LineNr guifg=#aed75f
     highlight LineNr guifg=#5eacd3
+    highlight netrwDir guifg=#5eacd3
 endfun
 call ColorMyPencils()
 
@@ -287,6 +309,9 @@ nmap <leader>tu :call GotoBuffer(0)<CR>
 nmap <leader>te :call GotoBuffer(1)<CR>
 nmap <leader>to :call GotoBuffer(2)<CR>
 nmap <leader>ta :call GotoBuffer(3)<CR>
+nmap <leader>nn :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 com! SetLspVirtualText call ThePrimeagen_LspHighlighter()
 
@@ -300,5 +325,9 @@ augroup THE_PRIMEAGEN
     autocmd BufWritePre * :call TrimWhitespace()
     " autocmd VimEnter * :VimApm
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
+
+    " Fire Neovim
+    au BufEnter github.com_*.txt set filetype=markdown
+    au BufEnter txti.es_*.txt set filetype=typescript
 augroup END
 
