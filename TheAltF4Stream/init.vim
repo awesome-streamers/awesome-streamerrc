@@ -1,6 +1,8 @@
 "'' VIM PRE-PLUG ''"
 filetype plugin indent on
+set exrc
 set nocompatible
+set secure
 set termguicolors
 syntax enable
 
@@ -20,6 +22,7 @@ Plug 'ntk148v/vim-horizon'
 """ Utilities
 Plug 'preservim/nerdcommenter'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'ThePrimeagen/harpoon'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -75,7 +78,7 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vi
   nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
   nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
-"'' Neovim LSP ''"
+  "'' Neovim LSP ''"
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
   lua require'nvim_lsp'.bashls.setup{ on_attach=require'completion'.on_attach }
   lua require'nvim_lsp'.dockerls.setup{ on_attach=require'completion'.on_attach }
@@ -90,9 +93,16 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vi
   nnoremap <Leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
 endif
 
+
 "'' Neovim Treesitter ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
   lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+endif
+
+
+"'' Harpoon ''"
+if filereadable(expand("~/.config/nvim/plugged/harpoon/plugin/harpoon.vim"))
+  nmap <Leader>bf :call GotoBuffer(0)<CR>
 endif
 
 
@@ -113,8 +123,8 @@ endif
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
-  nnoremap <Leader>pp :lua require'telescope.builtin'.find_files{}<CR>
-  nnoremap <Leader>pg :lua require'telescope.builtin'.live_grep{}<CR>
+  nnoremap <Leader>ff :lua require'telescope.builtin'.find_files{}<CR>
+  nnoremap <Leader>lg :lua require'telescope.builtin'.live_grep{}<CR>
   nnoremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
   nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
 endif
