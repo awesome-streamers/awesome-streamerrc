@@ -91,6 +91,7 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vi
   set completeopt=menuone,noinsert,noselect
   autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
   nnoremap <Leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
+  nnoremap <Leader>ls :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
 endif
 
 
