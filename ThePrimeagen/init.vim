@@ -53,7 +53,9 @@ let g:firenvim_config = {
     \ }
 \ }
 let fc = g:firenvim_config['localSettings']
-let fc['https?://twitter.com'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https://studio.youtube.com.*'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://instagram.com.*'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://twitter.com.*'] = { 'takeover': 'never', 'priority': 1 }
 let fc['https://.*gmail.com.*'] = { 'takeover': 'never', 'priority': 1 }
 let fc['https?://.*twitch.tv.*'] = { 'takeover': 'never', 'priority': 1 }
 
@@ -79,6 +81,7 @@ Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'theprimeagen/vim-be-good'
 Plug 'gruvbox-community/gruvbox'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
@@ -123,6 +126,7 @@ fun! ColorMyPencils()
     " highlight LineNr guifg=#aed75f
     highlight LineNr guifg=#5eacd3
     highlight netrwDir guifg=#5eacd3
+    highlight qfFileName guifg=#aed75f
 endfun
 call ColorMyPencils()
 
