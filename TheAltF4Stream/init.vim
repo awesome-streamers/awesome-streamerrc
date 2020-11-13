@@ -67,18 +67,8 @@ nmap <leader>k :wincmd k<CR>
 nmap <leader>l :wincmd l<CR>
 
 
-"'' Neovim LSP Keymaps ''"
+"'' Neovim LSP ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vim"))
-  nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
-  nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
-  nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-  nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
-  nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-  nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
-  nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-  nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-
-  "'' Neovim LSP ''"
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
   lua require'nvim_lsp'.bashls.setup{ on_attach=require'completion'.on_attach }
   lua require'nvim_lsp'.dockerls.setup{ on_attach=require'completion'.on_attach }
@@ -88,10 +78,19 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vi
   lua require'nvim_lsp'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
   lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
   lua require'nvim_lsp'.vuels.setup{ on_attach=require'completion'.on_attach }
+
   set completeopt=menuone,noinsert,noselect
+
   autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
-  nnoremap <Leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
-  nnoremap <Leader>ls :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
+
+  nnoremap <leader>ba :lua vim.lsp.buf.code_action()<CR>
+  nnoremap <leader>bd :lua vim.lsp.buf.definition()<CR>
+  nnoremap <leader>bf :lua vim.lsp.buf.references()<CR>
+  nnoremap <leader>bi :lua vim.lsp.buf.implementation()<CR>
+  nnoremap <leader>bs :lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <leader>br :lua vim.lsp.buf.rename()<CR>
+  nnoremap <leader>bh :lua vim.lsp.buf.hover()<CR>
+  nnoremap <Leader>bs :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
 endif
 
 
@@ -124,8 +123,8 @@ endif
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
-  nnoremap <Leader>ff :lua require'telescope.builtin'.find_files{}<CR>
-  nnoremap <Leader>lg :lua require'telescope.builtin'.live_grep{}<CR>
-  nnoremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
-  nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
+  nnoremap <Leader>tf :lua require'telescope.builtin'.find_files{}<CR>
+  nnoremap <Leader>tg :lua require'telescope.builtin'.live_grep{}<CR>
+  nnoremap <Leader>ts :lua require'telescope.builtin'.lsp_document_symbols()<CR>
+  nnoremap <Leader>tr :lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
 endif
