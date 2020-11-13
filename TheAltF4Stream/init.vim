@@ -23,6 +23,7 @@ Plug 'ntk148v/vim-horizon'
 Plug 'preservim/nerdcommenter'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ThePrimeagen/harpoon'
+Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -100,6 +101,13 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-trees
 endif
 
 
+"'' Hardtime ''"
+if filereadable(expand("~/.config/nvim/plugged/vim-hardtime/plugin/hardtime.vim"))
+  let g:hardtime_default_on = 1
+  let g:hardtime_showmsg = 1
+endif
+
+
 "'' Harpoon ''"
 if filereadable(expand("~/.config/nvim/plugged/harpoon/plugin/harpoon.vim"))
   nmap <Leader>bf :call GotoBuffer(0)<CR>
@@ -117,6 +125,7 @@ if filereadable(expand("~/.config/nvim/plugged/vim-prettier/plugin/prettier.vim"
   let g:prettier#config#bracket_spacing = 'true'
   let g:prettier#config#jsx_bracket_same_line = 'false'
   let g:prettier#autoformat = 0
+
   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 endif
 
