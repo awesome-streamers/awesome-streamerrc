@@ -69,16 +69,17 @@ nmap <leader>l :wincmd l<CR>
 
 
 "'' Neovim LSP ''"
-if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vim"))
+if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/lspconfig.vim"))
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-  lua require'nvim_lsp'.bashls.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.dockerls.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.html.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.jsonls.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.vuels.setup{ on_attach=require'completion'.on_attach }
+
+  lua require'lspconfig'.bashls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.dockerls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.html.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.vuels.setup{ on_attach=require'completion'.on_attach }
 
   set completeopt=menuone,noinsert,noselect
 
