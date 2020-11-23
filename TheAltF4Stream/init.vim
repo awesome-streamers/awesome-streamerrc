@@ -24,6 +24,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ThePrimeagen/harpoon'
 Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+Plug 'voldikss/vim-floaterm'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -99,6 +100,12 @@ endif
 "'' Neovim Treesitter ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
   lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+endif
+
+
+"'' Floatterm ''"
+if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
+  nnoremap <leader>fr :FloatermNew ranger<CR>
 endif
 
 
