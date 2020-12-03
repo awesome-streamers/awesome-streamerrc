@@ -116,4 +116,4 @@ docker container run \
 erkrnt/nvim-autoload:latest [<filename> | <folder>]
 ```
 
-[preview]: https://github.com/erkrnt/awesome-streamerrc/blob/master/TheAltF4Stream/TheAltF4Stream.png "The Alt-F4 Stream"
+[preview]: https://github.com/erkrnt/awesome-streamerrc/blob/master/TheAltF4Stream/TheAltF4Stream.gif "The Alt-F4 Stream"

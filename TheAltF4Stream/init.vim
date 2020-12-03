@@ -23,6 +23,8 @@ Plug 'ntk148v/vim-horizon'
 Plug 'preservim/nerdcommenter'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ThePrimeagen/harpoon'
+Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+Plug 'voldikss/vim-floaterm'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -67,37 +69,50 @@ nmap <leader>k :wincmd k<CR>
 nmap <leader>l :wincmd l<CR>
 
 
-"'' Neovim LSP Keymaps ''"
-if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/nvim_lsp.vim"))
-  nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
-  nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
-  nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-  nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
-  nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-  nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
-  nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-  nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-
-  "'' Neovim LSP ''"
+"'' Neovim LSP ''"
+if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/lspconfig.vim"))
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-  lua require'nvim_lsp'.bashls.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.dockerls.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.html.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.jsonls.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-  lua require'nvim_lsp'.vuels.setup{ on_attach=require'completion'.on_attach }
+
+  lua require'lspconfig'.bashls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.dockerls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.html.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.vuels.setup{ on_attach=require'completion'.on_attach }
+
   set completeopt=menuone,noinsert,noselect
+
   autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
-  nnoremap <Leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
-  nnoremap <Leader>ls :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
+
+  nnoremap <leader>ba :lua vim.lsp.buf.code_action()<CR>
+  nnoremap <leader>bd :lua vim.lsp.buf.definition()<CR>
+  nnoremap <leader>bf :lua vim.lsp.buf.references()<CR>
+  nnoremap <leader>bi :lua vim.lsp.buf.implementation()<CR>
+  nnoremap <leader>bs :lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <leader>br :lua vim.lsp.buf.rename()<CR>
+  nnoremap <leader>bh :lua vim.lsp.buf.hover()<CR>
+  nnoremap <Leader>bs :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
 endif
 
 
 "'' Neovim Treesitter ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
   lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+endif
+
+
+"'' Floatterm ''"
+if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
+  nnoremap <leader>fr :FloatermNew ranger<CR>
+endif
+
+
+"'' Hardtime ''"
+if filereadable(expand("~/.config/nvim/plugged/vim-hardtime/plugin/hardtime.vim"))
+  let g:hardtime_default_on = 1
+  let g:hardtime_showmsg = 1
 endif
 
 
@@ -118,14 +133,15 @@ if filereadable(expand("~/.config/nvim/plugged/vim-prettier/plugin/prettier.vim"
   let g:prettier#config#bracket_spacing = 'true'
   let g:prettier#config#jsx_bracket_same_line = 'false'
   let g:prettier#autoformat = 0
+
   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 endif
 
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
-  nnoremap <Leader>ff :lua require'telescope.builtin'.find_files{}<CR>
-  nnoremap <Leader>lg :lua require'telescope.builtin'.live_grep{}<CR>
-  nnoremap <Leader>en <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/" }<CR>
-  nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
+  nnoremap <Leader>tf :lua require'telescope.builtin'.find_files{}<CR>
+  nnoremap <Leader>tg :lua require'telescope.builtin'.live_grep{}<CR>
+  nnoremap <Leader>ts :lua require'telescope.builtin'.lsp_document_symbols()<CR>
+  nnoremap <Leader>tr :lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
 endif
