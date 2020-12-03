@@ -65,40 +65,9 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 " Debugger Plugins
 Plug 'puremourning/vimspector'
@@ -166,41 +135,7 @@ fun! ColorMyPencils()
 endfun
 call ColorMyPencils()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 let g:vim_be_good_log_file = 1
 let g:vim_apm_log = 1
