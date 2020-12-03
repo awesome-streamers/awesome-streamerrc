@@ -65,6 +65,41 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" Neovim Tree shitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 " Debugger Plugins
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
@@ -82,6 +117,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'theprimeagen/vim-be-good'
 Plug 'gruvbox-community/gruvbox'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'tpope/vim-projectionist'
 
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
@@ -130,21 +166,41 @@ fun! ColorMyPencils()
 endfun
 call ColorMyPencils()
 
-" --- vim go (polyglot) settings.
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_auto_sameids = 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let g:vim_be_good_log_file = 1
 let g:vim_apm_log = 1
@@ -184,6 +240,7 @@ let g:fzf_branch_actions = {
 
 lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
 
+nnoremap <leader>va :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
@@ -224,7 +281,6 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 " <Plug>VimspectorStop
 " <Plug>VimspectorPause
 " <Plug>VimspectorAddFunctionBreakpoint
-
 nnoremap <leader>gc :GBranches<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
 nnoremap <leader>grum :Git rebase upstream/master<CR>
@@ -273,10 +329,11 @@ nnoremap <leader>vwm :call ColorMyPencils()<CR>
 inoremap <C-c> <esc>
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
 " lua require'nvim_lsp'.sumneko_lua.setup{ on_attach=require'completion'.on_attach }
 
 nmap <leader>gh :diffget //3<CR>
@@ -333,5 +390,6 @@ augroup THE_PRIMEAGEN
     " Fire Neovim
     au BufEnter github.com_*.txt set filetype=markdown
     au BufEnter txti.es_*.txt set filetype=typescript
+    au BufEnter stackoverflow_*.txt filetype=markdown
 augroup END
 
