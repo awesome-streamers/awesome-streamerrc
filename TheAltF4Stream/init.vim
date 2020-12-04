@@ -10,32 +10,40 @@ syntax enable
 "'' START PLUG ''"
 call plug#begin('~/.config/nvim/plugged')
 
-"'' Neovim LSP Plugins ''"
+"'' Neovim LSP ''"
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
+
+"'' Neovim Treesitter '""
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/playground'
+
+" Neovim Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
+
+""" Other LSP ''"
+Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 """ Themes
 Plug 'ntk148v/vim-horizon'
 
 """ Utilities
 Plug 'preservim/nerdcommenter'
-Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ThePrimeagen/harpoon'
-Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
 Plug 'voldikss/vim-floaterm'
+Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+Plug 'RRethy/vim-illuminate'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
 
 " Prettier
-Plug 'prettier/vim-prettier'
-
-" Telescope
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 call plug#end()
 "'' END PLUG ''"
@@ -84,8 +92,6 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-lspconfig/plugin/lspconfig.v
 
   set completeopt=menuone,noinsert,noselect
 
-  autocmd BufWritePre *.go, lua vim.lsp.buf.formatting() 
-
   nnoremap <leader>ba :lua vim.lsp.buf.code_action()<CR>
   nnoremap <leader>bd :lua vim.lsp.buf.definition()<CR>
   nnoremap <leader>bf :lua vim.lsp.buf.references()<CR>
@@ -132,9 +138,13 @@ endif
 if filereadable(expand("~/.config/nvim/plugged/vim-prettier/plugin/prettier.vim"))
   let g:prettier#config#bracket_spacing = 'true'
   let g:prettier#config#jsx_bracket_same_line = 'false'
-  let g:prettier#autoformat = 0
+  let g:prettier#autoformat = 1
+endif
 
-  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+"'' Rust ''"
+if filereadable(expand("~/.config/nvim/plugged/rust.vim/plugin/rust.vim"))
+  let g:rustfmt_autosave = 1
 endif
 
 
