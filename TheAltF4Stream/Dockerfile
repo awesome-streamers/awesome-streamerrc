@@ -13,24 +13,30 @@ RUN apk add --no-cache \
   pkgconf \
   unzip
 
-RUN git clone --branch "nightly" --depth="1" --progress "https://github.com/neovim/neovim.git" \
+RUN git clone --progress "https://github.com/neovim/neovim.git" \
+  && (cd neovim && git checkout "tags/v0.4.4") \
   && make CMAKE_BUILD_TYPE="RelWithDebInfo" -C "/neovim" install
 
 
 FROM alpine:3.12.1
 
 RUN apk add --no-cache \
+  bash \
   build-base \
   curl \
   gcc \
   git \
+  go \
+  nodejs \
+  ripgrep \
+  rust \
   shadow \
   su-exec \
-  unzip
+  unzip \
+  yarn
 
-COPY --from=build /usr/local/share/nvim /usr/local/share/nvim
 COPY --from=build /usr/local/bin/nvim /usr/local/bin/nvim
-COPY --from=build /usr/local/lib64/nvim /usr/local/lib64/nvim
+COPY --from=build /usr/local/share/nvim /usr/local/share/nvim
 
 RUN addgroup "neovim" \
   && adduser -D -G "neovim" -g "" -s "/bin/bash" "neovim" \
