@@ -18,11 +18,15 @@ The first two should work out of the box - the `auto-loading` Docker image is st
 
 To use this configuration for your own personal use (recommended):
 
-1. Install `neovim` nightly (required for LSP support) using the instructions at https://github.com/neovim/neovim
+1. Install `neovim` latest using the instructions at https://github.com/neovim/neovim
 
-2. Install `vim-plug` (required for plugins management) using the instructions at https://github.com/junegunn/vim-plug
+2. Install `ranger` latest using the instructions at https://ranger.github.io/
 
-3. Copy `init.vim` to the local Neovim config path:
+3. Install `ripgrep` latest using the instructions at https://github.com/BurntSushi/ripgrep
+
+4. Install `vim-plug` (required for plugins management) using the instructions at https://github.com/junegunn/vim-plug
+
+5. Copy `init.vim` to the local Neovim config path:
 
 > NOTE: The default Neovim config path is used below but may vary depending on installation method.
 
