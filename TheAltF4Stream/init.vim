@@ -17,6 +17,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 """ Language Support ''"
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 """ Themes
 Plug 'ntk148v/vim-horizon'
@@ -235,6 +237,37 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
   nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
   " Resume latest coc list.
   nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+endif
+
+
+"'' Go ''"
+if filereadable(expand("~/.config/nvim/plugged/vim-go/plugin/go.vim"))
+  let g:go_code_completion_enabled = 0
+  let g:go_fmt_command = "goimports"
+  let g:go_gpls_enabled = 0
+  let g:go_doc_keywordprg_enabled = 0
+
+  let g:go_highlight_array_whitespace_error = 0
+  let g:go_highlight_chan_whitespace_error = 0
+  let g:go_highlight_extra_types = 0
+  let g:go_highlight_space_tab_error = 0
+  let g:go_highlight_trailing_whitespace_error = 0
+  let g:go_highlight_operators = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_function_parameters = 1
+  let g:go_highlight_function_calls = 1
+  let g:go_highlight_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_build_constraints = 1
+  let g:go_highlight_generate_tags = 1
+  let g:go_highlight_variable_declarations = 1
+  let g:go_highlight_variable_assignments = 1
+endif
+
+
+"'' Rust ''"
+if filereadable(expand("~/.config/nvim/plugged/rust.vim/plugin/rust.vim"))
+  let g:rustfmt_autosave = 1
 endif
 
 
