@@ -33,9 +33,6 @@ Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-
 " Lightline
 Plug 'itchyny/lightline.vim'
 
-" Prettier
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
 call plug#end()
 "'' END PLUG ''"
 
@@ -83,6 +80,7 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
       \'coc-html',
       \'coc-json',
       \'coc-marketplace',
+      \'coc-prettier',
       \'coc-python',
       \'coc-rls',
       \'coc-sh',
@@ -265,12 +263,6 @@ if filereadable(expand("~/.config/nvim/plugged/vim-go/plugin/go.vim"))
 endif
 
 
-"'' Rust ''"
-if filereadable(expand("~/.config/nvim/plugged/rust.vim/plugin/rust.vim"))
-  let g:rustfmt_autosave = 1
-endif
-
-
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
   nnoremap <leader>fr :FloatermNew ranger<CR>
@@ -298,12 +290,4 @@ endif
 "'' Lightline ''"
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
   let g:lightline = {'colorscheme' : 'horizon'}
-endif
-
-
-"'' Prettier ''"
-if filereadable(expand("~/.config/nvim/plugged/vim-prettier/plugin/prettier.vim"))
-  let g:prettier#config#bracket_spacing = 'true'
-  let g:prettier#config#jsx_bracket_same_line = 'false'
-  let g:prettier#autoformat = 1
 endif
