@@ -82,7 +82,7 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
       \'coc-marketplace',
       \'coc-prettier',
       \'coc-python',
-      \'coc-rls',
+      \'coc-rust-analyzer',
       \'coc-sh',
       \'coc-sql',
       \'coc-tabnine',
