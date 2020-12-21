@@ -84,6 +84,7 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
       \'coc-python',
       \'coc-rust-analyzer',
       \'coc-sh',
+      \'coc-snippets',
       \'coc-sql',
       \'coc-tabnine',
       \'coc-tailwindcss',
