@@ -1,0 +1,3 @@
+--glob=!**/*.pem
+--glob=!git/*
+--glob=!**/node_modules/**
