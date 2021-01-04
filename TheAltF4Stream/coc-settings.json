@@ -1,12 +1,15 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
+    "graphql",
+    "javascript",
+    "javascriptreact",
+    "json",
     "less",
+    "markdown",
+    "rust",
     "scss",
     "typescript",
-    "json",
-    "graphql",
-    "markdown",
-    "rust"
+    "typescriptreact"
   ]
 }
