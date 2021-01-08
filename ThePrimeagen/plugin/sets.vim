@@ -1,4 +1,3 @@
-set exrc
 set guicursor=
 set relativenumber
 set nohlsearch

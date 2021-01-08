@@ -1,3 +1,5 @@
+set exrc " Wont open project .nvimrc without this here
+
 call plug#begin('~/.vim/plugged')
 
 " Neovim lsp Plugins
@@ -49,6 +51,7 @@ Plug 'chriskempson/base16-vim'
 
 " HARPOON!!
 Plug '/home/mpaulson/personal/harpoon'
+Plug '/home/mpaulson/personal/rfc-reader'
 
 " Fire Nvim
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(69) } }
