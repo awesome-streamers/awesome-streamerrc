@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sheerun/vim-polyglot'
 
 """ Themes
 Plug 'ntk148v/vim-horizon'
@@ -262,7 +263,6 @@ if filereadable(expand("~/.config/nvim/plugged/vim-go/plugin/go.vim"))
   let g:go_highlight_variable_declarations = 1
   let g:go_highlight_variable_assignments = 1
 endif
-
 
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
