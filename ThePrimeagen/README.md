@@ -5,7 +5,7 @@ Please feel free to reach out and ask any questions.  Best place to reach me is 
 ![preview]
 
 ## Live Coding
-I also live code several times a week, usually Saturday - Tuesday, 7 PM PT.  
+I also live code several times a week, usually Saturday - Tuesday, 7 PM PT.
 
 [Twitch](https://twitch.tv/ThePrimeagen)
 
