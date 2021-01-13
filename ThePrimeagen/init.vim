@@ -52,6 +52,7 @@ Plug 'chriskempson/base16-vim'
 " HARPOON!!
 Plug '/home/mpaulson/personal/harpoon'
 Plug '/home/mpaulson/personal/rfc-reader'
+Plug 'mhinz/vim-rfc'
 
 " Fire Nvim
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(69) } }

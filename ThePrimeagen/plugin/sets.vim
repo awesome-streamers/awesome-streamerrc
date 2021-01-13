@@ -18,6 +18,7 @@ set termguicolors
 set scrolloff=8
 set noshowmode
 set signcolumn=yes
+set isfname+=@-@
 
 " Give more space for displaying messages.
 set cmdheight=2
