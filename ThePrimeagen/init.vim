@@ -2,9 +2,12 @@ set exrc " Wont open project .nvimrc without this here
 
 call plug#begin('~/.vim/plugged')
 
+" Yes, I am a sneaky snek now
+Plug 'ambv/black'
+
 " Neovim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/completion-nvim' 
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 
@@ -22,6 +25,7 @@ Plug '/home/mpaulson/personal/contextprint.nvim'
 Plug 'rust-lang/rust.vim'
 Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -47,6 +51,7 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug '/home/mpaulson/personal/VimDeathmatch/client'
 
 " HARPOON!!
@@ -59,6 +64,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(69) } }
 
 " Cheat Sheet
 Plug 'dbeniamine/cheat.sh-vim'
+Plug '/home/mpaulson/personal/vim-apm'
 
 call plug#end()
 
@@ -86,6 +92,9 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
+nnoremap <C-k> :bprev<CR>
+nnoremap <C-j> :bnext<CR>
+nnoremap <C-q> :bdelete<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :Sex!<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
@@ -151,6 +160,6 @@ augroup END
 augroup THE_PRIMEAGEN
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
-    " autocmd VimEnter * :VimApm
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
+    autocmd BufEnter * :VimApm
 augroup END

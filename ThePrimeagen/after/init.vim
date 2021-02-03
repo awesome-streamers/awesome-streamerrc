@@ -1,2 +1,0 @@
-echom "TESTING; test.vim"
-

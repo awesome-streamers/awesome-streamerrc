@@ -1,6 +1,6 @@
 let g:theprimeagen_colorscheme = "gruvbox"
 fun! ColorMyPencils()
-    colorscheme gruvbox
+    colorscheme ayu 
     set background=dark
 
     let g:gruvbox_contrast_dark = 'hard'
