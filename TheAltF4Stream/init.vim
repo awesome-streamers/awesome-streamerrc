@@ -22,6 +22,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
 
 """ Themes
+Plug 'ghifarit53/tokyonight-vim'
 Plug 'ntk148v/vim-horizon'
 
 """ Utilities
@@ -40,9 +41,9 @@ call plug#end()
 
 "'' VIM POST-PLUG ''"
 "This executes the command silently and ignores errors
-silent! colorscheme horizon
-highlight Normal cterm=NONE gui=NONE ctermbg=233 ctermfg=252 guibg=NONE guifg=NONE
-highlight Pmenu cterm=NONE gui=NONE ctermbg=233 ctermfg=252 guifg=#ffffff guibg=#4f4f4f
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
 set splitright
 set encoding=utf-8
 set noerrorbells
@@ -53,6 +54,7 @@ set nowrap
 set number
 set noshowmode
 set relativenumber "" PogChamp
+set scrolloff=3
 
 
 "'' Definitions ''"
@@ -80,6 +82,7 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
       \'coc-highlight',
       \'coc-html',
       \'coc-json',
+      \'coc-markdownlint',
       \'coc-marketplace',
       \'coc-prettier',
       \'coc-python',
@@ -266,8 +269,9 @@ endif
 
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
-  nnoremap <leader>fr :FloatermNew ranger<CR>
-  nnoremap <leader>ft :FloatermNew --wintype=floating --autoclose=2<CR>
+  nnoremap <leader>fl :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
+  nnoremap <leader>fr :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating ranger<CR>
+  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating<CR>
 endif
 
 
@@ -290,5 +294,6 @@ endif
 
 "'' Lightline ''"
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
-  let g:lightline = {'colorscheme' : 'horizon'}
+  " let g:lightline = {'colorscheme' : 'horizon'}
+  let g:lightline = {'colorscheme' : 'tokyonight'}
 endif
