@@ -13,8 +13,8 @@
 #   - and iTerm2 is configured to send [1;9A -> [1;9D for option + arrow keys
 # then uncomment the following line to make Meta + arrow keys mapping work
 set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
-set -g default-terminal "xterm-256color"
-set -ga terminal-overrides ",*256col*:Tc"
+set -g default-terminal "screen-256color"
+set-option -ga terminal-overrides ',*:Tc'
 
 
 # -- windows & pane creation ---------------------------------------------------

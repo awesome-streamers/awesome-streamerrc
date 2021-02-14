@@ -23,7 +23,6 @@ Plug 'sheerun/vim-polyglot'
 
 """ Themes
 Plug 'ghifarit53/tokyonight-vim'
-Plug 'ntk148v/vim-horizon'
 
 """ Utilities
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -55,6 +54,8 @@ set number
 set noshowmode
 set relativenumber "" PogChamp
 set scrolloff=3
+hi Normal guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 
 "'' Definitions ''"
@@ -294,6 +295,5 @@ endif
 
 "'' Lightline ''"
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
-  " let g:lightline = {'colorscheme' : 'horizon'}
   let g:lightline = {'colorscheme' : 'tokyonight'}
 endif
