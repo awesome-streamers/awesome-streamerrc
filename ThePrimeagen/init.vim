@@ -35,6 +35,7 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'theprimeagen/vim-be-good'
+Plug 'theprimeagen/af-pluth-pluth'
 Plug 'gruvbox-community/gruvbox'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-projectionist'
@@ -57,7 +58,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug '/home/mpaulson/personal/VimDeathmatch/client'
 
 " HARPOON!!
-Plug '/home/mpaulson/personal/harpoon'
+Plug 'ThePrimeagen/harpoon'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
 
