@@ -35,7 +35,7 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'theprimeagen/vim-be-good'
-Plug 'theprimeagen/af-pluth-pluth'
+Plug '/home/theprimeagen/personal/af-pluth-pluth'
 Plug 'gruvbox-community/gruvbox'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-projectionist'
@@ -67,7 +67,9 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(69) } }
 
 " Cheat Sheet
 Plug 'dbeniamine/cheat.sh-vim'
-Plug '/home/mpaulson/personal/vim-apm'
+
+" prettier
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 
@@ -143,6 +145,13 @@ com! W w
 " This just means I can crush, with opposite hand, the 4 terminal positions
 "
 " These functions are stored in harpoon.  A plugn that I am developing
+nmap <C-m> :call ManageAMark_MarkBuffer()<CR>
+nmap <C-e> :call ManageAMark_ViewMarks()<CR>
+nmap <C-h> :call ManageAMark_GoTo(1)<CR>
+nmap <C-t> :call ManageAMark_GoTo(2)<CR>
+nmap <C-n> :call ManageAMark_GoTo(3)<CR>
+nmap <C-s> :call ManageAMark_GoTo(4)<CR>
+nmap <C-g> :call ManageAMark_Rm(expand("%"))<CR>
 nmap <leader>tu :call GotoBuffer(0)<CR>
 nmap <leader>te :call GotoBuffer(1)<CR>
 nmap <leader>to :call GotoBuffer(2)<CR>
@@ -160,5 +169,4 @@ augroup THE_PRIMEAGEN
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
-    autocmd BufEnter * :VimApm
 augroup END

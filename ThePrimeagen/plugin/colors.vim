@@ -8,7 +8,12 @@ fun! ColorMyPencils()
     let g:gruvbox_invert_selection='0'
 
     set background=dark
-    colorscheme ayu 
+    if has('nvim')
+        call luaeval('vim.cmd("colorscheme " .. _A[1])', [g:theprimeagen_colorscheme])
+    else
+        " TODO: What the way to use g:theprimeagen_colorscheme
+        colorscheme gruvbox
+    endif
 
     highlight ColorColumn ctermbg=0 guibg=grey
     highlight Normal guibg=none
@@ -23,3 +28,4 @@ call ColorMyPencils()
 
 " Vim with me
 nnoremap <leader>vwm :call ColorMyPencils()<CR>
+nnoremap <leader>vwb :let g:theprimeagen_colorscheme = 

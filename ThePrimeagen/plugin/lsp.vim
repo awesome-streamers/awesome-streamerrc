@@ -11,10 +11,17 @@ nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.sho
 nnoremap <leader>vn :lua vim.lsp.diagnostic.goto_next()<CR>
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
-" lua require'nvim_lsp'.sumneko_lua.setup{ on_attach=require'completion'.on_attach }
 
+lua << EOF
+local on_attach = require'completion'.on_attach 
+require'lspconfig'.tsserver.setup{ on_attach=on_attach }
+
+require'lspconfig'.clangd.setup {
+    on_attach = on_attach, 
+    root_dir = function() return vim.loop.cwd() end 
+}
+
+require'lspconfig'.pyls.setup{ on_attach=on_attach }
+require'lspconfig'.gopls.setup{ on_attach=on_attach }
+require'lspconfig'.rust_analyzer.setup{ on_attach=on_attach }
+EOF
