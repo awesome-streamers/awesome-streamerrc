@@ -4,7 +4,7 @@ inoremap <C-Left> <esc>:call AfPPAlternatePluthPluth()<CR>
 inoremap <C-Up> <esc>:call AfPPAlternate()<CR>
 nnoremap <C-k> :cnext<CR>
 nnoremap <C-j> :cprev<CR>
-nnoremap <C-S-e> :copen<CR>
+nnoremap <leader>' :copen<CR>
 
 " May remove
 nnoremap <leader>h :wincmd h<CR>
