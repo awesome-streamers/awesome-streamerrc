@@ -1,5 +1,3 @@
-set exrc " Wont open project .nvimrc without this here
-
 call plug#begin('~/.vim/plugged')
 
 " Yes, I am a sneaky snek now

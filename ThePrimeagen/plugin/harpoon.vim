@@ -4,10 +4,10 @@ require("harpoon").setup({
         ["/home/theprimeagen/work/tvui-automation"] = {
             term = {
                 cmds = {
-                    "yarn test TextTo\n"
+                    "yarn test\n"
                 }
             }
         }
     }
-})
+}) 
 EOF
