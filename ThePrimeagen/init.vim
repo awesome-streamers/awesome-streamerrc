@@ -1,5 +1,3 @@
-set exrc " Wont open project .nvimrc without this here
-
 call plug#begin('~/.vim/plugged')
 
 " Yes, I am a sneaky snek now
@@ -58,7 +56,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug '/home/mpaulson/personal/VimDeathmatch/client'
 
 " HARPOON!!
-Plug 'ThePrimeagen/harpoon'
+Plug '/home/theprimeagen/personal/harpoon'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
 
@@ -145,17 +143,20 @@ com! W w
 " This just means I can crush, with opposite hand, the 4 terminal positions
 "
 " These functions are stored in harpoon.  A plugn that I am developing
-nmap <C-m> :call ManageAMark_MarkBuffer()<CR>
-nmap <C-e> :call ManageAMark_ViewMarks()<CR>
-nmap <C-h> :call ManageAMark_GoTo(1)<CR>
-nmap <C-t> :call ManageAMark_GoTo(2)<CR>
-nmap <C-n> :call ManageAMark_GoTo(3)<CR>
-nmap <C-s> :call ManageAMark_GoTo(4)<CR>
-nmap <C-g> :call ManageAMark_Rm(expand("%"))<CR>
-nmap <leader>tu :call GotoBuffer(0)<CR>
-nmap <leader>te :call GotoBuffer(1)<CR>
-nmap <leader>to :call GotoBuffer(2)<CR>
-nmap <leader>ta :call GotoBuffer(3)<CR>
+nnoremap <C-m> :lua require("harpoon.mark").add_file()<CR>
+nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <C-h> :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <C-t> :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <C-n> :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <C-s> :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <C-g> :lua require("harpoon.mark").rm_file()<CR>
+nnoremap <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
+nnoremap <leader>r :lua require("harpoon.mark").promote()<CR>
+nnoremap <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
+nnoremap <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
+nnoremap <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
+
 nmap <leader>nn :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
