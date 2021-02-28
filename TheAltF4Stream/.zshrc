@@ -1,5 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export EDITOR="nvim"
+
+# Ripgrep
+export RIPGREP_CONFIG_PATH='$HOME/.ripgreprc'
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -70,7 +74,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z)
+plugins=(git z zsh-completions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,4 +110,4 @@ export GOPATH="$GOENV"
 
 # ALIASES
 alias cat='bat --theme="base16"'
-alias ll='ls -lAh'
+alias ll='ls -alh'
