@@ -30,7 +30,7 @@ set $right semicolon
 
 # run with reload
 exec_always --no-startup-id xrdb -load ~/.Xresources
-exec_always --no-startup-id feh --bg-scale ~/Downloads/ibm-beamspring-1920x1080.png
+exec_always --no-startup-id feh --bg-scale ~/Downloads/cyberpunk.jpg
 
 # run once
 exec --no-startup-id vmware-user
