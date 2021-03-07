@@ -3,7 +3,7 @@ call plug#begin('~/.vim/plugged')
 " Yes, I am a sneaky snek now
 Plug 'ambv/black'
 
-" Neovim lsp Plugins
+" Plebvim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
@@ -27,9 +27,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'theprimeagen/vim-be-good'
@@ -38,11 +35,47 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-projectionist'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
@@ -59,12 +92,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug '/home/theprimeagen/personal/harpoon'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
-
-" Fire Nvim
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(69) } }
-
-" Cheat Sheet
-Plug 'dbeniamine/cheat.sh-vim'
 
 " prettier
 Plug 'sbdchd/neoformat'
@@ -84,9 +111,6 @@ endif
 
 let loaded_matchparen = 1
 let mapleader = " "
-
-nnoremap <leader>cP :lua require("contextprint").add_statement()<CR>
-nnoremap <leader>cp :lua require("contextprint").add_statement(true)<CR>
 
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
@@ -138,25 +162,6 @@ endfun
 " ES
 com! W w
 
-" Terminal commands
-" ueoa is first through fourth finger left hand home row.
-" This just means I can crush, with opposite hand, the 4 terminal positions
-"
-" These functions are stored in harpoon.  A plugn that I am developing
-nnoremap <C-m> :lua require("harpoon.mark").add_file()<CR>
-nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <C-h> :lua require("harpoon.ui").nav_file(1)<CR>
-nnoremap <C-t> :lua require("harpoon.ui").nav_file(2)<CR>
-nnoremap <C-n> :lua require("harpoon.ui").nav_file(3)<CR>
-nnoremap <C-s> :lua require("harpoon.ui").nav_file(4)<CR>
-nnoremap <C-g> :lua require("harpoon.mark").rm_file()<CR>
-nnoremap <leader><C-r> :lua require("harpoon.mark").shorten_list()<CR>
-nnoremap <leader>r :lua require("harpoon.mark").promote()<CR>
-nnoremap <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
-nnoremap <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
-nnoremap <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
-nnoremap <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
-
 nmap <leader>nn :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
@@ -171,3 +176,19 @@ augroup THE_PRIMEAGEN
     autocmd BufWritePre * :call TrimWhitespace()
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
+
+lua << EOF
+
+function sort_qf_gatsby(a, b)
+    local a_num = tonumber(a.text(8, #a.text - 2))
+    local b_num = tonumber(b.text(8, #b.text - 2))
+
+    print(a.text, a_num, b.text, b_num)
+
+    if a_num > b_num then
+        return 1
+    end
+    return -1
+end
+EOF
+
