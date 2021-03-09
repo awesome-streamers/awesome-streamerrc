@@ -52,7 +52,7 @@ Plug 'tpope/vim-projectionist'
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug '/home/theprimeagen/personal/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 
@@ -100,6 +100,7 @@ call plug#end()
 
 " let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
+lua require("theprimeagen")
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 let g:vim_be_good_log_file = 1
@@ -116,7 +117,7 @@ nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :Sex!<CR>
+nnoremap <leader>pv :Ex<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
@@ -153,12 +154,6 @@ fun! EmptyRegisters()
     endfor
 endfun
 
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
 " ES
 com! W w
 
@@ -173,22 +168,6 @@ augroup END
 
 augroup THE_PRIMEAGEN
     autocmd!
-    autocmd BufWritePre * :call TrimWhitespace()
+    autocmd BufWritePre * %s/\s\+$//e
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
-
-lua << EOF
-
-function sort_qf_gatsby(a, b)
-    local a_num = tonumber(a.text(8, #a.text - 2))
-    local b_num = tonumber(b.text(8, #b.text - 2))
-
-    print(a.text, a_num, b.text, b_num)
-
-    if a_num > b_num then
-        return 1
-    end
-    return -1
-end
-EOF
-
