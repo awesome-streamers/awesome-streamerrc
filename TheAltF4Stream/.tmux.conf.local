@@ -54,17 +54,17 @@ tmux_conf_theme_colour_3="#8a8a8a"    # light gray
 tmux_conf_theme_colour_4="#00afff"    # light blue
 # tmux_conf_theme_colour_5="#ffff00"    # yellow
 # tmux_conf_theme_colour_6="#080808"    # dark gray
-tmux_conf_theme_colour_7="#e4e4e4"    # white
+tmux_conf_theme_colour_7="#a9b1d6"    # white
 # tmux_conf_theme_colour_8="#080808"    # dark gray
 # tmux_conf_theme_colour_9="#ffff00"    # yellow
 # tmux_conf_theme_colour_10="#ff00af"   # pink
 # tmux_conf_theme_colour_11="#5fff00"   # green
 tmux_conf_theme_colour_12="#8a8a8a"   # light gray
-tmux_conf_theme_colour_13="#e4e4e4"   # white
+tmux_conf_theme_colour_13="#a9b1d6"   # white
 # tmux_conf_theme_colour_14="#080808"   # dark gray
 # tmux_conf_theme_colour_15="#080808"   # dark gray
 # tmux_conf_theme_colour_16="#d70000"   # red
-tmux_conf_theme_colour_17="#e4e4e4"   # white
+tmux_conf_theme_colour_17="#a9b1d6"   # white
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -86,17 +86,17 @@ tmux_conf_theme_colour_17="#e4e4e4"   # white
 #tmux_conf_theme_colour_17="colour15"
 
 # default theme (overrides)
-tmux_conf_theme_colour_1="#1c1e25"
+tmux_conf_theme_colour_1="#232433"
 tmux_conf_theme_colour_2="#282a35"
-tmux_conf_theme_colour_5="#f1b89a"
-tmux_conf_theme_colour_6="#1c1e25"
-tmux_conf_theme_colour_8="#1c1e25"
-tmux_conf_theme_colour_9="#f1b89a"
-tmux_conf_theme_colour_10="#da6179"
+tmux_conf_theme_colour_5="#7AA2F7"
+tmux_conf_theme_colour_6="#232433"
+tmux_conf_theme_colour_8="#232433"
+tmux_conf_theme_colour_9="#7AA2F7"
+tmux_conf_theme_colour_10="#444B6A"
 tmux_conf_theme_colour_11="#6ef2a7"
-tmux_conf_theme_colour_14="#1c1e25"
-tmux_conf_theme_colour_15="#1c1e25"
-tmux_conf_theme_colour_16="#da6179"
+tmux_conf_theme_colour_14="#232433"
+tmux_conf_theme_colour_15="#232433"
+tmux_conf_theme_colour_16="#444B6A"
 
 # window style
 tmux_conf_theme_window_fg="default"
@@ -285,7 +285,7 @@ tmux_conf_battery_bar_length="auto"
 #   - heat
 #   - "colour_full_fg,colour_empty_fg,colour_bg"
 tmux_conf_battery_bar_palette="gradient"
-#tmux_conf_battery_bar_palette="#d70000,#e4e4e4,#000000"   # red, white, black
+#tmux_conf_battery_bar_palette="#d70000,#a9b1d6,#000000"   # red, white, black
 
 # battery hbar palette, possible values are:
 #   - gradient (default)

@@ -108,6 +108,10 @@ source $ZSH/oh-my-zsh.sh
 export GOENV="$HOME/Development/go"
 export GOPATH="$GOENV"
 
+# PATH
+export PATH="$GOPATH/bin:$PATH"
+
 # ALIASES
 alias cat='bat --theme="base16"'
 alias ll='ls -alh'
+alias ssh='TERM="xterm-256color" ssh'
