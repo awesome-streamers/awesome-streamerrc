@@ -301,5 +301,10 @@ endif
 
 "'' VimWiki ''"
 if filereadable(expand("~/.config/nvim/plugged/vimwiki/plugin/vimwiki.vim"))
-  let g:lightline = {'colorscheme' : 'tokyonight'}
+  let g:vimwiki_list = [{'path': '~/.vimwiki', 'path_html': '~/.vimwiki_html'}]
+
+  augroup WrapInWiki
+    autocmd!
+    autocmd FileType vimwiki setlocal wrap
+  augroup END
 endif
