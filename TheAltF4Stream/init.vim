@@ -30,6 +30,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'voldikss/vim-floaterm'
 Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+Plug 'vimwiki/vimwiki'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -42,7 +43,7 @@ call plug#end()
 "This executes the command silently and ignores errors
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
-colorscheme tokyonight
+silent! colorscheme tokyonight
 set splitright
 set encoding=utf-8
 set noerrorbells
@@ -295,5 +296,10 @@ endif
 
 "'' Lightline ''"
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
+  let g:lightline = {'colorscheme' : 'tokyonight'}
+endif
+
+"'' VimWiki ''"
+if filereadable(expand("~/.config/nvim/plugged/vimwiki/plugin/vimwiki.vim"))
   let g:lightline = {'colorscheme' : 'tokyonight'}
 endif

@@ -115,3 +115,6 @@ export PATH="$GOPATH/bin:$PATH"
 alias cat='bat --theme="base16"'
 alias ll='ls -alh'
 alias ssh='TERM="xterm-256color" ssh'
+
+# ITERM (MACOS ONLY)
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
