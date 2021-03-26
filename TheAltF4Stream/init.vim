@@ -30,7 +30,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'voldikss/vim-floaterm'
 Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-Plug 'vimwiki/vimwiki'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -58,6 +57,10 @@ set scrolloff=3
 hi Normal guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
 
+augroup WrapInMarkdown
+  autocmd!
+  autocmd FileType markdown setlocal wrap
+augroup END
 
 "'' Definitions ''"
 let mapleader = " "
@@ -299,12 +302,5 @@ if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vi
   let g:lightline = {'colorscheme' : 'tokyonight'}
 endif
 
-"'' VimWiki ''"
-if filereadable(expand("~/.config/nvim/plugged/vimwiki/plugin/vimwiki.vim"))
-  let g:vimwiki_list = [{'path': '~/.vimwiki', 'path_html': '~/.vimwiki_html'}]
 
-  augroup WrapInWiki
-    autocmd!
-    autocmd FileType vimwiki setlocal wrap
-  augroup END
-endif
+
