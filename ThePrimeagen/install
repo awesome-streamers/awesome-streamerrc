@@ -4,7 +4,7 @@ mkdir -p ~/.config/nvim/after/plugin
 mkdir -p ~/.config/nvim/lua
 
 # link wholesale
-for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
+for f in $(find . -regex ".*\.vim$\|.*\.lua$"); do
     rm -rf "$HOME/.config/nvim/$f"
     ln -s "$HOME/dotfiles/awesome-streamerrc/ThePrimeagen/$f" "$HOME/.config/nvim/$f"
 done
