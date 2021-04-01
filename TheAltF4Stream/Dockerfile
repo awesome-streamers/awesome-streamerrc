@@ -1,4 +1,4 @@
-FROM alpine:3.12.1 as build
+FROM alpine:latest as neovim
 
 RUN apk add --no-cache \
   autoconf \
@@ -14,48 +14,60 @@ RUN apk add --no-cache \
   unzip
 
 RUN git clone --progress "https://github.com/neovim/neovim.git" \
-  && (cd neovim && git checkout "tags/v0.4.4") \
   && make CMAKE_BUILD_TYPE="RelWithDebInfo" -C "/neovim" install
 
 
-FROM alpine:3.12.1
+FROM alpine:latest
 
 RUN apk add --no-cache \
   bash \
+  bat \
   build-base \
   curl \
   gcc \
   git \
   go \
+  lazygit \
   nodejs \
   ranger \
   ripgrep \
   python3 \
   python3-dev \
+  rustup \
   shadow \
   su-exec \
   unzip \
-  yarn
+  yarn \
+  zsh
+
+COPY --from=neovim /usr/local/bin/nvim /usr/local/bin/nvim
+COPY --from=neovim /usr/local/share/nvim /usr/local/share/nvim
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o "/get-pip.py" \
   && python3 "/get-pip.py" \
-  && rm -rf "/get-pip.py"
-
-COPY --from=build /usr/local/bin/nvim /usr/local/bin/nvim
-COPY --from=build /usr/local/share/nvim /usr/local/share/nvim
+  && rm -rf "/get-pip.py" \
+  && python3 -m pip install --upgrade pynvim
 
 RUN addgroup "neovim" \
-  && adduser -D -G "neovim" -g "" -s "/bin/bash" "neovim" \
-  && su-exec neovim:neovim python3 -m pip install --user --upgrade pynvim \
-  && su-exec neovim:neovim curl -fLo "/home/neovim/.local/share/nvim/site/autoload/plug.vim" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
-  && su-exec neovim:neovim mkdir -p /home/neovim/.config/nvim/plugged
+  && adduser -D -G "neovim" -g "" -s "/bin/zsh" "neovim"
 
-COPY ./init.vim /home/neovim/.config/nvim/init.vim
+USER neovim
 
-RUN su-exec neovim:neovim nvim --headless +PlugInstall +qa
+ENV GOENV="/home/neovim/Development/go"
+ENV GOPATH="${GOENV}" 
 
-COPY ./scripts/default_entrypoint.sh /docker_entrypoint.sh
+RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+  && git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions \
+  && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-WORKDIR /workspace
+RUN curl -fLo "/home/neovim/.local/share/nvim/site/autoload/plug.vim" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
+  && mkdir -p /home/neovim/.config/nvim/plugged
 
-ENTRYPOINT [ "/docker_entrypoint.sh" ]
+COPY --chown="neovim" ./.ripgreprc /home/neovim/.ripgreprc
+COPY --chown="neovim" ./.zshrc /home/neovim/.zshrc
+COPY --chown="neovim" ./init.vim /home/neovim/.config/nvim/init.vim
+COPY --chown="neovim" ./coc-settings.json /home/neovim/.config/nvim/coc-settings.json 
+
+RUN /usr/local/bin/nvim --headless +PlugInstall +qa
+
+WORKDIR /home/neovim

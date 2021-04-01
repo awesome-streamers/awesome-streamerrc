@@ -42,7 +42,7 @@ call plug#end()
 "This executes the command silently and ignores errors
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
-colorscheme tokyonight
+silent! colorscheme tokyonight
 set splitright
 set encoding=utf-8
 set noerrorbells
@@ -57,6 +57,10 @@ set scrolloff=3
 hi Normal guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
 
+augroup WrapInMarkdown
+  autocmd!
+  autocmd FileType markdown setlocal wrap
+augroup END
 
 "'' Definitions ''"
 let mapleader = " "
@@ -297,3 +301,6 @@ endif
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
   let g:lightline = {'colorscheme' : 'tokyonight'}
 endif
+
+
+
