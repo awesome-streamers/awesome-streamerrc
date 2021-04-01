@@ -1,4 +1,4 @@
-let g:theprimeagen_colorscheme = "gruvbox"
+let g:theprimeagen_colorscheme = "ayu"
 fun! ColorMyPencils()
     let g:gruvbox_contrast_dark = 'hard'
     if exists('+termguicolors')
@@ -16,6 +16,8 @@ fun! ColorMyPencils()
     endif
 
     highlight ColorColumn ctermbg=0 guibg=grey
+    hi SignColumn guibg=none
+    hi CursorLineNR guibg=None
     highlight Normal guibg=none
     " highlight LineNr guifg=#ff8659
     " highlight LineNr guifg=#aed75f
@@ -28,4 +30,4 @@ call ColorMyPencils()
 
 " Vim with me
 nnoremap <leader>vwm :call ColorMyPencils()<CR>
-nnoremap <leader>vwb :let g:theprimeagen_colorscheme = 
+nnoremap <leader>vwb :let g:theprimeagen_colorscheme =

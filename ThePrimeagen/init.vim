@@ -1,3 +1,16 @@
+set path+=**
+" Nice menu when typing `:find *.py`
+set wildmode=longest,list,full
+set wildmenu
+" Ignore files
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=**/coverage/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/android/*
+set wildignore+=**/ios/*
+set wildignore+=**/.git/*
+
 call plug#begin('~/.vim/plugged')
 
 " Yes, I am a sneaky snek now
@@ -35,52 +48,13 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-projectionist'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug '/home/theprimeagen/personal/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
-"  TOOOOOOOOOOOOO
-
 Plug 'colepeters/spacemacs-theme.vim'
+
 Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
@@ -92,6 +66,8 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug '/home/theprimeagen/personal/harpoon'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
+
+Plug 'ThePrimeagen/neovim-irc-ui'
 
 " prettier
 Plug 'sbdchd/neoformat'
@@ -114,7 +90,6 @@ let loaded_matchparen = 1
 let mapleader = " "
 
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :Ex<CR>
