@@ -5,7 +5,7 @@ mkdir -p ~/.config/nvim/lua
 
 # link wholesale
 for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
-    rm -rf ~/.config/nvim/$f
-    ln -s ~/dotfiles/awesome-streamerrc/ThePrimeagen/$f ~/.config/nvim/$f
+    rm -rf "$HOME/.config/nvim/$f"
+    ln -s "$HOME/dotfiles/awesome-streamerrc/ThePrimeagen/$f" "$HOME/.config/nvim/$f"
 done
 
