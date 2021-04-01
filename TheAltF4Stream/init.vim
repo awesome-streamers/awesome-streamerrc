@@ -1,6 +1,4 @@
 "'' VIM PRE-PLUG ''"
-filetype plugin indent on
-set exrc
 set hidden
 set nobackup
 set nocompatible
@@ -272,9 +270,11 @@ if filereadable(expand("~/.config/nvim/plugged/vim-go/plugin/go.vim"))
   let g:go_highlight_variable_assignments = 1
 endif
 
+
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
-  nnoremap <leader>fl :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
+  nnoremap <leader>fd :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
+  nnoremap <leader>fg :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
   nnoremap <leader>fr :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating ranger<CR>
   nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
 endif
@@ -286,7 +286,7 @@ if filereadable(expand("~/.config/nvim/plugged/fzf.vim/plugin/fzf.vim"))
   let $FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
   nnoremap <leader>ff :Files<CR>
-  nnoremap <leader>fg :Rg<CR>
+  nnoremap <leader>fs :Rg<CR>
 endif
 
 
@@ -301,6 +301,3 @@ endif
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
   let g:lightline = {'colorscheme' : 'tokyonight'}
 endif
-
-
-
