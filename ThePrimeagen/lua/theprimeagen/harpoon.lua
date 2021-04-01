@@ -1,5 +1,6 @@
 require("harpoon").setup({
     projects = {
+
         ["/home/theprimeagen/work/nrdp/20.2"] = {
             term = {
                 cmds = {
