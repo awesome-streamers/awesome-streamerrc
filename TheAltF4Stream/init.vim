@@ -24,6 +24,7 @@ Plug 'ghifarit53/tokyonight-vim'
 
 """ Utilities
 Plug 'phaazon/hop.nvim'
+Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
@@ -32,10 +33,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
-" Lightline
-Plug 'itchyny/lightline.vim'
+Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 
 call plug#end()
 "'' END PLUG ''"
@@ -60,10 +58,12 @@ set scrolloff=3
 hi Normal guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
 
+
 augroup WrapInMarkdown
   autocmd!
   autocmd FileType markdown setlocal wrap
 augroup END
+
 
 "'' Definitions ''"
 let mapleader = " "
@@ -251,6 +251,15 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
 endif
 
 
+"'' Floatterm ''"
+if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
+  nnoremap <leader>fd :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
+  nnoremap <leader>fg :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
+  nnoremap <leader>fr :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating ranger<CR>
+  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
+endif
+
+
 "'' Go ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-go/plugin/go.vim"))
   let g:go_code_completion_enabled = 0
@@ -273,15 +282,6 @@ if filereadable(expand("~/.config/nvim/plugged/vim-go/plugin/go.vim"))
   let g:go_highlight_generate_tags = 1
   let g:go_highlight_variable_declarations = 1
   let g:go_highlight_variable_assignments = 1
-endif
-
-
-"'' Floatterm ''"
-if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
-  nnoremap <leader>fd :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
-  nnoremap <leader>fg :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
-  nnoremap <leader>fr :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating ranger<CR>
-  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
 endif
 
 
@@ -313,4 +313,9 @@ if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.v
   nnoremap <leader>fs <CMD>lua require('telescope.builtin').live_grep()<CR>
   nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
   nnoremap <leader>fh <CMD>lua require('telescope.builtin').help_tags()<CR>
+endif
+
+"'' Treesitter ''"
+if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
+  lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
 endif
