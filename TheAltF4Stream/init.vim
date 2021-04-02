@@ -15,19 +15,24 @@ call plug#begin('~/.config/nvim/plugged')
 
 """ Language Support ''"
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'sheerun/vim-polyglot'
 
 """ Themes
 Plug 'ghifarit53/tokyonight-vim'
 
 """ Utilities
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'phaazon/hop.nvim'
 Plug 'preservim/nerdcommenter'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -280,16 +285,6 @@ if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"
 endif
 
 
-"'' FZF ''"
-if filereadable(expand("~/.config/nvim/plugged/fzf.vim/plugin/fzf.vim"))
-  let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{**/node_modules/**,.git/*,**/*.pem}"'
-  let $FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-
-  nnoremap <leader>ff :Files<CR>
-  nnoremap <leader>fs :Rg<CR>
-endif
-
-
 "'' Hardtime ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-hardtime/plugin/hardtime.vim"))
   let g:hardtime_default_on = 1
@@ -297,7 +292,24 @@ if filereadable(expand("~/.config/nvim/plugged/vim-hardtime/plugin/hardtime.vim"
 endif
 
 
+"'' Hop ''"
+if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
+  nnoremap <leader>h1 :HopChar1<CR>
+  nnoremap <leader>h2 :HopChar2<CR>
+  nnoremap <leader>hs :HopPattern<CR>
+endif
+
+
 "'' Lightline ''"
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
   let g:lightline = {'colorscheme' : 'tokyonight'}
+endif
+
+
+"'' Telescope ''"
+if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
+  nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files()<CR>
+  nnoremap <leader>fs <CMD>lua require('telescope.builtin').live_grep()<CR>
+  nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
+  nnoremap <leader>fh <CMD>lua require('telescope.builtin').help_tags()<CR>
 endif
