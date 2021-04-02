@@ -2,9 +2,6 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export EDITOR="nvim"
 
-# Ripgrep
-export RIPGREP_CONFIG_PATH='$HOME/.ripgreprc'
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 

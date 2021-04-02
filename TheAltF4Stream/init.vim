@@ -19,6 +19,16 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+""" Neuron
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'fiatjaf/neuron.vim'
+
+""" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 """ Themes
 Plug 'ghifarit53/tokyonight-vim'
 
@@ -27,10 +37,7 @@ Plug 'phaazon/hop.nvim'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
 Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
 Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
@@ -309,7 +316,24 @@ endif
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
-  nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files()<CR>
+lua << EOF
+  require('telescope').setup{
+    defaults = {
+      vimgrep_arguments = {
+        'rg',
+        '--column',
+        '--glob=!**/*.pem',
+        '--glob=!git/*',
+        '--glob=!**/node_modules/**',
+        '--line-number',
+        '--no-heading',
+        '--smart-case',
+        '--with-filename'
+      }
+    }
+  }
+EOF
+  nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files{ hidden = true }<CR>
   nnoremap <leader>fs <CMD>lua require('telescope.builtin').live_grep()<CR>
   nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
   nnoremap <leader>fh <CMD>lua require('telescope.builtin').help_tags()<CR>
