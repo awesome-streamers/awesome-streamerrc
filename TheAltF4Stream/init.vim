@@ -36,6 +36,7 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'phaazon/hop.nvim'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdcommenter'
+Plug 'romgrk/nvim-treesitter-context'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'voldikss/vim-floaterm'
@@ -338,6 +339,7 @@ EOF
   nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
   nnoremap <leader>fh <CMD>lua require('telescope.builtin').help_tags()<CR>
 endif
+
 
 "'' Treesitter ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
