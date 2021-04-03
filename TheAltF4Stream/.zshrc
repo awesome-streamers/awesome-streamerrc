@@ -1,6 +1,25 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# FUSION, HA!
+export FUSION_PATH="/Library/Application Support/VMware Fusion"
+
+# GO
+export GO_PATH="$HOME/Development/go"
+export GOENV="$GO_PATH"
+export GOPATH="$GO_PATH"
+
+# VSCODE
+export VSCODE_PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# PATH
+export PATH="$FUSION_PATH:$GO_PATH/bin:$VSCODE_PATH:$PATH"
+
+# EDITOR
 export EDITOR="nvim"
+
+# VAGRANT
+export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -100,13 +119,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# GO
-export GOENV="$HOME/Development/go"
-export GOPATH="$GOENV"
-
-# PATH
-export PATH="$GOPATH/bin:$PATH"
 
 # ALIASES
 alias cat='bat --theme="base16"'
