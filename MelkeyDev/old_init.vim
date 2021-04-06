@@ -1,6 +1,5 @@
 syntax on
 
-set rnu nu
 set cursorline
 set tabstop=4
 set shiftwidth=4
@@ -10,26 +9,22 @@ set autoread
 set nobackup
 set nowritebackup
 set noswapfile
-highlight Comment ctermfg=red
-
-
 set relativenumber
 set nu rnu
-call plug#begin('~/.vim/plugged')
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/telescope.nvim'
+set foldlevelstart=99
 
-Plug 'neovim/nvim-lsp'
-Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
-Plug 'norcalli/nvim-colorizer.lua'
+syntax enable
+set scrolloff=7
+
+call plug#begin('~/.vim/plugged')
+
+"Dont use it 
 Plug 'iamcco/coc-tailwindcss'
-Plug 'jaredgorski/spacecamp'
+"Dont use it 
 Plug 'ntk148v/vim-horizon'
+"Dont use it 
 Plug 'roxma/nvim-yarp'
-"Plug 'ncm2/ncm2'
-"Plug 'ncm2/ncm2-path'
+"Dont use it
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
@@ -41,31 +36,72 @@ Plug 'lepture/vim-jinja'
 Plug 'joshdick/onedark.vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'preservim/NERDTree'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'ryanoasis/vim-devicons'
+
+"Comment Plugin
 Plug 'preservim/nerdcommenter'
 
+"Autocomplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+
+"Auto-format plugin
+Plug 'sbdchd/neoformat'
+
+"Code Jump Plugin
+Plug 'davidhalter/jedi-vim'
+
+"Code checker
+Plug 'neomake/neomake'
+
+"Code folding
+Plug 'tmhedberg/SimpylFold'
+
+"ripgrep
+"Plug 'jremmen/vim-ripgrep'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pappasam/coc-jedi', { 'do': 'npm install --frozen-lockfile && npm build' }
 call plug#end()
+let g:SimpylFold_docstring_preview = 1
 
 
-set completeopt=menuone,noselect,noinsert
+"minimum deoplete settings:
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+"Jedi Vim
+" disable autocompletion, because we use deoplete for completion
+let g:jedi#completions_enabled = 0
+
+" open the go-to function in split, not another buffer
+let g:jedi#use_splits_not_buffers = "right"
+
+"Definitions
+"<leader>d: go to definition
+"K check documentation of class or method
+"<leader>n: show the usage of a name in current file
+"<leader>r: rename a name
+
+"Code checker
+let g:neomake_python_enabled_makers = ['flake8']
+call neomake#configure#automake('nrwi', 500)
+
 set shortmess+=c
 inoremap <c-c> <ESC>
-" make it fast
 
 colorscheme onedark
 
 set encoding=UTF-8
 let mapleader = " "
 nnoremap <leader><CR> :source ~/.config/nvim/init.vim<CR>
-nnoremap <C-p> :Rg<CR>
 nnoremap <leader>ne :NERDTreeToggle<CR>
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -76,26 +112,15 @@ nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <C-S> :w<CR>
 tnoremap <ESC> <C-\><C-N>
 inoremap <C-S> <ESC>:write<CR>
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>p :Rg<CR>
+
 autocmd StdinReadPre * let s:std
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | :vertical resize 60 | endif
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-nnoremap <silent>gr    <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
-
-
 
 "toggle Tagbag
 map <Leader>t :TagbarToggle<CR>
-
-"Coc Config"
- let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-json',
-  \ ]
-
 
 "Allow NERDTree to show hidden files"
 let NERDTreeShowHidden=1
@@ -119,54 +144,27 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
 
-
 " enable line numbers
 let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
 
-
 let $FZF_DEFAULT_OPTS='--reverse'
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 
-let g:airline_powerline_fonts = 1
 
+let g:airline_powerline_fonts = 1
 
 " Focus and redistribute split windows
 noremap ff :resize 100 <CR> <BAR> :vertical resize 220<CR>
 noremap fm <C-w>=
 
-"" syntastic
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
-"map <leader>s :SyntasticCheck<CR>
-"map <leader>sd :SyntasticReset<CR>
-"map <leader>e :lnext<CR>
-"map <leader>r :lprev<CR>
+" Tabs and Buffers
+let g:airline#extensions#tabline#fnamemode=':t'
+let g:airline#extensions#tabline#enabled=1
+nnoremap <Leader>q :bp<CR>
+nnoremap <Leader>e :bn<CR>
+nnoremap <Leader>w :bd<CR>
 
-lua require('init')
-" =====================================
-" ======= Completion Settings =========
-" =====================================
-
-inoremap <silent><expr> <c-p> completion#trigger_completion()
-
-function! CheckBackSpace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ CheckBackSpace() ? "\<TAB>" :
-  \ completion#trigger_completion()
-
-" This is very important to be loaded here
-" or Tab will not work, for completion
-"inoremap <expr> <Tab> pumvisible() ? "<C-n>" : "<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "<C-p>" : "<S-Tab>"
-"inoremap <expr> <cr> pumvisible() ? "<C-y>" : "<C-g>u<CR>"
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
-autocmd BufEnter * lua require'completion'.on_attach()
+" Use CTRL+c to copy to system clipboard
+noremap <C-c> "+y 
