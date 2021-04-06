@@ -293,16 +293,10 @@ if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.v
 lua << EOF
   require('telescope').setup{
     defaults = {
-      vimgrep_arguments = {
-        'rg',
-        '--column',
-        '--glob=!**/*.pem',
-        '--glob=!git/*',
-        '--glob=!**/node_modules/**',
-        '--line-number',
-        '--no-heading',
-        '--smart-case',
-        '--with-filename'
+      file_ignore_patterns = {
+        "git/*",
+        "**/*.pem",
+        "**/node_modules/**"
       }
     }
   }
