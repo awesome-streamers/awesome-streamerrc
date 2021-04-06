@@ -1,3 +1,10 @@
 {"html.autoClosingTags":true,
-"coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact","typescript","typescriptreact"]}
+"coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact","typescript","typescriptreact"],
+"suggest.autoTrigger": "none",
+"suggest.timeout": 1,
+"diagnostic.enable": true,
+"clangd.semanticHighlighting": true,
+//"eslint.format.enable":true,
+//"prettier.formatterPriority":-1
+}
 
