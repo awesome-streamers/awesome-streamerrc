@@ -16,7 +16,6 @@ call plug#begin('~/.config/nvim/plugged')
 """ Language Support ''"
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'rust-lang/rust.vim'
 
 """ Neuron
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
