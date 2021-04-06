@@ -17,7 +17,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 """ Neuron
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -268,31 +267,6 @@ if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"
 endif
 
 
-"'' Go ''"
-if filereadable(expand("~/.config/nvim/plugged/vim-go/plugin/go.vim"))
-  let g:go_code_completion_enabled = 0
-  let g:go_fmt_command = "goimports"
-  let g:go_gpls_enabled = 0
-  let g:go_doc_keywordprg_enabled = 0
-
-  let g:go_highlight_array_whitespace_error = 0
-  let g:go_highlight_chan_whitespace_error = 0
-  let g:go_highlight_extra_types = 0
-  let g:go_highlight_space_tab_error = 0
-  let g:go_highlight_trailing_whitespace_error = 0
-  let g:go_highlight_operators = 1
-  let g:go_highlight_functions = 1
-  let g:go_highlight_function_parameters = 1
-  let g:go_highlight_function_calls = 1
-  let g:go_highlight_types = 1
-  let g:go_highlight_fields = 1
-  let g:go_highlight_build_constraints = 1
-  let g:go_highlight_generate_tags = 1
-  let g:go_highlight_variable_declarations = 1
-  let g:go_highlight_variable_assignments = 1
-endif
-
-
 "'' Hardtime ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-hardtime/plugin/hardtime.vim"))
   let g:hardtime_default_on = 1
@@ -334,6 +308,7 @@ lua << EOF
     }
   }
 EOF
+  nnoremap <leader>fe <CMD>lua require('telescope.builtin').file_browser()<CR>
   nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files{ hidden = true }<CR>
   nnoremap <leader>fs <CMD>lua require('telescope.builtin').live_grep()<CR>
   nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
