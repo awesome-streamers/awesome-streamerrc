@@ -30,7 +30,7 @@ set $right semicolon
 
 # run with reload
 exec_always --no-startup-id xrdb -load ~/.Xresources
-exec_always --no-startup-id feh --bg-scale ~/Downloads/cyberpunk.jpg
+exec_always --no-startup-id feh --bg-scale $HOME/Development/awesome-streamerrc/TheAltF4Stream/wallpaper/cyberpunk.jpg
 
 # run once
 exec --no-startup-id vmware-user

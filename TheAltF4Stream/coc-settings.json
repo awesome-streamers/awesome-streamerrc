@@ -2,6 +2,7 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "graphql",
+    "go",
     "javascript",
     "javascriptreact",
     "json",
@@ -11,5 +12,12 @@
     "scss",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "filetypes": ["go"],
+      "rootPatterns": ["go.mod"]
+    }
+  }
 }

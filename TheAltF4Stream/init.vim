@@ -1,6 +1,4 @@
 "'' VIM PRE-PLUG ''"
-filetype plugin indent on
-set exrc
 set hidden
 set nobackup
 set nocompatible
@@ -17,22 +15,31 @@ call plug#begin('~/.config/nvim/plugged')
 
 """ Language Support ''"
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+""" Neuron
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'fiatjaf/neuron.vim'
+
+""" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 """ Themes
 Plug 'ghifarit53/tokyonight-vim'
 
 """ Utilities
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'phaazon/hop.nvim'
+Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdcommenter'
+Plug 'romgrk/nvim-treesitter-context'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'voldikss/vim-floaterm'
 Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-
-" Lightline
-Plug 'itchyny/lightline.vim'
+Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 
 call plug#end()
 "'' END PLUG ''"
@@ -57,10 +64,12 @@ set scrolloff=3
 hi Normal guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
 
+
 augroup WrapInMarkdown
   autocmd!
   autocmd FileType markdown setlocal wrap
 augroup END
+
 
 "'' Definitions ''"
 let mapleader = " "
@@ -248,45 +257,12 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
 endif
 
 
-"'' Go ''"
-if filereadable(expand("~/.config/nvim/plugged/vim-go/plugin/go.vim"))
-  let g:go_code_completion_enabled = 0
-  let g:go_fmt_command = "goimports"
-  let g:go_gpls_enabled = 0
-  let g:go_doc_keywordprg_enabled = 0
-
-  let g:go_highlight_array_whitespace_error = 0
-  let g:go_highlight_chan_whitespace_error = 0
-  let g:go_highlight_extra_types = 0
-  let g:go_highlight_space_tab_error = 0
-  let g:go_highlight_trailing_whitespace_error = 0
-  let g:go_highlight_operators = 1
-  let g:go_highlight_functions = 1
-  let g:go_highlight_function_parameters = 1
-  let g:go_highlight_function_calls = 1
-  let g:go_highlight_types = 1
-  let g:go_highlight_fields = 1
-  let g:go_highlight_build_constraints = 1
-  let g:go_highlight_generate_tags = 1
-  let g:go_highlight_variable_declarations = 1
-  let g:go_highlight_variable_assignments = 1
-endif
-
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
-  nnoremap <leader>fl :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
+  nnoremap <leader>fd :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
+  nnoremap <leader>fg :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
   nnoremap <leader>fr :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating ranger<CR>
   nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
-endif
-
-
-"'' FZF ''"
-if filereadable(expand("~/.config/nvim/plugged/fzf.vim/plugin/fzf.vim"))
-  let $FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{**/node_modules/**,.git/*,**/*.pem}"'
-  let $FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-
-  nnoremap <leader>ff :Files<CR>
-  nnoremap <leader>fg :Rg<CR>
 endif
 
 
@@ -297,10 +273,43 @@ if filereadable(expand("~/.config/nvim/plugged/vim-hardtime/plugin/hardtime.vim"
 endif
 
 
+"'' Hop ''"
+if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
+  nnoremap <leader>h1 :HopChar1<CR>
+  nnoremap <leader>h2 :HopChar2<CR>
+  nnoremap <leader>hs :HopPattern<CR>
+  nnoremap <leader>hw :HopWord<CR>
+endif
+
+
 "'' Lightline ''"
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
   let g:lightline = {'colorscheme' : 'tokyonight'}
 endif
 
 
+"'' Telescope ''"
+if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
+lua << EOF
+  require('telescope').setup{
+    defaults = {
+      file_ignore_patterns = {
+        "git/*",
+        "**/*.pem",
+        "**/node_modules/**"
+      }
+    }
+  }
+EOF
+  nnoremap <leader>fe <CMD>lua require('telescope.builtin').file_browser()<CR>
+  nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files{ hidden = true }<CR>
+  nnoremap <leader>fs <CMD>lua require('telescope.builtin').live_grep()<CR>
+  nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
+  nnoremap <leader>fh <CMD>lua require('telescope.builtin').help_tags()<CR>
+endif
 
+
+"'' Treesitter ''"
+if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
+  lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+endif
