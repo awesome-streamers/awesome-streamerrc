@@ -1,30 +1,17 @@
 require("harpoon").setup({
     projects = {
-        ["/home/theprimeagen/work/nrdp/20.2"] = {
+        ["/home/theprimeagen/personal/harpoon/{}"] = {
             term = {
                 cmds = {
-                    "ninja -C /home/theprimeagen/work/nrdp/builds/20.2 -j 25 && cp compile_commands.json /home/theprimeagen/work/nrdp/20.2\n",
+                    "echo hello {}"
                 }
-            }
+            },
         },
-        ["/home/theprimeagen/work/nrdp/20.3"] = {
+
+        ["/home/theprimeagen/work/nrdp/{}"] = {
             term = {
                 cmds = {
-                    "ninja -C /home/theprimeagen/work/nrdp/builds/20.3 -j 25 && cp compile_commands.json /home/theprimeagen/work/nrdp/20.3\n",
-                }
-            }
-        },
-        ["/home/theprimeagen/work/nrdp/20.1"] = {
-            term = {
-                cmds = {
-                    "ninja -C /home/theprimeagen/work/nrdp/builds/20.1 -j 25 && cp compile_commands.json /home/theprimeagen/work/nrdp/20.1\n",
-                }
-            }
-        },
-        ["/home/theprimeagen/work/tvui-automation"] = {
-            term = {
-                cmds = {
-                    "yarn test\n"
+                    "ninja -C /home/theprimeagen/work/nrdp/builds/{} -j 25 && cp compile_commands.json /home/theprimeagen/work/nrdp/{}\n",
                 }
             }
         }

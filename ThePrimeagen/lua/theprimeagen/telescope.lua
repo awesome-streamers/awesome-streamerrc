@@ -27,7 +27,7 @@ require('telescope').setup {
 require('telescope').load_extension('fzy_native')
 
 local M = {}
-M.search_dotfiles = function() 
+M.search_dotfiles = function()
     require("telescope.builtin").find_files({
         prompt_title = "< VimRC >",
         cwd = "$HOME/dotfiles/awesome-streamerrc/ThePrimeagen/",
@@ -50,14 +50,14 @@ end
             --   :h telescope.layout ->
             --   :h telescope.actions
             --
-function set_background(content) 
+function set_background(content)
     vim.fn.system(
         "dconf write /org/mate/desktop/background/picture-filename \"'" .. content .. "'\"")
 end
 
 local function select_background(prompt_bufnr, map)
     local function set_the_background(close)
-        local content = 
+        local content =
         require('telescope.actions.state').get_selected_entry(prompt_bufnr)
         set_background(content.cwd .. "/" .. content.value)
         if close then

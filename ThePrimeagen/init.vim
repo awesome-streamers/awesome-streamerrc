@@ -63,7 +63,8 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug '/home/mpaulson/personal/VimDeathmatch/client'
 
 " HARPOON!!
-Plug '/home/theprimeagen/personal/harpoon'
+Plug '/home/theprimeagen/personal/harpoon/wildcards'
+Plug '/home/theprimeagen/personal/git-worktree.nvim/master'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
 
@@ -71,6 +72,10 @@ Plug 'ThePrimeagen/neovim-irc-ui'
 
 " prettier
 Plug 'sbdchd/neoformat'
+
+" should I try another status bar???
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'hoob3rt/lualine.nvim'
 
 call plug#end()
 
@@ -101,6 +106,7 @@ nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kk
 nnoremap <Leader>cpu a%" PRIu64 "<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
 " greatest remap ever
 vnoremap <leader>p "_dP

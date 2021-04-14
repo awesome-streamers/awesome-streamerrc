@@ -2,6 +2,7 @@ local sumneko_root_path = '/home/theprimeagen/personal/lua-language-server'
 local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
 
 local on_attach = require'completion'.on_attach
+
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
 
 require'lspconfig'.clangd.setup {
