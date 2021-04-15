@@ -31,6 +31,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'ghifarit53/tokyonight-vim'
 
 """ Utilities
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'phaazon/hop.nvim'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdcommenter'
@@ -256,7 +257,6 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
   nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 endif
 
-
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
   nnoremap <leader>fd :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
@@ -265,13 +265,16 @@ if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"
   nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
 endif
 
+"'' Gitsigns ''"
+if filereadable(expand("~/.config/nvim/plugged/gitsigns.nvim/lua/gitsigns.lua"))
+  lua require('gitsigns').setup()
+endif
 
 "'' Hardtime ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-hardtime/plugin/hardtime.vim"))
   let g:hardtime_default_on = 1
   let g:hardtime_showmsg = 1
 endif
-
 
 "'' Hop ''"
 if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
@@ -281,12 +284,10 @@ if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
   nnoremap <leader>hw :HopWord<CR>
 endif
 
-
 "'' Lightline ''"
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
   let g:lightline = {'colorscheme' : 'tokyonight'}
 endif
-
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
@@ -294,9 +295,10 @@ lua << EOF
   require('telescope').setup{
     defaults = {
       file_ignore_patterns = {
-        "git/*",
-        "**/*.pem",
-        "**/node_modules/**"
+        "%.git/.*",
+        "node_modules/.*",
+        "secret.d/.*",
+        "%.pem"
       }
     }
   }
@@ -307,7 +309,6 @@ EOF
   nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
   nnoremap <leader>fh <CMD>lua require('telescope.builtin').help_tags()<CR>
 endif
-
 
 "'' Treesitter ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
