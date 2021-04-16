@@ -123,6 +123,7 @@ source $ZSH/oh-my-zsh.sh
 # ALIASES
 alias cat='bat --theme="base16"'
 alias ll='ls -alh'
+# alias neuron="docker container run --rm -it --user $(id -u):$(id -g) -v ~/Neuron:/notes sridca/neuron neuron -o '/notes'"
 alias ssh='TERM="xterm-256color" ssh'
 
 # ITERM (MACOS ONLY)

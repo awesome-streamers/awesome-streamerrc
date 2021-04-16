@@ -13,41 +13,49 @@ syntax enable
 "'' START PLUG ''"
 call plug#begin('~/.config/nvim/plugged')
 
-""" Language Support ''"
+"'' Git Support ''"
+Plug 'rhysd/git-messenger.vim'
+Plug 'lewis6991/gitsigns.nvim'
+
+"'' Language Support ''"
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-""" Neuron
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'fiatjaf/neuron.vim'
+"'' Neuron ''"
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+"Plug 'fiatjaf/neuron.vim'
 
-""" Telescope
+"'' Telescope ''"
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-""" Themes
+"'' Themes ''"
 Plug 'ghifarit53/tokyonight-vim'
 
-""" Utilities
-Plug 'lewis6991/gitsigns.nvim'
+"'' Utilities ''"
 Plug 'phaazon/hop.nvim'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'vim-scripts/ReplaceWithRegister'
+" Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'voldikss/vim-floaterm'
 Plug 'takac/vim-hardtime' " see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
+" Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
+
+"'' VimWiki + Zettelkasten ''"
+Plug 'vimwiki/vimwiki'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'michal-h21/vim-zettel'
 
 call plug#end()
 "'' END PLUG ''"
 
 
 "'' VIM POST-PLUG ''"
-"This executes the command silently and ignores errors
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
 silent! colorscheme tokyonight
@@ -257,6 +265,7 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
   nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 endif
 
+
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
   nnoremap <leader>fd :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
@@ -265,16 +274,19 @@ if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"
   nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
 endif
 
+
 "'' Gitsigns ''"
 if filereadable(expand("~/.config/nvim/plugged/gitsigns.nvim/lua/gitsigns.lua"))
   lua require('gitsigns').setup()
 endif
+
 
 "'' Hardtime ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-hardtime/plugin/hardtime.vim"))
   let g:hardtime_default_on = 1
   let g:hardtime_showmsg = 1
 endif
+
 
 "'' Hop ''"
 if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
@@ -284,10 +296,12 @@ if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
   nnoremap <leader>hw :HopWord<CR>
 endif
 
+
 "'' Lightline ''"
 if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
   let g:lightline = {'colorscheme' : 'tokyonight'}
 endif
+
 
 "'' Telescope ''"
 if filereadable(expand("~/.config/nvim/plugged/telescope.nvim/plugin/telescope.vim"))
@@ -310,7 +324,13 @@ EOF
   nnoremap <leader>fh <CMD>lua require('telescope.builtin').help_tags()<CR>
 endif
 
+
 "'' Treesitter ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
   lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+endif
+
+
+"'' Vimwiki ''"
+if filereadable(expand("~/.config/nvim/plugged/vimwiki.nvim/plugin/vimwiki.vim"))
 endif
