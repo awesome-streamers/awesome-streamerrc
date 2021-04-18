@@ -11,3 +11,4 @@ nnoremap <leader>vrc :lua require('theprimeagen.telescope').search_dotfiles()<CR
 nnoremap <leader>va :lua require('theprimeagen.telescope').anime_selector()<CR>
 nnoremap <leader>vc :lua require('theprimeagen.telescope').chat_selector()<CR>
 nnoremap <leader>gc :lua require('theprimeagen.telescope').git_branches()<CR>
+nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>

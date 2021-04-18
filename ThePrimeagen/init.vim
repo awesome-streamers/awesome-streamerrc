@@ -50,7 +50,7 @@ Plug 'tpope/vim-projectionist'
 
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
+Plug '/home/theprimeagen/personal/plenary.nvim' " local dev bay bee
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'colepeters/spacemacs-theme.vim'
@@ -63,6 +63,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug '/home/mpaulson/personal/VimDeathmatch/client'
 
 " HARPOON!!
+Plug '/home/theprimeagen/personal/vim-with-me/ui'
 Plug '/home/theprimeagen/personal/harpoon/wildcards'
 Plug '/home/theprimeagen/personal/git-worktree.nvim/master'
 Plug '/home/mpaulson/personal/rfc-reader'
@@ -74,7 +75,7 @@ Plug 'ThePrimeagen/neovim-irc-ui'
 Plug 'sbdchd/neoformat'
 
 " should I try another status bar???
-" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+"  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'hoob3rt/lualine.nvim'
 
 call plug#end()
