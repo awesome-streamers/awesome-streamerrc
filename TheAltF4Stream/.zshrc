@@ -15,9 +15,6 @@ export VSCODE_PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/
 # PATH
 export PATH="$FUSION_PATH:$GO_PATH/bin:$VSCODE_PATH:$PATH"
 
-# EDITOR
-export EDITOR="nvim"
-
 # VAGRANT
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
 
@@ -102,11 +99,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -121,6 +114,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ALIASES
+#alias bw="NODE_EXTRA_CA_CERTS='/etc/ca-certificates/trust-source/anchors/drn_io_ca.crt' bw"
 alias cat='bat --theme="base16"'
 alias ll='ls -alh'
 # alias neuron="docker container run --rm -it --user $(id -u):$(id -g) -v ~/Neuron:/notes sridca/neuron neuron -o '/notes'"
@@ -128,3 +122,4 @@ alias ssh='TERM="xterm-256color" ssh'
 
 # ITERM (MACOS ONLY)
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh

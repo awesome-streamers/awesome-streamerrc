@@ -20,11 +20,7 @@ Plug 'lewis6991/gitsigns.nvim'
 "'' Language Support ''"
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-"'' Neuron ''"
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
-"Plug 'fiatjaf/neuron.vim'
+Plug 'jparise/vim-graphql'
 
 "'' Telescope ''"
 Plug 'nvim-lua/popup.nvim'
@@ -292,7 +288,7 @@ endif
 if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
   nnoremap <leader>h1 :HopChar1<CR>
   nnoremap <leader>h2 :HopChar2<CR>
-  nnoremap <leader>hs :HopPattern<CR>
+  nnoremap <leader>hp :HopPattern<CR>
   nnoremap <leader>hw :HopWord<CR>
 endif
 
@@ -317,7 +313,7 @@ lua << EOF
     }
   }
 EOF
-  nnoremap <leader>fe <CMD>lua require('telescope.builtin').file_browser()<CR>
+  nnoremap <leader>fe <CMD>lua require('telescope.builtin').file_browser{cwd = vim.fn.expand("%:p:h")}<CR>
   nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files{ hidden = true }<CR>
   nnoremap <leader>fs <CMD>lua require('telescope.builtin').live_grep()<CR>
   nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
@@ -331,6 +327,15 @@ if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-trees
 endif
 
 
-"'' Vimwiki ''"
-if filereadable(expand("~/.config/nvim/plugged/vimwiki.nvim/plugin/vimwiki.vim"))
+"'' VIM Zettel ''"
+if filereadable(expand("~/.config/nvim/plugged/vim-zettel/plugin/zettel.vim"))
+  nnoremap <leader>zn :ZettelNew<CR>
+  nnoremap <leader>zo :ZettelOpen<CR>
+  nnoremap <leader>zi :ZettelInsertNote<CR>
+  nnoremap <leader>zb :ZettelBackLinks<CR>
+  nnoremap <leader>zu :ZettelInbox<CR>
+  nnoremap <leader>zl :ZettelGenerateLinks<CR>
+  nnoremap <leader>zt :ZettelGenerateTags<CR>
+  nnoremap <leader>zs :ZettelSearch<CR>
+  nnoremap <leader>zy :ZettelYankName<CR>
 endif
