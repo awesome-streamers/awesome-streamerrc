@@ -18,7 +18,7 @@ end
 
 Worktree.on_tree_change(function(op, path, upstream)
 
-    if op == Worktree.Operations.Create and is_tvui() then
+    if op == Worktree.Operations.Switch and is_tvui() then
         Job:new({
             "./tvui", "install"
         }):start()
