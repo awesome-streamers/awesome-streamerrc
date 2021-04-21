@@ -297,7 +297,7 @@ endif
 if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
   nnoremap <leader>h1 :HopChar1<CR>
   nnoremap <leader>h2 :HopChar2<CR>
-  nnoremap <leader>hs :HopPattern<CR>
+  nnoremap <leader>hh :HopPattern<CR>
   nnoremap <leader>hw :HopWord<CR>
 endif
 
