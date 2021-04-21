@@ -322,8 +322,9 @@ lua << EOF
     }
   }
 EOF
-
-  lua require("telescope").load_extension("git_worktree")
+  if filereadable(expand("~/.config/nvim/plugged/git-worktree.nvim/lua/git-worktree/init.lua"))
+    lua require("telescope").load_extension("git_worktree")
+  endif
 
   nnoremap <leader>fe <CMD>lua require('telescope.builtin').file_browser{cwd = vim.fn.expand("%:p:h")}<CR>
   nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files{ hidden = true }<CR>
