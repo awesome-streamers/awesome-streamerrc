@@ -15,6 +15,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 "'' Git Support ''"
 Plug 'rhysd/git-messenger.vim'
+Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 
 "'' Language Support ''"
@@ -271,6 +272,14 @@ if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"
 endif
 
 
+"'' Git-worktree ''"
+if filereadable(expand("~/.config/nvim/plugged/git-worktree.nvim/lua/git-worktree/init.lua"))
+  lua require("git-worktree").setup()
+
+  nnoremap <leader>gc <CMD>lua require("git-worktree").create_worktree(vim.fn.input("Worktree name > "), vim.fn.input("Worktree upstream > "))<CR>
+endif
+
+
 "'' Gitsigns ''"
 if filereadable(expand("~/.config/nvim/plugged/gitsigns.nvim/lua/gitsigns.lua"))
   lua require('gitsigns').setup()
@@ -288,7 +297,7 @@ endif
 if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
   nnoremap <leader>h1 :HopChar1<CR>
   nnoremap <leader>h2 :HopChar2<CR>
-  nnoremap <leader>hp :HopPattern<CR>
+  nnoremap <leader>hh :HopPattern<CR>
   nnoremap <leader>hw :HopWord<CR>
 endif
 
@@ -313,11 +322,16 @@ lua << EOF
     }
   }
 EOF
+  if filereadable(expand("~/.config/nvim/plugged/git-worktree.nvim/lua/git-worktree/init.lua"))
+    lua require("telescope").load_extension("git_worktree")
+  endif
+
   nnoremap <leader>fe <CMD>lua require('telescope.builtin').file_browser{cwd = vim.fn.expand("%:p:h")}<CR>
   nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files{ hidden = true }<CR>
   nnoremap <leader>fs <CMD>lua require('telescope.builtin').live_grep()<CR>
   nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
   nnoremap <leader>fh <CMD>lua require('telescope.builtin').help_tags()<CR>
+  nnoremap <leader>fw <CMD>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
 endif
 
 
