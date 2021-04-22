@@ -51,7 +51,7 @@ Plug 'tpope/vim-projectionist'
 
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
-Plug '/home/theprimeagen/personal/plenary.nvim' " local dev bay bee
+Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'colepeters/spacemacs-theme.vim'
@@ -66,7 +66,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " HARPOON!!
 Plug '/home/theprimeagen/personal/vim-with-me/ui'
 Plug '/home/theprimeagen/personal/harpoon/wildcards'
-Plug '/home/theprimeagen/personal/git-worktree.nvim/master'
+Plug '/home/theprimeagen/personal/git-worktree.nvim/non-bare'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
 
