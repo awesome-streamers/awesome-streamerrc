@@ -294,7 +294,7 @@ endif
 
 
 "'' Gitsigns ''"
-if filereadable(expand("~/.config/nvim/plugged/gitsigns.nvim/lua/gitsigns.lua"))
+if filereadable(expand("~/.config/nvim/plugged/gitsigns.nvim/lua/gitsigns/git.lua"))
   lua require('gitsigns').setup()
 endif
 
