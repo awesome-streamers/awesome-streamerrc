@@ -26,5 +26,6 @@
       "initializationOptions": {},
       "settings": {}
     }
-  }
+  },
+  "Lua.diagnostics.globals": ["vim"]
 }

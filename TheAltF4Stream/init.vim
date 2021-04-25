@@ -109,6 +109,7 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
       \'coc-highlight',
       \'coc-html',
       \'coc-json',
+      \'coc-lua',
       \'coc-markdownlint',
       \'coc-marketplace',
       \'coc-prettier',
@@ -287,9 +288,11 @@ endif
 
 "'' Git-worktree ''"
 if filereadable(expand("~/.config/nvim/plugged/git-worktree.nvim/lua/git-worktree/init.lua"))
-  lua require("git-worktree").setup()
+  lua require("git-worktree").setup{ autopush = false }
 
-  nnoremap <leader>gc <CMD>lua require("git-worktree").create_worktree(vim.fn.input("Worktree name > "), vim.fn.input("Worktree upstream > "))<CR>
+  nnoremap <leader>wc <CMD>lua require("git-worktree").create_worktree(vim.fn.input("Worktree name > "), vim.fn.input("Worktree upstream > "))<CR>
+  nnoremap <leader>ws <CMD>lua require("git-worktree").switch_worktree(vim.fn.input("Worktree name > "))<CR>
+  nnoremap <leader>wd <CMD>lua require("git-worktree").delete_worktree(vim.fn.input("Worktree name > "))<CR>
 endif
 
 
@@ -327,7 +330,6 @@ lua << EOF
   require('telescope').setup{
     defaults = {
       file_ignore_patterns = {
-        "%.git/.*",
         "node_modules/.*",
         "secret.d/.*",
         "%.pem"
