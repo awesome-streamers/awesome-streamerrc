@@ -10,59 +10,41 @@ local function packer_verify()
   end
 end
 
-local load_telescope = function()
-	require("telescope").setup{
-		defaults = {
-			file_ignore_patterns = {
-				"node_modules/.*",
-				"secret.d/.*",
-				"%.pem"
-			}
-		}
-	}
-
-	local map = vim.api.nvim_set_keymap
-
-	local options = { noremap = true }
-
-	-- TODO: Map keybinds to custom TA4S commands (lua :TA4SOpenFiles)
-	map('n', '<leader>fe', '<CMD>lua require("telescope.builtin").file_browser{ cwd = vim.fn.expand("%:p:h") }<CR>', options)
-	map('n', '<leader>ff', '<CMD>lua require("telescope.builtin").find_files{ hidden = true }<CR>', options)
-end
-
-function PackerInit()
-  packer_verify()
-
+local function packer_startup()
   require('packer').startup(function(use)
     -- Packer --
     use 'wbthomason/packer.nvim'
 
-    -- Git Support --
-    use 'rhysd/git-messenger.vim'
-    use 'ThePrimeagen/git-worktree.nvim'
-    use 'lewis6991/gitsigns.nvim'
-
     -- Language Support --
-    use {
-      'neoclide/coc.nvim',
-      branch = "release"
-    }
+    use { 'neoclide/coc.nvim', branch = "release" }
     use {
       'nvim-treesitter/nvim-treesitter',
+      requires = { "neoclide/coc.nvim" },
       run = ":TSUpdate"
     }
     use 'jparise/vim-graphql'
 
     -- Telescope --
-    use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
+    use 'nvim-lua/popup.nvim'
     use {
       'nvim-telescope/telescope.nvim',
-      requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim' }
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-lua/popup.nvim'
+      }
     }
 
     -- Themes --
     use 'folke/tokyonight.nvim'
+
+    -- Git Support --
+    use 'rhysd/git-messenger.vim'
+    use {
+      'ThePrimeagen/git-worktree.nvim',
+      requires = { 'nvim-telescope/telescope.nvim' }
+    }
+    use 'lewis6991/gitsigns.nvim'
 
     -- Utilities --
     use 'phaazon/hop.nvim'
@@ -86,7 +68,9 @@ function PackerInit()
     use 'michal-h21/vim-zettel'
 
   end)
+end
 
-	load_telescope()
-
+function PackerInit()
+  packer_verify()
+  packer_startup()
 end
