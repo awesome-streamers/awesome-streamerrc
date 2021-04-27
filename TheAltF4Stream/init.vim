@@ -279,10 +279,10 @@ endif
 
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
-  nnoremap <leader>fd :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
-  nnoremap <leader>fg :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
-  nnoremap <leader>fr :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating ranger<CR>
-  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
+  nnoremap <leader>ld :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
+  nnoremap <leader>lg :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
+  nnoremap <leader>rr :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating ranger<CR>
+  nnoremap <leader>tt :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating<CR>
 endif
 
 
@@ -343,6 +343,7 @@ EOF
   endif
 
   nnoremap <leader>fe <CMD>lua require('telescope.builtin').file_browser{cwd = vim.fn.expand("%:p:h")}<CR>
+  nnoremap <leader>fg <CMD>lua require('telescope.builtin').git_files{}<CR>
   nnoremap <leader>ff <CMD>lua require('telescope.builtin').find_files{ hidden = true }<CR>
   nnoremap <leader>fs <CMD>lua require('telescope.builtin').live_grep()<CR>
   nnoremap <leader>fb <CMD>lua require('telescope.builtin').buffers()<CR>
