@@ -20,7 +20,7 @@ Plug 'lewis6991/gitsigns.nvim'
 
 "'' Language Support ''"
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'jparise/vim-graphql'
 
 "'' Telescope ''"
@@ -29,12 +29,13 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 "'' Themes ''"
-Plug 'ghifarit53/tokyonight-vim'
+Plug 'folke/tokyonight.nvim'
 
 "'' Utilities ''"
 Plug 'phaazon/hop.nvim'
-Plug 'itchyny/lightline.vim'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'preservim/nerdcommenter'
+Plug 'akinsho/nvim-bufferline.lua'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'vim-scripts/ReplaceWithRegister'
@@ -52,9 +53,15 @@ call plug#end()
 "'' END PLUG ''"
 
 
+"'' Tokyonight ''"
+if filereadable(expand("~/.config/nvim/plugged/tokyonight.nvim/lua/tokyonight/init.lua"))
+  let g:tokyonight_style = "night"
+  let g:tokyonight_enable_italic = 1
+  "let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+endif
+
+
 "'' VIM POST-PLUG ''"
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
 silent! colorscheme tokyonight
 set splitright
 set encoding=utf-8
@@ -67,8 +74,8 @@ set number
 set noshowmode
 set relativenumber "" PogChamp
 set scrolloff=3
-hi Normal guibg=NONE ctermbg=NONE
-hi EndOfBuffer guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
+"hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 
 augroup WrapInMarkdown
@@ -102,6 +109,7 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
       \'coc-highlight',
       \'coc-html',
       \'coc-json',
+      \'coc-lua',
       \'coc-markdownlint',
       \'coc-marketplace',
       \'coc-prettier',
@@ -263,6 +271,12 @@ if filereadable(expand("~/.config/nvim/plugged/coc.nvim/plugin/coc.vim"))
 endif
 
 
+"'' Bufferline ''"
+if filereadable(expand("~/.config/nvim/plugged/nvim-bufferline.lua/lua/bufferline.lua"))
+  lua require'bufferline'.setup{ options = { mappings = true } }
+endif
+
+
 "'' Floatterm ''"
 if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
   nnoremap <leader>fd :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazydocker<CR>
@@ -274,14 +288,16 @@ endif
 
 "'' Git-worktree ''"
 if filereadable(expand("~/.config/nvim/plugged/git-worktree.nvim/lua/git-worktree/init.lua"))
-  lua require("git-worktree").setup()
+  lua require("git-worktree").setup{ autopush = false }
 
-  nnoremap <leader>gc <CMD>lua require("git-worktree").create_worktree(vim.fn.input("Worktree name > "), vim.fn.input("Worktree upstream > "))<CR>
+  nnoremap <leader>wc <CMD>lua require("git-worktree").create_worktree(vim.fn.input("Worktree name > "), vim.fn.input("Worktree upstream > "))<CR>
+  nnoremap <leader>ws <CMD>lua require("git-worktree").switch_worktree(vim.fn.input("Worktree name > "))<CR>
+  nnoremap <leader>wd <CMD>lua require("git-worktree").delete_worktree(vim.fn.input("Worktree name > "))<CR>
 endif
 
 
 "'' Gitsigns ''"
-if filereadable(expand("~/.config/nvim/plugged/gitsigns.nvim/lua/gitsigns.lua"))
+if filereadable(expand("~/.config/nvim/plugged/gitsigns.nvim/lua/gitsigns/git.lua"))
   lua require('gitsigns').setup()
 endif
 
@@ -302,9 +318,9 @@ if filereadable(expand("~/.config/nvim/plugged/hop.nvim/plugin/hop.vim"))
 endif
 
 
-"'' Lightline ''"
-if filereadable(expand("~/.config/nvim/plugged/lightline.vim/plugin/lightline.vim"))
-  let g:lightline = {'colorscheme' : 'tokyonight'}
+"'' Lualine ''"
+if filereadable(expand("~/.config/nvim/plugged/lualine.nvim/lua/lualine/init.lua"))
+  lua require('lualine').setup { options = { extensions = { 'fzf' }, theme = 'tokyonight' } }
 endif
 
 
@@ -314,7 +330,6 @@ lua << EOF
   require('telescope').setup{
     defaults = {
       file_ignore_patterns = {
-        "%.git/.*",
         "node_modules/.*",
         "secret.d/.*",
         "%.pem"
@@ -322,6 +337,7 @@ lua << EOF
     }
   }
 EOF
+
   if filereadable(expand("~/.config/nvim/plugged/git-worktree.nvim/lua/git-worktree/init.lua"))
     lua require("telescope").load_extension("git_worktree")
   endif
