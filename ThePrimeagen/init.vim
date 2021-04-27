@@ -19,9 +19,12 @@ Plug 'ambv/black'
 
 " Plebvim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-Plug 'tjdevries/nlua.nvim'
-Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'hrsh7th/nvim-compe'
+" Plug 'nvim-lua/completion-nvim'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'simrat39/symbols-outline.nvim'
+" Plug 'tjdevries/nlua.nvim'
+" Plug 'tjdevries/lsp_extensions.nvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -66,7 +69,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " HARPOON!!
 Plug '/home/theprimeagen/personal/vim-with-me/ui'
 Plug '/home/theprimeagen/personal/harpoon/wildcards'
-Plug '/home/theprimeagen/personal/git-worktree.nvim/non-bare'
+Plug '/home/theprimeagen/personal/git-worktree.nvim/master'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
 
