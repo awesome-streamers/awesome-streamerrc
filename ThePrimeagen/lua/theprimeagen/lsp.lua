@@ -1,10 +1,12 @@
 local sumneko_root_path = '/home/theprimeagen/personal/lua-language-server'
 local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
 
-local on_attach = require'completion'.on_attach
+local function on_attach()
+    -- TODO: TJ told me to do this and I should do it because he is Telescopic
+    -- "Big Tech" "Cash Money" Johnson
+end
 
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
-
 require'lspconfig'.clangd.setup {
     on_attach = on_attach,
     root_dir = function() return vim.loop.cwd() end
@@ -40,3 +42,16 @@ require'lspconfig'.sumneko_lua.setup {
     },
 }
 
+local opts = {
+    -- whether to highlight the currently hovered symbol
+    -- disable if your cpu usage is higher than you want it
+    -- or you just hate the highlight
+    -- default: true
+    highlight_hovered_item = true,
+
+    -- whether to show outline guides
+    -- default: true
+    show_guides = true,
+}
+
+require('symbols-outline').setup(opts)
