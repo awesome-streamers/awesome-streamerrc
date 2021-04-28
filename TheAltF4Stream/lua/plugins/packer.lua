@@ -70,7 +70,11 @@ local function packer_startup()
   end)
 end
 
-function PackerInit()
+local function init()
   packer_verify()
   packer_startup()
 end
+
+return {
+  init = init
+}

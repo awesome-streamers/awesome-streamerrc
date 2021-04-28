@@ -1,9 +1,7 @@
-require "TheAltF4Stream"
+local taf4s = require "TheAltF4Stream"
 
 local function main()
-  VimInit()
-  PluginsInit()
-  ThemeInit()
+	taf4s.init()
 end
 
 main()

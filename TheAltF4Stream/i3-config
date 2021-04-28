@@ -52,9 +52,9 @@ bindsym Control+space exec --no-startup-id rofi_run -r
 # core
 bindsym $Mod+w          exec --no-startup-id exo-open --launch WebBrowser
 bindsym $Mod+f          exec --no-startup-id exo-open --launch FileManager
-bindsym $Mod+t          exec --no-startup-id alacritty
-bindsym $Mod+Return     exec --no-startup-id alacritty
-bindsym Control+Shift+t exec --no-startup-id alacritty
+bindsym $Mod+t          exec --no-startup-id kitty
+bindsym $Mod+Return     exec --no-startup-id kitty
+bindsym Control+Shift+t exec --no-startup-id kitty
 
 # logout script
 bindsym $Mod+x exec --no-startup-id rofi_run -l

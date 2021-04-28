@@ -1,4 +1,4 @@
-function ThemeInit()
+local function init()
   -- Theme settings
   vim.g.tokyonight_style = "night"
   vim.g.tokyonight_italic_functions = true
@@ -7,3 +7,7 @@ function ThemeInit()
   -- Load colorscheme
   vim.cmd[[colorscheme tokyonight]]
 end
+
+return {
+  init = init
+}
