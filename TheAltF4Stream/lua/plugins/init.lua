@@ -1,4 +1,5 @@
 local bufferline = require "TheAltF4Stream.plugins.bufferline"
+local coc = require "TheAltF4Stream.plugins.coc"
 local floaterm = require "TheAltF4Stream.plugins.floaterm"
 local gitsigns = require "TheAltF4Stream.plugins.gitsigns"
 local git_worktree = require "TheAltF4Stream.plugins.git_worktree"
@@ -14,6 +15,7 @@ local zettel = require "TheAltF4Stream.plugins.zettel"
 local function init()
   -- Sync
 	packer.init()
+  coc.init()
 	telescope.init()
 	git_worktree.init()
 

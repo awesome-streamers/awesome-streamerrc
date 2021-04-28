@@ -7,7 +7,7 @@ end
 
 
 local function set_vim_g()
-	vim.g.mapleader = " "
+  vim.g.mapleader = " "
 end
 
 local function set_vim_o()
@@ -17,7 +17,7 @@ local function set_vim_o()
     expandtab = true,
     hidden = true,
     scrolloff = 3,
-		softtabstop = 2,
+    softtabstop = 2,
     showmode = false,
     termguicolors = true
   }
@@ -60,7 +60,7 @@ end
 
 local function init()
   set_augroup()
-	set_vim_g()
+  set_vim_g()
   set_vim_o()
   set_vim_wo()
   set_keymaps()
