@@ -1,9 +1,6 @@
-local plugins = require "TheAltF4Stream.plugins"
-local vim = require "TheAltF4Stream.vim"
-
 local function init()
-  vim.init()
-  plugins.init()
+  require 'TheAltF4Stream.vim'.init()
+  require 'TheAltF4Stream.plugins'.init()
 end
 
 return {
