@@ -14,16 +14,23 @@ local function init()
     documentation = true;
 
     source = {
-      path = true;
+      -- Built-in
       buffer = true;
       calc = true;
-      nvim_lsp = true;
-      tags = true;
+      path = true;
       spell = true;
+      tags = true;
+
+      -- Neovim
+      nvim_lsp = true;
       nvim_lua = true;
-      vsnip = true;
-      tabnine = true;
+
+      -- External plugin
       treesitter = true;
+      vsnip = true;
+
+      -- External source
+      tabnine = true;
     };
   }
 
@@ -37,7 +44,7 @@ local function init()
     inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
   ]])
 
-
+  --vim.cmd("highlight link CompeDocumentation NormalFloat")
 end
 
 return {
