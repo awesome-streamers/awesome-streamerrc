@@ -16,13 +16,22 @@ local function packer_startup()
     use 'wbthomason/packer.nvim'
 
     -- Language Support --
-    use { 'neoclide/coc.nvim', branch = "release" }
+    use 'neovim/nvim-lspconfig'
+    use {
+      'hrsh7th/nvim-compe',
+      requires = { 'neovim/nvim-lspconfig' }
+    }
+    use {
+      'tzachar/compe-tabnine',
+      requires = 'hrsh7th/nvim-compe',
+      run='./install.sh'
+    }
+    use 'norcalli/snippets.nvim'
     use {
       'nvim-treesitter/nvim-treesitter',
-      requires = { "neoclide/coc.nvim" },
+      requires = { 'neovim/nvim-lspconfig' },
       run = ":TSUpdate"
     }
-    use 'jparise/vim-graphql'
 
     -- Telescope --
     use 'nvim-lua/plenary.nvim'
