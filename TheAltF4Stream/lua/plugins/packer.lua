@@ -22,11 +22,14 @@ local function packer_startup()
       requires = { 'neovim/nvim-lspconfig' }
     }
     use {
+      'hrsh7th/vim-vsnip',
+      requires = { 'hrsh7th/nvim-compe' }
+    }
+    use {
       'tzachar/compe-tabnine',
       requires = 'hrsh7th/nvim-compe',
       run='./install.sh'
     }
-    use 'norcalli/snippets.nvim'
     use {
       'nvim-treesitter/nvim-treesitter',
       requires = { 'neovim/nvim-lspconfig' },

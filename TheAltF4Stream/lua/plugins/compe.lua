@@ -18,6 +18,8 @@ local function init()
       buffer = true;
       calc = true;
       nvim_lsp = true;
+      tags = true;
+      spell = true;
       nvim_lua = true;
       vsnip = true;
       tabnine = true;

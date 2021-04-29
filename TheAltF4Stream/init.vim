@@ -354,7 +354,7 @@ endif
 
 "'' Treesitter ''"
 if filereadable(expand("~/.config/nvim/plugged/nvim-treesitter/plugin/nvim-treesitter.vim"))
-  lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true } }
+  lua require'nvim-treesitter.configs'.setup{ ensure_installed='all', highlight={ enable=true }, ignore_install = { 'haskell' } }
 endif
 
 
