@@ -105,7 +105,7 @@ local function init()
     }
   }
 
-  local servers = { "gopls" }
+  local servers = { "gopls", "tsserver" }
 
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { capabilities = capabilities, on_attach = on_attach }
