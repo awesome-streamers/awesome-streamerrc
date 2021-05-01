@@ -95,21 +95,46 @@ end
 local function setup_servers()
   lspinstall.setup()
 
-  -- get all installed servers
-  local servers = lspinstall.installed_servers()
+  -- TODO: Find a better approach to autoinstalling LSPs
+
+  -- servers to be installed
+  --local required_servers = {
+    --"bash",
+    --"css",
+    --"dockerfile",
+    --"go",
+    --"graphql",
+    --"html",
+    --"json",
+    --"lua",
+    --"tailwindcss",
+    --"typescript"
+  --}
+
+  -- currently installed servers
+  local installed_servers = lspinstall.installed_servers()
+
+  -- installs any missing servers
+  --for _, s in pairs(required_servers) do
+    --if not vim.tbl_contains(installed_servers, s) then
+      --lspinstall.install_server(s)
+    --end
+  --end
 
   -- add any manually installed servers
   -- table.insert(servers, "clangd")
 
-  for _, server in pairs(servers) do
-    local config = make_config()
+  -- setup installed servers
+  for _, s in pairs(installed_servers) do
+    local c = make_config()
 
     -- language specific configs
-    if server == "lua" then
-      config.settings = lua_settings
+    if s == "lua" then
+      c.settings = lua_settings
     end
 
-    require'lspconfig'[server].setup(config)
+    -- language server setup
+    require'lspconfig'[s].setup(c)
   end
 end
 
