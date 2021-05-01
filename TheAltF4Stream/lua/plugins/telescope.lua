@@ -13,8 +13,6 @@ local function init()
 
   local options = { noremap = true }
 
-  -- TODO: Map keymaps to custom TA4S commands (lua :TA4SOpenFiles)
-
   -- Keymaps
   map('n', '<leader>fe', '<CMD>lua require("telescope.builtin").file_browser{ cwd = vim.fn.expand("%:p:h") }<CR>', options)
   map('n', '<leader>fg', '<CMD>lua require("telescope.builtin").git_files{}<CR>', options)

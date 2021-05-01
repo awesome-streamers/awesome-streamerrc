@@ -3,7 +3,7 @@ local function init()
   require 'TheAltF4Stream.plugins.packer'.init()
 
   -- lsp
-  require 'TheAltF4Stream.plugins.lspconfig'.init()
+  require 'TheAltF4Stream.plugins.lsp'.init()
   require 'TheAltF4Stream.plugins.treesitter'.init()
   require 'TheAltF4Stream.plugins.compe'.init()
   require 'TheAltF4Stream.plugins.compe_tabnine'.init()

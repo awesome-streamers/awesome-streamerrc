@@ -18,6 +18,10 @@ local function packer_startup()
     -- Language Support --
     use 'neovim/nvim-lspconfig'
     use {
+      'kabouzeid/nvim-lspinstall',
+      requires = { 'neovim/nvim-lspconfig' }
+    }
+    use {
       'hrsh7th/nvim-compe',
       requires = { 'neovim/nvim-lspconfig' }
     }
