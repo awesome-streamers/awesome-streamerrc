@@ -1,10 +1,8 @@
-local lspinstall = require'lspinstall'
-
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   -- Mappings
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -88,45 +86,38 @@ local function make_config()
   }
 end
 
+local function sumneko_system_name()
+  local system_name
+
+  if vim.fn.has("mac") == 1 then
+    system_name = "macOS"
+  elseif vim.fn.has("unix") == 1 then
+    system_name = "Linux"
+  elseif vim.fn.has('win32') == 1 then
+    system_name = "Windows"
+  else
+    print("Unsupported system for sumneko")
+  end
+
+  return system_name
+end
+
 -- lsp-install
 local function setup_servers()
-  lspinstall.setup()
-
   -- TODO: Find a better approach to autoinstalling LSPs
-
-  -- servers to be installed
-  --local required_servers = {
-    --"bash",
-    --"css",
-    --"dockerfile",
-    --"go",
-    --"graphql",
-    --"html",
-    --"json",
-    --"lua",
-    --"tailwindcss",
-    --"typescript"
-  --}
-
-  -- currently installed servers
-  local installed_servers = lspinstall.installed_servers()
-
-  -- installs any missing servers
-  --for _, s in pairs(required_servers) do
-    --if not vim.tbl_contains(installed_servers, s) then
-      --lspinstall.install_server(s)
-    --end
-  --end
-
-  -- add any manually installed servers
-  -- table.insert(servers, "clangd")
+  local servers = { "gopls", "sumneko_lua" }
 
   -- setup installed servers
-  for _, s in pairs(installed_servers) do
+  for _, s in pairs(servers) do
     local c = make_config()
 
     -- language specific configs
-    if s == "lua" then
+    if s == "sumneko_lua" then
+      local system_name = sumneko_system_name()
+      local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
+      local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+
+      c.cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" }
       c.settings = lua_settings
     end
 
@@ -137,11 +128,6 @@ end
 
 local function init()
   setup_servers()
-
-  lspinstall.post_install_hook = function ()
-    setup_servers() -- reload installed servers
-    vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-  end
 end
 
 return {
