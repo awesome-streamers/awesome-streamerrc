@@ -104,6 +104,7 @@ local function setup_servers()
     --"html",
     --"json",
     --"lua",
+    --"rust",
     --"tailwindcss",
     --"typescript"
   --}
