@@ -69,10 +69,8 @@ local function packer_startup()
     use 'akinsho/nvim-bufferline.lua'
     use 'romgrk/nvim-treesitter-context'
     use 'kyazdani42/nvim-web-devicons'
-    -- use 'vim-scripts/ReplaceWithRegister'
     use 'voldikss/vim-floaterm'
     use 'takac/vim-hardtime' -- see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-    -- use 'mg979/vim-visual-multi', { 'branch': 'master' }
 
     -- VimWiki + Zettelkasten --
     use 'vimwiki/vimwiki'

@@ -15,10 +15,12 @@ local function init()
   require 'TheAltF4Stream.plugins.gitsigns'.init()
   require 'TheAltF4Stream.plugins.git_worktree'.init()
 
+  -- theme
+  require 'TheAltF4Stream.plugins.tokyonight'.init()
+
   -- window
   require 'TheAltF4Stream.plugins.bufferline'.init()
   require 'TheAltF4Stream.plugins.lualine'.init()
-  require 'TheAltF4Stream.plugins.tokyonight'.init()
 
   -- utils
   require 'TheAltF4Stream.plugins.floaterm'.init()
