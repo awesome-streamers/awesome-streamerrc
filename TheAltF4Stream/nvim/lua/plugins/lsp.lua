@@ -91,6 +91,7 @@ local function docker_command(server)
   local volume = cwd..":"..cwd
   local image = ""
 
+  -- TODO: this isn't working yet
   if server == "dockerls" then
     image = "erkrnt/docker-langserver:0.4.1"
   end
@@ -117,13 +118,13 @@ local function setup_servers()
   for _, s in pairs(servers) do
     local c = make_config()
 
-    c.cmd = docker_command(s)
-
     if s == "dockerls" then
       c.cmd = { "docker-langserver", "--stdio" }
+      --c.cmd = docker_command(s)
     end
 
     if s == "sumneko_lua" then
+      c.cmd = docker_command(s)
       c.settings = lua_settings
     end
 
