@@ -53,11 +53,11 @@ local lua_settings = {
       globals = {'vim'},
     },
     workspace = {
-    -- Make the server aware of Neovim runtime files
-    library = {
-      [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-      [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-    },
+      -- Make the server aware of Neovim runtime files
+      library = {
+        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+      },
     },
     -- Do not send telemetry data containing a randomized but unique identifier
     telemetry = {
@@ -86,42 +86,47 @@ local function make_config()
   }
 end
 
-local function sumneko_system_name()
-  local system_name
+local function docker_command(server)
+  local cwd = vim.fn.getcwd()
+  local volume = cwd..":"..cwd
+  local image = ""
 
-  if vim.fn.has("mac") == 1 then
-    system_name = "macOS"
-  elseif vim.fn.has("unix") == 1 then
-    system_name = "Linux"
-  elseif vim.fn.has('win32') == 1 then
-    system_name = "Windows"
-  else
-    print("Unsupported system for sumneko")
+  if server == "dockerls" then
+    image = "erkrnt/docker-langserver:0.4.1"
   end
 
-  return system_name
+  if server == "sumneko_lua" then
+    image = "erkrnt/lua-language-server:1.20.5"
+  end
+
+  return {
+      "docker",
+      "container",
+      "run",
+      "--interactive",
+      "--rm",
+      "--volume",
+      volume,
+      image
+    }
 end
 
--- lsp-install
 local function setup_servers()
-  -- TODO: Find a better approach to autoinstalling LSPs
-  local servers = { "gopls", "sumneko_lua" }
+  local servers = { "dockerls", "sumneko_lua" }
 
-  -- setup installed servers
   for _, s in pairs(servers) do
     local c = make_config()
 
-    -- language specific configs
-    if s == "sumneko_lua" then
-      local system_name = sumneko_system_name()
-      local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
-      local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+    c.cmd = docker_command(s)
 
-      c.cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" }
+    if s == "dockerls" then
+      c.cmd = { "docker-langserver", "--stdio" }
+    end
+
+    if s == "sumneko_lua" then
       c.settings = lua_settings
     end
 
-    -- language server setup
     require'lspconfig'[s].setup(c)
   end
 end

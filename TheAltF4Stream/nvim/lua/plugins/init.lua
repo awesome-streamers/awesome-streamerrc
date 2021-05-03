@@ -27,9 +27,6 @@ local function init()
   require 'TheAltF4Stream.plugins.hardtime'.init()
   require 'TheAltF4Stream.plugins.hop'.init()
   require 'TheAltF4Stream.plugins.zettel'.init()
-
-  -- development
-  require 'TheAltF4Stream.plugins.lsp_install'.init()
 end
 
 return {
