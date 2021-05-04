@@ -16,13 +16,25 @@ local function packer_startup()
     use 'wbthomason/packer.nvim'
 
     -- Language Support --
-    use { 'neoclide/coc.nvim', branch = "release" }
+    use 'neovim/nvim-lspconfig'
+    use {
+      'hrsh7th/nvim-compe',
+      requires = { 'neovim/nvim-lspconfig' }
+    }
+    use {
+      'hrsh7th/vim-vsnip',
+      requires = { 'hrsh7th/nvim-compe' }
+    }
+    use {
+      'tzachar/compe-tabnine',
+      requires = 'hrsh7th/nvim-compe',
+      run='./install.sh'
+    }
     use {
       'nvim-treesitter/nvim-treesitter',
-      requires = { "neoclide/coc.nvim" },
+      requires = { 'neovim/nvim-lspconfig' },
       run = ":TSUpdate"
     }
-    use 'jparise/vim-graphql'
 
     -- Telescope --
     use 'nvim-lua/plenary.nvim'
@@ -53,10 +65,8 @@ local function packer_startup()
     use 'akinsho/nvim-bufferline.lua'
     use 'romgrk/nvim-treesitter-context'
     use 'kyazdani42/nvim-web-devicons'
-    -- use 'vim-scripts/ReplaceWithRegister'
     use 'voldikss/vim-floaterm'
     use 'takac/vim-hardtime' -- see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-    -- use 'mg979/vim-visual-multi', { 'branch': 'master' }
 
     -- VimWiki + Zettelkasten --
     use 'vimwiki/vimwiki'
@@ -70,7 +80,11 @@ local function packer_startup()
   end)
 end
 
-function PackerInit()
+local function init()
   packer_verify()
   packer_startup()
 end
+
+return {
+  init = init
+}
