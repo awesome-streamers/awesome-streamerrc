@@ -36,7 +36,6 @@ Plug 'szw/vim-maximizer'
 
 " THANKS BFREDL
 Plug '/home/mpaulson/personal/contextprint.nvim'
-Plug '/home/mpaulson/personal/af-pluth-pluth'
 
 Plug 'rust-lang/rust.vim'
 Plug 'tweekmonster/gofmt.vim'
@@ -44,12 +43,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
-Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'theprimeagen/vim-be-good'
-Plug '/home/theprimeagen/personal/af-pluth-pluth'
 Plug 'gruvbox-community/gruvbox'
-Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-projectionist'
 
 " telescope requirements...
@@ -57,23 +53,13 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'colepeters/spacemacs-theme.vim'
 
-Plug 'sainnhe/gruvbox-material'
-Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug '/home/mpaulson/personal/VimDeathmatch/client'
 
 " HARPOON!!
-Plug '/home/theprimeagen/personal/vim-with-me/ui'
-Plug '/home/theprimeagen/personal/harpoon/wildcards'
-Plug '/home/theprimeagen/personal/git-worktree.nvim/master'
 Plug '/home/mpaulson/personal/rfc-reader'
 Plug 'mhinz/vim-rfc'
-
-Plug 'ThePrimeagen/neovim-irc-ui'
 
 " prettier
 Plug 'sbdchd/neoformat'
@@ -83,6 +69,11 @@ Plug 'sbdchd/neoformat'
 " Plug 'hoob3rt/lualine.nvim'
 
 call plug#end()
+
+" Adding local modules
+let &runtimepath.=',/home/theprimeagen/personal/harpoon/master'
+let &runtimepath.=',/home/theprimeagen/personal/vim-with-me/ui'
+let &runtimepath.=',/home/theprimeagen/personal/git-worktree.nvim/master'
 
 " let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 
@@ -99,6 +90,7 @@ endif
 let loaded_matchparen = 1
 let mapleader = " "
 
+nnoremap <silent> <C-f> :lua require("harpoon.term").sendCommand(1, "tmux2\n"); require("harpoon.term").gotoTerminal(1)<CR>
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>

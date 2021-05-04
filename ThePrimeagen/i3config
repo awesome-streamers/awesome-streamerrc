@@ -40,6 +40,8 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
+bindsym $mod+space exec "/home/theprimeagen/dotfiles/awesome-streamerrc/ThePrimeagen/tmux2"
+
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
@@ -89,9 +91,6 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
