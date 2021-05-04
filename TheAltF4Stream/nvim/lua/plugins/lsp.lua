@@ -113,15 +113,20 @@ local function docker_command(server)
 end
 
 local function setup_servers()
-  local servers = { "dockerls", "sumneko_lua" }
+  local servers = {
+    "cssls",
+    "dockerls",
+    "gopls",
+    "sumneko_lua",
+    "tsserver"
+  }
 
   for _, s in pairs(servers) do
     local c = make_config()
 
-    if s == "dockerls" then
-      c.cmd = { "docker-langserver", "--stdio" }
+    --if s == "dockerls" then
       --c.cmd = docker_command(s)
-    end
+    --end
 
     if s == "sumneko_lua" then
       c.cmd = docker_command(s)
