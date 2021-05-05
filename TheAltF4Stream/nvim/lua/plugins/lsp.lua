@@ -114,11 +114,21 @@ end
 
 local function setup_servers()
   local servers = {
+    "bashls",
     "cssls",
     "dockerls",
+    "elixirls",
     "gopls",
+    "graphql",
+    "html",
+    "jsonls",
+    "pyls",
+    "rust_analyzer",
+    "sqlls",
     "sumneko_lua",
-    "tsserver"
+    "terraformls",
+    "tsserver",
+    "yamlls"
   }
 
   for _, s in pairs(servers) do
