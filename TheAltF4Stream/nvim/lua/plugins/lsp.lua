@@ -1,3 +1,5 @@
+local lspcontainers = require'lspcontainers'
+
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -50,7 +52,7 @@ local lua_settings = {
     },
     diagnostics = {
       -- Get the language server to recognize the `vim` global
-      globals = {'vim'},
+      globals = { 'vim' },
     },
     workspace = {
       -- Make the server aware of Neovim runtime files
@@ -86,32 +88,6 @@ local function make_config()
   }
 end
 
-local function docker_command(server)
-  local cwd = vim.fn.getcwd()
-  local volume = cwd..":"..cwd
-  local image = ""
-
-  -- TODO: this isn't working yet
-  if server == "dockerls" then
-    image = "erkrnt/docker-langserver:0.4.1"
-  end
-
-  if server == "sumneko_lua" then
-    image = "erkrnt/lua-language-server:1.20.5"
-  end
-
-  return {
-      "docker",
-      "container",
-      "run",
-      "--interactive",
-      "--rm",
-      "--volume",
-      volume,
-      image
-    }
-end
-
 local function setup_servers()
   local servers = {
     "bashls",
@@ -135,11 +111,11 @@ local function setup_servers()
     local c = make_config()
 
     --if s == "dockerls" then
-      --c.cmd = docker_command(s)
+      --c.cmd = lspcontainers.command(s)
     --end
 
     if s == "sumneko_lua" then
-      c.cmd = docker_command(s)
+      c.cmd = lspcontainers.command(s)
       c.settings = lua_settings
     end
 
