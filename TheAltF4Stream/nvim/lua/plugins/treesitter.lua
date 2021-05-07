@@ -1,5 +1,25 @@
+local treesitter = require'nvim-treesitter.configs'
+
 local function init()
-  require'nvim-treesitter.configs'.setup{ ensure_installed={ 'go', 'lua' }, highlight={ enable=true } }
+  treesitter.setup{
+    ensure_installed = {
+      'bash',
+      'css',
+      'go',
+      'graphql',
+      'html',
+      'json',
+      'lua',
+      'python',
+      'rust',
+      'tsx',
+      'typescript',
+      'yaml',
+    },
+    highlight = {
+      enable = true
+    }
+  }
 end
 
 return {

@@ -1,4 +1,6 @@
+local lspconfig = require'lspconfig'
 local lspcontainers = require'lspcontainers'
+local util = require 'lspconfig/util'
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -110,16 +112,61 @@ local function setup_servers()
   for _, s in pairs(servers) do
     local c = make_config()
 
-    --if s == "dockerls" then
-      --c.cmd = lspcontainers.command(s)
-    --end
+    if s == "bashls" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
+
+    if s == "dockerls" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
+
+    if s == "gopls" then
+      c.cmd = lspcontainers.command(s)
+    end
+
+    if s == "pyright" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
 
     if s == "sumneko_lua" then
       c.cmd = lspcontainers.command(s)
       c.settings = lua_settings
     end
 
-    require'lspconfig'[s].setup(c)
+    if s == "tsserver" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
+
+    if s == "yamlls" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
+
+    lspconfig[s].setup(c)
   end
 end
 
