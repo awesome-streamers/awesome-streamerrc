@@ -148,6 +148,21 @@ local function setup_servers()
       c.settings = lua_settings
     end
 
+      if s == "rust_analyzer" then
+        c.cmd = lspcontainers.command(s)
+        c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+        c.settings = {
+          ["rust-analyzer"] = {
+            updates = {
+              channel = "nightly"
+            }
+          }
+      }
+        vim.api.nvim_exec([[
+          autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"TypeHint", "ChainingHint", "ParameterHint" } }
+      ]], false)
+    end
+
     if s == "tsserver" then
       c.before_init = function(params)
         params.processId = vim.NIL

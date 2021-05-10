@@ -36,6 +36,7 @@ local function packer_startup()
       requires = { 'neovim/nvim-lspconfig' },
       run = ":TSUpdate"
     }
+    use 'nvim-lua/lsp_extensions.nvim'
 
     -- Telescope --
     use 'nvim-lua/plenary.nvim'
