@@ -17,6 +17,7 @@ local function packer_startup()
 
     -- Language Support --
     use 'neovim/nvim-lspconfig'
+    use 'lspcontainers/lspcontainers.nvim'
     use {
       'hrsh7th/nvim-compe',
       requires = { 'neovim/nvim-lspconfig' }
@@ -27,7 +28,7 @@ local function packer_startup()
     }
     use {
       'tzachar/compe-tabnine',
-      requires = 'hrsh7th/nvim-compe',
+      requires = { 'hrsh7th/nvim-compe' },
       run='./install.sh'
     }
     use {
@@ -35,6 +36,7 @@ local function packer_startup()
       requires = { 'neovim/nvim-lspconfig' },
       run = ":TSUpdate"
     }
+    use 'nvim-lua/lsp_extensions.nvim'
 
     -- Telescope --
     use 'nvim-lua/plenary.nvim'

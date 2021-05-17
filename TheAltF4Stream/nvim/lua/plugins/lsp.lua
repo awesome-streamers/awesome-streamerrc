@@ -1,3 +1,7 @@
+local lspconfig = require'lspconfig'
+local lspcontainers = require'lspcontainers'
+local util = require 'lspconfig/util'
+
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -50,7 +54,7 @@ local lua_settings = {
     },
     diagnostics = {
       -- Get the language server to recognize the `vim` global
-      globals = {'vim'},
+      globals = { 'vim' },
     },
     workspace = {
       -- Make the server aware of Neovim runtime files
@@ -86,49 +90,98 @@ local function make_config()
   }
 end
 
-local function docker_command(server)
-  local cwd = vim.fn.getcwd()
-  local volume = cwd..":"..cwd
-  local image = ""
-
-  -- TODO: this isn't working yet
-  if server == "dockerls" then
-    image = "erkrnt/docker-langserver:0.4.1"
-  end
-
-  if server == "sumneko_lua" then
-    image = "erkrnt/lua-language-server:1.20.5"
-  end
-
-  return {
-      "docker",
-      "container",
-      "run",
-      "--interactive",
-      "--rm",
-      "--volume",
-      volume,
-      image
-    }
-end
-
 local function setup_servers()
-  local servers = { "dockerls", "sumneko_lua" }
+  local servers = {
+    "bashls",
+    "cssls",
+    "dockerls",
+    "elixirls",
+    "gopls",
+    "graphql",
+    "html",
+    "jsonls",
+    "pyls",
+    "rust_analyzer",
+    "sqlls",
+    "sumneko_lua",
+    "terraformls",
+    "tsserver",
+    "yamlls"
+  }
 
   for _, s in pairs(servers) do
     local c = make_config()
 
+    if s == "bashls" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
+
     if s == "dockerls" then
-      c.cmd = { "docker-langserver", "--stdio" }
-      --c.cmd = docker_command(s)
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
+
+    if s == "gopls" then
+      c.cmd = lspcontainers.command(s)
+    end
+
+    if s == "pyright" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
     end
 
     if s == "sumneko_lua" then
-      c.cmd = docker_command(s)
+      c.cmd = lspcontainers.command(s)
       c.settings = lua_settings
     end
 
-    require'lspconfig'[s].setup(c)
+      if s == "rust_analyzer" then
+        c.cmd = lspcontainers.command(s)
+        c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+        c.settings = {
+          ["rust-analyzer"] = {
+            updates = {
+              channel = "nightly"
+            }
+          }
+      }
+        vim.api.nvim_exec([[
+          autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"TypeHint", "ChainingHint", "ParameterHint" } }
+      ]], false)
+    end
+
+    if s == "tsserver" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
+
+    if s == "yamlls" then
+      c.before_init = function(params)
+        params.processId = vim.NIL
+      end
+
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    end
+
+    lspconfig[s].setup(c)
   end
 end
 
