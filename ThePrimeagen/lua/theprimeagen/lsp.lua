@@ -14,6 +14,7 @@ require'lspconfig'.clangd.setup {
 
 require'lspconfig'.pyls.setup{ on_attach=on_attach }
 require'lspconfig'.gopls.setup{ on_attach=on_attach }
+-- who even uses this?
 require'lspconfig'.rust_analyzer.setup{ on_attach=on_attach }
 
 require'lspconfig'.sumneko_lua.setup {
