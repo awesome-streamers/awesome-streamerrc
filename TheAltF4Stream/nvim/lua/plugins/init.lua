@@ -15,12 +15,10 @@ local function init()
     -- theme
     'tokyonight',
     -- window
-    'bufferline',
     'lualine',
     -- utils
     'floaterm',
     'hardtime',
-    'hop',
     'zettel',
   }
 
