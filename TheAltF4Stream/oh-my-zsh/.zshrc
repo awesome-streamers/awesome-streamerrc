@@ -87,7 +87,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z zsh-completions zsh-syntax-highlighting)
+plugins=(git z zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,5 +123,3 @@ alias ssh='TERM="xterm-256color" ssh'
 # ITERM (MACOS ONLY)
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 test -e /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh
-
-alias luamake=/home/erikreinert/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
