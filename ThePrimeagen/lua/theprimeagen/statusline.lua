@@ -38,10 +38,6 @@ local function get_file_name()
         return "(no name)"
     end
 
-    if last_name == name then
-        return last_name_results
-    end
-
     local name_parts = split(name, path.sep)
     local name_results = {}
     for idx = 1, #name_parts - 1 do
@@ -97,7 +93,7 @@ function StatusLine()
         constrain_string(get_file_name(), 23, false),
         get_git_info(),
         lsp_info(),
-        harpoon_status(),
+        "H:O", -- harpoon_status(),
         status_line)
 end
 
