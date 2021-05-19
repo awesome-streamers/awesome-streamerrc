@@ -5,7 +5,6 @@ local function set_augroup()
   vim.api.nvim_command("augroup END")
 end
 
-
 local function set_vim_g()
   vim.g.mapleader = " "
 end

@@ -114,10 +114,8 @@ export EDITOR='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ALIASES
-#alias bw="NODE_EXTRA_CA_CERTS='/etc/ca-certificates/trust-source/anchors/drn_io_ca.crt' bw"
 alias cat='bat --theme="base16"'
-alias ll='ls -alh'
-# alias neuron="docker container run --rm -it --user $(id -u):$(id -g) -v ~/Neuron:/notes sridca/neuron neuron -o '/notes'"
+alias ll='nnn -Hde'
 alias ssh='TERM="xterm-256color" ssh'
 
 # ITERM (MACOS ONLY)
