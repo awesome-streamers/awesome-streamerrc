@@ -18,8 +18,7 @@ local function init()
     'lualine',
     -- utils
     'floaterm',
-    'hardtime',
-    'zettel',
+    'hardtime'
   }
 
   for _, plug in ipairs(plugins) do

@@ -44,12 +44,6 @@ local function packer_startup()
     use 'kyazdani42/nvim-web-devicons'
     use 'voldikss/vim-floaterm'
     use 'takac/vim-hardtime' -- see http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-
-    -- VimWiki + Zettelkasten --
-    use 'vimwiki/vimwiki'
-    use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
-    use 'junegunn/fzf.vim'
-    use 'michal-h21/vim-zettel'
   end)
 end
 

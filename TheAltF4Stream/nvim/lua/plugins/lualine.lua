@@ -1,7 +1,7 @@
 local function init()
   require('lualine').setup {
     options = {
-      extensions = { 'fzf', 'quickfix' },
+      extensions = { 'quickfix' },
       theme = 'tokyonight'
     }
   }
