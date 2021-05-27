@@ -130,9 +130,9 @@ local function setup_servers()
       c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
     end
 
-    if s == "gopls" then
-      c.cmd = lspcontainers.command(s)
-    end
+    --if s == "gopls" then
+      --c.cmd = lspcontainers.command(s)
+    --end
 
     if s == "pylsp" then
       c.cmd = lspcontainers.command(s)
