@@ -14,6 +14,8 @@ local function init()
     'git_worktree',
     -- theme
     'tokyonight',
+    --sessions
+    'auto_session',
     -- window
     'lualine',
     -- utils

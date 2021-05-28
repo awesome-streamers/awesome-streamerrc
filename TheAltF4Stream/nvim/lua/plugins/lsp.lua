@@ -138,15 +138,6 @@ local function setup_servers()
       c.cmd = lspcontainers.command(s)
     end
 
-    if s == "pyright" then
-      c.before_init = function(params)
-        params.processId = vim.NIL
-      end
-
-      c.cmd = lspcontainers.command(s)
-      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
-    end
-
     if s == "sumneko_lua" then
       c.cmd = lspcontainers.command(s)
       c.settings = lua_settings
