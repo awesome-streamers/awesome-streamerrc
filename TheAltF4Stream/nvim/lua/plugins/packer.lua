@@ -37,6 +37,10 @@ local function packer_startup()
     use 'ThePrimeagen/git-worktree.nvim'
     use 'lewis6991/gitsigns.nvim'
 
+    -- Sessions --
+    use 'rmagatti/auto-session'
+    use 'rmagatti/session-lens'
+
     -- Utilities --
     use 'hoob3rt/lualine.nvim'
     use 'preservim/nerdcommenter'
