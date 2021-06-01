@@ -129,10 +129,6 @@ local function init()
       c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
     end
 
-    --if s == "gopls" then
-      --c.cmd = lspcontainers.command(s)
-    --end
-
     if s == "pylsp" then
       c.cmd = lspcontainers.command(s)
     end
