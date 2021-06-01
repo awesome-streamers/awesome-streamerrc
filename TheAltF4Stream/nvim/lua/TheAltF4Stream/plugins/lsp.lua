@@ -1,4 +1,3 @@
-local lspconfig = require'lspconfig'
 local lspcontainers = require'lspcontainers'
 local util = require 'lspconfig/util'
 
@@ -90,7 +89,7 @@ local function make_config()
   }
 end
 
-local function setup_servers()
+local function init()
   local lspconfig_servers = {
     "bashls",
     "cssls",
@@ -182,12 +181,8 @@ local function setup_servers()
       c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
     end
 
-    lspconfig[s].setup(c)
+    require'lspconfig'[s].setup(c)
   end
-end
-
-local function init()
-  setup_servers()
 end
 
 return {

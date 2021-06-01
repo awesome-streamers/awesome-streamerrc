@@ -11,9 +11,6 @@ local function init()
 
   require'auto-session'.setup(opts)
 
-  require'telescope'.load_extension("session-lens")
-
-  -- Keymaps
   map('n', '<leader>sd', '<CMD>lua require("auto-session").DeleteSession()<CR>', mapOpts)
   map('n', '<leader>ss', '<CMD>lua require("auto-session").SaveSession()<CR>', mapOpts)
 end

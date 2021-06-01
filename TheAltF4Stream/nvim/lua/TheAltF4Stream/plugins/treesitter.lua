@@ -1,7 +1,5 @@
-local treesitter = require'nvim-treesitter.configs'
-
 local function init()
-  treesitter.setup{
+  require'nvim-treesitter.configs'.setup{
     ensure_installed = {
       'bash',
       'css',
