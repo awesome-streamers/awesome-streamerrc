@@ -1,4 +1,4 @@
-FROM alpine:latest as neovim
+FROM alpine:3.13.5 as neovim
 
 RUN apk add --no-cache \
   autoconf \
@@ -17,7 +17,7 @@ RUN git clone --progress "https://github.com/neovim/neovim.git" \
   && make CMAKE_BUILD_TYPE="RelWithDebInfo" -C "/neovim" install
 
 
-FROM alpine:latest
+FROM alpine:3.13.5
 
 RUN apk add --no-cache \
   bash \
