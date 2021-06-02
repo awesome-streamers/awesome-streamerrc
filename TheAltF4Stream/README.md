@@ -45,6 +45,8 @@ ln -s <root-path>/awesome-streamerrc/TheAltF4Stream/nvim/init.lua ~/.config/nvim
 ln -s <root-path>/awesome-streamerrc/TheAltF4Stream/nvim/lua/TheAltF4Stream ~/.config/nvim/lua/TheAltF4Stream
 ```
 
+Once both symlinks are created install all plugins with `:PackerSync` in Neovim.
+
 #### Keymaps
 
 To find keymaps for any given plugin check the module file for it in `./nvim/lua/TheAltF4Stream/plugins`.
