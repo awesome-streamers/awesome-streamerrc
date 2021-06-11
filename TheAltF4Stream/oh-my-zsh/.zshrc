@@ -6,8 +6,6 @@ export FUSION_PATH="/Library/Application Support/VMware Fusion"
 
 # GO
 export GO_PATH="$HOME/Development/go"
-export GOENV="$GO_PATH"
-export GOPATH="$GO_PATH"
 
 # VSCODE
 export VSCODE_PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -87,7 +85,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z zsh-completions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -113,15 +111,46 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# NNN
+n ()
+{
+    # Block nesting of nnn in subshells
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # To cd on quit only on ^G, remove the "export" as in:
+    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    # NOTE: NNN_TMPFILE is fixed, should not be modified
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+
+    nnn "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+    fi
+}
+
 # ALIASES
-#alias bw="NODE_EXTRA_CA_CERTS='/etc/ca-certificates/trust-source/anchors/drn_io_ca.crt' bw"
 alias cat='bat --theme="base16"'
-alias ll='ls -alh'
-# alias neuron="docker container run --rm -it --user $(id -u):$(id -g) -v ~/Neuron:/notes sridca/neuron neuron -o '/notes'"
+alias ll='n -Hde'
 alias ssh='TERM="xterm-256color" ssh'
 
 # ITERM (MACOS ONLY)
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 test -e /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh
 
-alias luamake=/home/erikreinert/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/erikreinert/Development/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/erikreinert/Development/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/erikreinert/Development/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/erikreinert/Development/google-cloud-sdk/completion.zsh.inc'; fi

@@ -1,4 +1,3 @@
-local lspconfig = require'lspconfig'
 local lspcontainers = require'lspcontainers'
 local util = require 'lspconfig/util'
 
@@ -90,8 +89,8 @@ local function make_config()
   }
 end
 
-local function setup_servers()
-  local servers = {
+local function init()
+  local lspconfig_servers = {
     "bashls",
     "cssls",
     "dockerls",
@@ -100,7 +99,7 @@ local function setup_servers()
     "graphql",
     "html",
     "jsonls",
-    "pyls",
+    "pylsp",
     "rust_analyzer",
     "sqlls",
     "sumneko_lua",
@@ -109,7 +108,7 @@ local function setup_servers()
     "yamlls"
   }
 
-  for _, s in pairs(servers) do
+  for _, s in pairs(lspconfig_servers) do
     local c = make_config()
 
     if s == "bashls" then
@@ -130,17 +129,8 @@ local function setup_servers()
       c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
     end
 
-    if s == "gopls" then
+    if s == "pylsp" then
       c.cmd = lspcontainers.command(s)
-    end
-
-    if s == "pyright" then
-      c.before_init = function(params)
-        params.processId = vim.NIL
-      end
-
-      c.cmd = lspcontainers.command(s)
-      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
     end
 
     if s == "sumneko_lua" then
@@ -148,19 +138,25 @@ local function setup_servers()
       c.settings = lua_settings
     end
 
-      if s == "rust_analyzer" then
-        c.cmd = lspcontainers.command(s)
-        c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
-        c.settings = {
-          ["rust-analyzer"] = {
-            updates = {
-              channel = "nightly"
-            }
+    if s == "rust_analyzer" then
+      c.cmd = lspcontainers.command(s)
+      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+      c.settings = {
+        ["rust-analyzer"] = {
+          updates = {
+            channel = "nightly"
           }
+        }
       }
-        vim.api.nvim_exec([[
-          autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"TypeHint", "ChainingHint", "ParameterHint" } }
+
+      vim.api.nvim_exec([[
+        autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"TypeHint", "ChainingHint", "ParameterHint" } }
       ]], false)
+    end
+
+    if s == "terraformls" then
+      c.cmd = lspcontainers.command(s)
+      c.filetypes = { "hcl", "tf", "terraform", "tfvars" }
     end
 
     if s == "tsserver" then
@@ -181,12 +177,8 @@ local function setup_servers()
       c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
     end
 
-    lspconfig[s].setup(c)
+    require'lspconfig'[s].setup(c)
   end
-end
-
-local function init()
-  setup_servers()
 end
 
 return {
