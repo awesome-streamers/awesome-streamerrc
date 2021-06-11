@@ -38,7 +38,7 @@ Plug 'szw/vim-maximizer'
 Plug '/home/mpaulson/personal/contextprint.nvim'
 
 Plug 'rust-lang/rust.vim'
-Plug 'tweekmonster/gofmt.vim'
+Plug 'darrikonn/vim-gofmt'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'vim-utils/vim-man'
@@ -90,6 +90,7 @@ endif
 let loaded_matchparen = 1
 let mapleader = " "
 
+nnoremap <silent> Q <nop>
 nnoremap <silent> <C-f> :lua require("harpoon.term").sendCommand(1, "tmux2\n"); require("harpoon.term").gotoTerminal(1)<CR>
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
@@ -105,6 +106,8 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <leader>gt <Plug>PlenaryTestFile
+nnoremap <leader>vwm :lua require("vim-with-me").init()<CR>
+nnoremap <leader>dwm :lua require("vim-with-me").disconnect()<CR>
 
 " greatest remap ever
 vnoremap <leader>p "_dP
