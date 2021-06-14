@@ -139,8 +139,8 @@ local function init()
     end
 
     if s == "rust_analyzer" then
-      c.cmd = lspcontainers.command(s)
-      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+      --c.cmd = lspcontainers.command(s)
+      --c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
       c.settings = {
         ["rust-analyzer"] = {
           updates = {
