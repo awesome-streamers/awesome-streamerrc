@@ -13,7 +13,19 @@ require'lspconfig'.clangd.setup {
 }
 
 require'lspconfig'.pyls.setup{ on_attach=on_attach }
-require'lspconfig'.gopls.setup{ on_attach=on_attach }
+
+require'lspconfig'.gopls.setup{
+    on_attach=on_attach,
+    cmd = {"gopls", "serve"},
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
+    },
+}
 -- who even uses this?
 require'lspconfig'.rust_analyzer.setup{ on_attach=on_attach }
 
