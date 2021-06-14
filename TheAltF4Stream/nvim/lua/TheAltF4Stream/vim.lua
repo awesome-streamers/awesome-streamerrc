@@ -27,6 +27,7 @@ local function set_vim_o()
   end
 
   -- Custom vim.o
+  vim.o.clipboard = 'unnamedplus'
   vim.o.shortmess = vim.o.shortmess .. 'c'
 
   -- Not yet in vim.o
