@@ -52,6 +52,7 @@ local function packer_startup()
         'erkrnt/compe-tabnine',
         run = './install.sh'
       },
+      'wellle/tmux-complete.vim',
       'hrsh7th/vim-vsnip'
     },
     config = function ()

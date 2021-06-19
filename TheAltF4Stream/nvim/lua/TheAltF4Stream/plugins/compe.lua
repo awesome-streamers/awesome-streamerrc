@@ -31,6 +31,7 @@ local function init()
 
       -- External source
       tabnine = true;
+      tmux = true;
     };
   }
 
