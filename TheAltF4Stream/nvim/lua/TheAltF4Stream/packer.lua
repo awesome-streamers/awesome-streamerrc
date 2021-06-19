@@ -65,15 +65,7 @@ local function packer_startup()
   use 'nvim-lua/popup.nvim'
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {
-      {
-        'ThePrimeagen/git-worktree.nvim',
-        config = function ()
-          require 'TheAltF4Stream.plugins.git_worktree'.init()
-        end
-      },
-      'rmagatti/session-lens'
-    },
+    requires = 'rmagatti/session-lens',
     config = function ()
       require'TheAltF4Stream.plugins.telescope'.init()
     end
