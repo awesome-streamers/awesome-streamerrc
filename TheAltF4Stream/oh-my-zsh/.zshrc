@@ -11,7 +11,7 @@ export GOPATH="$HOME/Development/go"
 export VSCODE_PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # PATH
-export PATH="$FUSION_PATH:$GOPATH/bin:$VSCODE_PATH:$PATH"
+export PATH="$FUSION_PATH:$GOPATH/bin:$VSCODE_PATH:/usr/local/sbin:$PATH"
 
 # VAGRANT
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"

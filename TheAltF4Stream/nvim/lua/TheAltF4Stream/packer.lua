@@ -76,7 +76,7 @@ local function packer_startup()
   use {
     'folke/tokyonight.nvim',
     config = function ()
-      require 'TheAltF4Stream.plugins.tokyonight'.init()
+      require'TheAltF4Stream.plugins.tokyonight'.init()
     end
   }
 
@@ -101,7 +101,7 @@ local function packer_startup()
   use {
     'hoob3rt/lualine.nvim',
     config = function ()
-      require 'TheAltF4Stream.plugins.lualine'.init()
+      require'TheAltF4Stream.plugins.lualine'.init()
     end
   }
   use 'preservim/nerdcommenter'
@@ -110,7 +110,7 @@ local function packer_startup()
   use {
     'voldikss/vim-floaterm',
     config = function ()
-      require 'TheAltF4Stream.plugins.floaterm'.init()
+      require'TheAltF4Stream.plugins.floaterm'.init()
     end
   }
   use {
