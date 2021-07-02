@@ -53,7 +53,7 @@ local function packer_startup()
         run = './install.sh'
       },
       'wellle/tmux-complete.vim',
-      'hrsh7th/vim-vsnip',
+      'L3MON4D3/LuaSnip',
       'onsails/lspkind-nvim'
     },
     config = function ()

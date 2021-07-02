@@ -26,8 +26,8 @@ local function init()
       nvim_lua = true;
 
       -- External plugin
+      luasnip = true;
       treesitter = true;
-      vsnip = true;
 
       -- External source
       tabnine = true;
