@@ -31,7 +31,7 @@ local function packer_startup()
       'nvim-lua/lsp_extensions.nvim',
     },
     config = function ()
-      require'TheAltF4Stream.plugins.lsp'.init()
+      require'TheAltF4Stream.plugins.lspconfig'.init()
     end
   }
 
