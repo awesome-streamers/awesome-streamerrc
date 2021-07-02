@@ -53,11 +53,13 @@ local function packer_startup()
         run = './install.sh'
       },
       'wellle/tmux-complete.vim',
-      'hrsh7th/vim-vsnip'
+      'hrsh7th/vim-vsnip',
+      'onsails/lspkind-nvim'
     },
     config = function ()
       require'TheAltF4Stream.plugins.compe'.init()
       require'TheAltF4Stream.plugins.compe_tabnine'.init()
+      require'TheAltF4Stream.plugins.lspkind'.init()
     end
   }
 
@@ -98,6 +100,10 @@ local function packer_startup()
   }
 
   -- Utilities
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    branch = 'lua'
+  }
   use {
     'hoob3rt/lualine.nvim',
     config = function ()

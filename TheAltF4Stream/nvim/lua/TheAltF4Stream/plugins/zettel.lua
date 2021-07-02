@@ -3,11 +3,11 @@ local function init()
 
   local options = { noremap = true }
 
-  --vim.g.vimwiki_list = {{
-    --ext = '.md',
-    --path = '~/Documents/Obsidian/Neovim',
-    --syntax = 'markdown',
-  --}}
+  vim.g.vimwiki_list = {{
+    ext = '.wiki',
+    path = '~/vimwiki',
+    syntax = 'default',
+  }}
 
   -- Keymaps
   map('n', '<leader>ww','<CMD>vsp | VimwikiIndex<CR>', options)
