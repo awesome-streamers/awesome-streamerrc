@@ -31,7 +31,7 @@ local function packer_startup()
       'nvim-lua/lsp_extensions.nvim',
     },
     config = function ()
-      require'TheAltF4Stream.plugins.lsp'.init()
+      require'TheAltF4Stream.plugins.lspconfig'.init()
     end
   }
 
@@ -52,11 +52,14 @@ local function packer_startup()
         'erkrnt/compe-tabnine',
         run = './install.sh'
       },
-      'hrsh7th/vim-vsnip'
+      'wellle/tmux-complete.vim',
+      'L3MON4D3/LuaSnip',
+      'onsails/lspkind-nvim'
     },
     config = function ()
       require'TheAltF4Stream.plugins.compe'.init()
       require'TheAltF4Stream.plugins.compe_tabnine'.init()
+      require'TheAltF4Stream.plugins.lspkind'.init()
     end
   }
 
@@ -65,15 +68,7 @@ local function packer_startup()
   use 'nvim-lua/popup.nvim'
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {
-      {
-        'ThePrimeagen/git-worktree.nvim',
-        config = function ()
-          require 'TheAltF4Stream.plugins.git_worktree'.init()
-        end
-      },
-      'rmagatti/session-lens'
-    },
+    requires = 'rmagatti/session-lens',
     config = function ()
       require'TheAltF4Stream.plugins.telescope'.init()
     end
@@ -83,7 +78,7 @@ local function packer_startup()
   use {
     'folke/tokyonight.nvim',
     config = function ()
-      require 'TheAltF4Stream.plugins.tokyonight'.init()
+      require'TheAltF4Stream.plugins.tokyonight'.init()
     end
   }
 
@@ -106,9 +101,13 @@ local function packer_startup()
 
   -- Utilities
   use {
+    'lukas-reineke/indent-blankline.nvim',
+    branch = 'lua'
+  }
+  use {
     'hoob3rt/lualine.nvim',
     config = function ()
-      require 'TheAltF4Stream.plugins.lualine'.init()
+      require'TheAltF4Stream.plugins.lualine'.init()
     end
   }
   use 'preservim/nerdcommenter'
@@ -117,7 +116,7 @@ local function packer_startup()
   use {
     'voldikss/vim-floaterm',
     config = function ()
-      require 'TheAltF4Stream.plugins.floaterm'.init()
+      require'TheAltF4Stream.plugins.floaterm'.init()
     end
   }
   use {

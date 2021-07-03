@@ -1,7 +1,4 @@
-local lspcontainers = require'lspcontainers'
-local util = require 'lspconfig/util'
-
-local on_attach = function(client, bufnr)
+local function on_attach(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
   -- Mappings
@@ -43,32 +40,6 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local lua_settings = {
-  Lua = {
-    runtime = {
-      -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-      version = 'LuaJIT',
-      -- Setup your lua path
-      path = vim.split(package.path, ';'),
-    },
-    diagnostics = {
-      -- Get the language server to recognize the `vim` global
-      globals = { 'vim' },
-    },
-    workspace = {
-      -- Make the server aware of Neovim runtime files
-      library = {
-        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-      },
-    },
-    -- Do not send telemetry data containing a randomized but unique identifier
-    telemetry = {
-      enable = false,
-    },
-  },
-}
-
 -- config that activates keymaps and enables snippet support
 local function make_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -92,92 +63,28 @@ end
 local function init()
   local lspconfig_servers = {
     "bashls",
-    "cssls",
+    "cssls", -- tbi
     "dockerls",
-    "elixirls",
+    "elixirls", -- tbi
     "gopls",
-    "graphql",
+    "graphql", -- tbi
     "html",
-    "jsonls",
+    "jsonls", -- tbi
     "pylsp",
     "rust_analyzer",
-    "sqlls",
+    "sqlls", -- tbi
     "sumneko_lua",
     "terraformls",
     "tsserver",
     "yamlls"
   }
 
-  for _, s in pairs(lspconfig_servers) do
-    local c = make_config()
+  for _, server in pairs(lspconfig_servers) do
+    local config = make_config()
 
-    if s == "bashls" then
-      c.before_init = function(params)
-        params.processId = vim.NIL
-      end
+    require'TheAltF4Stream.plugins.lspcontainers'.setup(config, server)
 
-      c.cmd = lspcontainers.command(s)
-      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
-    end
-
-    if s == "dockerls" then
-      c.before_init = function(params)
-        params.processId = vim.NIL
-      end
-
-      c.cmd = lspcontainers.command(s)
-      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
-    end
-
-    if s == "pylsp" then
-      c.cmd = lspcontainers.command(s)
-    end
-
-    if s == "sumneko_lua" then
-      c.cmd = lspcontainers.command(s)
-      c.settings = lua_settings
-    end
-
-    if s == "rust_analyzer" then
-      c.cmd = lspcontainers.command(s)
-      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
-      c.settings = {
-        ["rust-analyzer"] = {
-          updates = {
-            channel = "nightly"
-          }
-        }
-      }
-
-      vim.api.nvim_exec([[
-        autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"TypeHint", "ChainingHint", "ParameterHint" } }
-      ]], false)
-    end
-
-    if s == "terraformls" then
-      c.cmd = lspcontainers.command(s)
-      c.filetypes = { "hcl", "tf", "terraform", "tfvars" }
-    end
-
-    if s == "tsserver" then
-      c.before_init = function(params)
-        params.processId = vim.NIL
-      end
-
-      c.cmd = lspcontainers.command(s)
-      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
-    end
-
-    if s == "yamlls" then
-      c.before_init = function(params)
-        params.processId = vim.NIL
-      end
-
-      c.cmd = lspcontainers.command(s)
-      c.root_dir = util.root_pattern(".git", vim.fn.getcwd())
-    end
-
-    require'lspconfig'[s].setup(c)
+    require'lspconfig'[server].setup(config)
   end
 end
 

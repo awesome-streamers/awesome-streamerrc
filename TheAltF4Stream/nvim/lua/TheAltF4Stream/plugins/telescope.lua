@@ -1,7 +1,5 @@
-local telescope = require'telescope'
-
 local function init()
-  telescope.setup{
+  require'telescope'.setup{
     defaults = {
       file_ignore_patterns = {
         "node_modules/.*",
@@ -10,9 +8,6 @@ local function init()
       }
     }
   }
-
-  telescope.load_extension("git_worktree")
-  telescope.load_extension("session-lens")
 
   local map = vim.api.nvim_set_keymap
 

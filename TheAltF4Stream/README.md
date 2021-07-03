@@ -10,6 +10,7 @@ The following dependencies must be installed before setup:
 
 - [Bottom](https://github.com/clementtsang/bottom): Host Metrics + Statistics
 - [Docker Engine](https://docs.docker.com/engine/install/): LSPContainers Integration
+- [k9s](https://k9scli.io/): Kubernetes Integration
 - [Lazydocker](https://github.com/jesseduffield/lazydocker): Docker Integration
 - [Lazygit](https://github.com/jesseduffield/lazygit): Git Integration
 - [Neovim (nightly)](https://github.com/neovim/neovim/releases/tag/nightly): Editor

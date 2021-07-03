@@ -5,13 +5,13 @@
 export FUSION_PATH="/Library/Application Support/VMware Fusion"
 
 # GO
-export GO_PATH="$HOME/Development/go"
+export GOPATH="$HOME/Development/go"
 
 # VSCODE
 export VSCODE_PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # PATH
-export PATH="$FUSION_PATH:$GO_PATH/bin:$VSCODE_PATH:$PATH"
+export PATH="$FUSION_PATH:$GOPATH/bin:$VSCODE_PATH:/usr/local/sbin:$PATH"
 
 # VAGRANT
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
