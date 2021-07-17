@@ -64,8 +64,8 @@ local function setup(config, server)
   end
 
   if server == "rust_analyzer" then
-    config.cmd = lspcontainers.command(server)
-    config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
+    --config.cmd = lspcontainers.command(server)
+    --config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
 
     vim.api.nvim_exec([[
       autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', highlight = "NonText", enabled = {"TypeHint", "ChainingHint", "ParameterHint" } }

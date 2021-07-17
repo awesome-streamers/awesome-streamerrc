@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export CARGO_PATH="$HOME/.cargo/bin"
+
 # FUSION, HA!
 export FUSION_PATH="/Library/Application Support/VMware Fusion"
 
@@ -11,7 +13,7 @@ export GOPATH="$HOME/Development/go"
 export VSCODE_PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # PATH
-export PATH="$FUSION_PATH:$GOPATH/bin:$VSCODE_PATH:/usr/local/sbin:$PATH"
+export PATH="$FUSION_PATH:$VSCODE_PATH:$CARGO_PATH:$GOPATH/bin:/usr/local/sbin:$PATH"
 
 # VAGRANT
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"

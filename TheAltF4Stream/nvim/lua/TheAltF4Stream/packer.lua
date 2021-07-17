@@ -100,10 +100,8 @@ local function packer_startup()
   }
 
   -- Utilities
-  use {
-    'lukas-reineke/indent-blankline.nvim',
-    branch = 'lua'
-  }
+  use 'unblevable/quick-scope'
+  use 'lukas-reineke/indent-blankline.nvim'
   use {
     'hoob3rt/lualine.nvim',
     config = function ()

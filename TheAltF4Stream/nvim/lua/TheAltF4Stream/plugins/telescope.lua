@@ -21,6 +21,7 @@ local function init()
   map('n', '<leader>fb', '<CMD>lua require("telescope.builtin").buffers()<CR>', options)
   map('n', '<leader>fh', '<CMD>lua require("telescope.builtin").help_tags()<CR>', options)
   map('n', '<leader>fd', '<CMD>lua require("telescope.builtin").lsp_workspace_diagnostics()<CR>', options)
+  map('n', '<leader>fr', '<CMD>lua require("telescope.builtin").registers()<CR>', options)
 
   -- Extensions
   map('n', '<leader>fs', '<CMD>lua require("telescope").extensions["session-lens"].search_session()<CR>', options)
