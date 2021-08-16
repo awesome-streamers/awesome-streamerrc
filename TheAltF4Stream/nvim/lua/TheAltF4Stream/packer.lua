@@ -63,6 +63,8 @@ local function packer_startup()
     end
   }
 
+  use 'hashivim/vim-terraform'
+
   -- Telescope
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'

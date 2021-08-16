@@ -156,3 +156,6 @@ if [ -f '/Users/erikreinert/Development/google-cloud-sdk/path.zsh.inc' ]; then .
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/erikreinert/Development/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/erikreinert/Development/google-cloud-sdk/completion.zsh.inc'; fi
+
+# The next line sources a private environment file if it exists
+if [ -f "$HOME/.zsh_private" ]; then . "$HOME/.zsh_private"; fi
