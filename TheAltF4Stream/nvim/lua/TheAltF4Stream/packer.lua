@@ -34,6 +34,7 @@ local function packer_startup()
       require'TheAltF4Stream.plugins.lspconfig'.init()
     end
   }
+  use 'hashivim/vim-terraform'
 
   -- Treesitter
   use {
@@ -63,10 +64,7 @@ local function packer_startup()
     end
   }
 
-  use 'hashivim/vim-terraform'
-
   -- Telescope
-  use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
   use {
     'nvim-telescope/telescope.nvim',
@@ -88,6 +86,9 @@ local function packer_startup()
   use 'rhysd/git-messenger.vim'
   use {
     'lewis6991/gitsigns.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
     config = function ()
       require'TheAltF4Stream.plugins.gitsigns'.init()
     end
