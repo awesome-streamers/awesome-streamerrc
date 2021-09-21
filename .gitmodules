@@ -1,3 +1,6 @@
 [submodule "ThePrimeagen"]
 	path = ThePrimeagen
 	url = git@github.com:ThePrimeagen/.dotfiles
+[submodule "TheAltF4Stream"]
+	path = TheAltF4Stream
+	url = git@github.com:ALT-F4-LLC/dotfiles.git
